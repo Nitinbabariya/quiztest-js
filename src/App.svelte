@@ -68,6 +68,7 @@
                             <QuestionView
                                 question="{$question}"
                                 n="{$index + 1}"
+                                countOfQuestions="{quiz.questions.length}"
                             />
                             <Hint hint="{$question.hint}" show="{$showHint}" />
                         {/if}
