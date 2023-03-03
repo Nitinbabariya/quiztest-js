@@ -13,5 +13,6 @@ export default function (locale: 'de' | 'en' | 'es' | 'fr' | null) {
     init({
         fallbackLocale: 'en',
         initialLocale: locale === null ? getLocaleFromNavigator() : locale,
-    });
+    }
+    );
 }

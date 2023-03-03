@@ -8,7 +8,7 @@ Currently, the following options are supported. Shown are the default settings:
 
 ```typescript
 let config = {
-    startOnLoad: true,          // detect and convert all div html elements with class quizdown
+    startOnLoad: true,          // detect and convert all div html elements with class quiztest
     shuffleAnswers: true,       // shuffle answers for each question
     shuffleQuestions: false,    // shuffle questions for each quiz
     nQuestions: undefined       // display n questions at random, if shuffleQuestions is true
@@ -18,7 +18,7 @@ let config = {
     locale: null                // language of the user interface (auto-detect per default)
 };
 
-quizdown.init(config);
+quiztest.init(config);
 ```
 
 ## Language settings
@@ -28,7 +28,7 @@ Otherwise locale can be set globally to `en`, `fr`, `es` or `de`.
 
 ## Setting quiz and question specific options
 
-- Quiz and question specific options can be set inside the quizdown using YAML headers.
+- Quiz and question specific options can be set inside the quiztest using YAML headers.
 - Only the option `shuffleAnswers` can be used on a question level. 
 - The answers for sequence questions are always shuffled.
 

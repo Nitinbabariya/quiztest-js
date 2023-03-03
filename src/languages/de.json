@@ -6,5 +6,6 @@
     "hint": "Tipp anzeigen",
     "resultsTitle": "Ihr Ergebnis",
     "resultsText": "Sie haben {points} von {total} Fragen richtig beantwortet!",
-    "questionLetter": "F"
+    "questionLetter": "F",
+    "outOf" : "aus"
 }

@@ -243,9 +243,9 @@
         user-select: none;
         margin: 5px;
         padding: 0;
-        background-color: var(--quizdown-color-secondary);
+        background-color: var(--quiztest-color-secondary);
         border: 3px solid transparent;
-        color: var(--quizdown-color-text);
+        color: var(--quiztest-color-text);
     }
 
     .item:last-child {
@@ -297,8 +297,8 @@
         top: 0;
         left: 0;
         opacity: 0;
-        border: 3px solid var(--quizdown-color-primary);
-        background-color: var(--quizdown-color-secondary);
+        border: 3px solid var(--quiztest-color-primary);
+        background-color: var(--quiztest-color-secondary);
     }
 
     #ghost * {

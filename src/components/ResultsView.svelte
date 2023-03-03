@@ -16,23 +16,40 @@
         waitTime = 300;
     }
     let points = 0;
-    beforeUpdate(() => (points = quiz.evaluate()));
+    let percentage=0;
+    let message=0;
+    beforeUpdate(() => {
+        points = quiz.evaluate();
+        percentage = points/quiz.questions.length * 100;
+    });
 
     function format(n: number) {
         return n.toLocaleString('en-US', {
-            minimumIntegerDigits: 2,
+            minimumIntegerDigits: 1,
         });
+    }
+    function stringInterpolation(text,vars)
+    {
+        Object.keys(vars).map((k) => {
+            const regex = new RegExp(`{{${k}}}`, "g");
+            text = text.replace(regex, vars[k]);
+        });
+        return text;
     }
 </script>
 
-<h3>{$_('resultsTitle')}</h3>
+<div style="text-align:center;"><i class="fa-shake fa fa-id-card-o" aria-hidden="true"></i>
+    {$_('resultsTitle')}</div>
 <Loading ms="{waitTime}" minHeight="{150}">
     <div in:fade="{{ duration: 1000 }}">
-        <h1>
-            <Icon name="check-double" />
-            {format(points)}/{format(quiz.questions.length)}
-        </h1>
-
+        <div class="centerParent">
+            <h1 class="center">
+                {format(points)}/{format(quiz.questions.length)}
+            </h1>
+        </div>
+        <h3 class="highlight-circle-sketch">{stringInterpolation( $_('resultsText'),{'percentage' : format(percentage)})}  </h3>
+        <hr/>
+        <div>This is how you answered each of the questions</div>
         <ol>
             {#each quiz.questions as question, i}
                 <li class="top-list-item" on:click="{() => quiz.jump(i)}">
@@ -74,7 +91,7 @@
 
     .top-list-item:hover {
         cursor: pointer;
-        background-color: var(--quizdown-color-secondary);
+        background-color: var(--quiztest-color-secondary);
     }
 
     .top-list-item:hover .list-question {
@@ -84,5 +101,27 @@
     .list-comment {
         margin-left: 2em;
         list-style-type: initial;
+    }
+
+    .centerParent {
+    text-align: center;
+    display: flex;
+    flex-direction: column-reverse;
+    flex-wrap: wrap;
+    align-content: space-around;
+    align-items: baseline;
+        justify-content: space-around;
+    }
+    .center {
+        background:#f2f2f2;
+        width: 100px;
+        height: 100px;
+        border-radius: 50%;
+        border-color: #FF7A59;
+        border-width: 2rem;
+        display: flex;
+        align-items: center;
+        text-align: center;
+        justify-content: space-around;
     }
 </style>

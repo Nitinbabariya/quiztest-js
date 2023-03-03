@@ -1,6 +1,6 @@
 <div class="credits">
     <!-- inject the version number using rollup-plugin-version-injector -->
-    <a href="https://github.com/cncfacademy/quizdown-js"
+    <a href="https://github.com/cncfacademy/quiztest-js"
         >cncf academy {'[VI]v{version}[/VI]'}</a
     >
 </div>

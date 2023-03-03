@@ -1,27 +1,27 @@
 import App from './App.svelte';
-import parseQuizdown from './parser.js';
+import parseQuiztest from './parser.js';
 import { Config } from './config.js';
 import marked from './customizedMarked.js';
 import type { Quiz } from './quiz';
 
-export interface Quizdown {
-    register(extension: QuizdownExtension): Quizdown;
-    createApp(rawQuizdown: string, node: Element, config: Config): App;
-    parseQuizdown(rawQuizdown: string, config: Config): Quiz;
+export interface Quiztest {
+    register(extension: QuiztestExtension): Quiztest
+    createApp(rawQuiztest: string, node: Element, config: Config): App;
+    parseQuiztest(rawQuiztest: string, config: Config): Quiz;
     init(config: object): void;
     getMarkedParser(): typeof marked;
 }
 
-export interface QuizdownExtension {
-    setup(quizdown: Quizdown): void;
+export interface QuiztestExtension {
+    setup(quiztest: Quiztest): void;
 }
 
-function register(extension: QuizdownExtension): Quizdown {
-    extension.setup(this as Quizdown);
-    return this as Quizdown;
+function register(extension: QuiztestExtension): Quiztest {
+    extension.setup(this as Quiztest);
+    return this as Quiztest;
 }
 
-function createApp(rawQuizdown: string, node: Element, config: Config): App {
+function createApp(rawQuiztest: string, node: Element, config: Config): App {
     node.innerHTML = '';
     let root: ShadowRoot;
     if (!!node.shadowRoot) {
@@ -32,7 +32,7 @@ function createApp(rawQuizdown: string, node: Element, config: Config): App {
         root = node.attachShadow({ mode: 'open' });
     }
     try {
-        let quiz = parseQuizdown(rawQuizdown, config);
+        let quiz = parseQuiztest(rawQuiztest, config);
         let app = new App({
             // https://github.com/sveltejs/svelte/pull/5870
             target: root,
@@ -43,7 +43,7 @@ function createApp(rawQuizdown: string, node: Element, config: Config): App {
         });
         return app;
     } catch (e) {
-        root.innerHTML = `${e}. App could not render. Please check your quizdown syntax.`;
+        root.innerHTML = `${e}. App could not render. Please check your quiztest syntax.`;
     }
 }
 
@@ -54,7 +54,7 @@ function init(config: object = {}): void {
             window.addEventListener(
                 'load',
                 function () {
-                    let nodes = document.querySelectorAll('.quizdown');
+                    let nodes = document.querySelectorAll('.quiztest');
                     for (let node of nodes) {
                         createApp(node.innerHTML, node, globalConfig);
                     }
@@ -69,12 +69,12 @@ function getMarkedParser(): typeof marked {
     return marked;
 }
 
-let quizdown: Quizdown = {
+let quiztest: Quiztest = {
     init,
     register,
-    parseQuizdown,
+    parseQuiztest,
     createApp,
     getMarkedParser,
 };
 
-export default quizdown;
+export default quiztest;

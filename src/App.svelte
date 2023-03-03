@@ -40,7 +40,7 @@
     let node: HTMLElement;
     let minHeight = 150;
     let reloaded = false;
-    // let showModal = false;
+    let showModal = true;
 
     // set global options
     onMount(async () => {
@@ -48,14 +48,14 @@
         let secondaryColor: string = quiz.config.secondaryColor;
         let textColor: string = quiz.config.textColor;
 
-        node.style.setProperty('--quizdown-color-primary', primaryColor);
-        node.style.setProperty('--quizdown-color-secondary', secondaryColor);
-        node.style.setProperty('--quizdown-color-text', textColor);
+        node.style.setProperty('--quiztest-color-primary', primaryColor);
+        node.style.setProperty('--quiztest-color-secondary', secondaryColor);
+        node.style.setProperty('--quiztest-color-text', textColor);
         node.style.minHeight = `${minHeight}px`;
     });
 </script>
 
-<div class="quizdown-content" bind:this="{node}">
+<div class="quiztest-content" bind:this="{node}">
     <Card>
         <ProgressBar value="{$index}" max="{quiz.questions.length - 1}" />
         <Loading update="{reloaded}" ms="{800}" minHeight="{minHeight}">
@@ -64,19 +64,21 @@
                     <Animated update="{$index}">
                         {#if $onResults}
                             <ResultsView quiz="{quiz}" />
+                            <hr/>
                         {:else}
                             <QuestionView
                                 question="{$question}"
                                 n="{$index + 1}"
-                                countOfQuestions="{quiz.questions.length}"
+                                questionType="{$question.questionType}"
+                                counfOfQuestions="{quiz.questions.length}"
                             />
+                            <hr/>
                             <Hint hint="{$question.hint}" show="{$showHint}" />
                         {/if}
                     </Animated>
                 </SmoothResize>
 
                 <!-- <Modal show="{showModal}">Are you sure?</Modal> -->
-
                 <Row>
                     <Button
                         slot="left"
@@ -139,6 +141,8 @@
     @import 'katex/dist/katex';
     @import '@fortawesome/fontawesome-svg-core/styles';
 
+    hr { border: 0; border-top: 1px solid #dee2e6; }
+
     img {
         max-height: 400px;
         border-radius: 4px;
@@ -158,10 +162,10 @@
     }
 
     a {
-        color: var(--quizdown-color-primary);
+        color: var(--quiztest-color-primary);
     }
 
-    .quizdown-content {
+    .quiztest-content {
         padding: 1rem;
         max-width: 900px;
         margin: auto;

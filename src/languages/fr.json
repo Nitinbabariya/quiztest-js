@@ -6,5 +6,6 @@
     "hint": "Indice",
     "resultsTitle": "Vos résultats",
     "resultsText": "Vous avez répondu correctement à {points} questions sur {total}!",
-    "questionLetter": "Q"
+    "questionLetter": "Q",
+    "outOf" : "hors de"
 }

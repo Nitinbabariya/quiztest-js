@@ -1,5 +1,5 @@
 import katex from 'katex';
-import type { QuizdownExtension } from '../quizdown.js';
+import type { QuiztestExtension } from '../quiztest.js';
 
 interface KatexToken {
     type: 'katex';
@@ -35,12 +35,12 @@ let markedExtension = {
     },
 };
 
-let quizdownKatex: QuizdownExtension = {
-    setup: function (quizdown) {
+let quiztestKatex: QuiztestExtension = {
+    setup: function (quiztest) {
         // type definition seems outdated, because this is the correct usage
         // @ts-ignore
-        quizdown.getMarkedParser().use({ extensions: [markedExtension] });
+        quiztest.getMarkedParser().use({ extensions: [markedExtension] });
     },
 };
 
-export default quizdownKatex;
+export default quiztestKatex;

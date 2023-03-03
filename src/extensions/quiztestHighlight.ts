@@ -7,7 +7,7 @@ import plaintext from 'highlight.js/lib/languages/plaintext';
 import python from 'highlight.js/lib/languages/python';
 import typescript from 'highlight.js/lib/languages/typescript';
 import xml from 'highlight.js/lib/languages/xml';
-import type { QuizdownExtension } from '../quizdown.js';
+import type { QuiztestExtension } from '../quiztest.js';
 
 // this does not work....
 // ['javascript', 'python', 'bash'].forEach(async (langName) => {
@@ -29,12 +29,12 @@ function highlighter(code, language) {
     return hljs.highlight(code, { language: validLanguage }).value;
 }
 
-let quizdownHighlight: QuizdownExtension = {
-    setup: function (quizdown) {
-        quizdown
+let quiztestHighlight: QuiztestExtension = {
+    setup: function (quiztest) {
+        quiztest
             .getMarkedParser()
             .setOptions({ highlight: highlighter, langPrefix: 'hljs lang-' });
     },
 };
 
-export default quizdownHighlight;
+export default quiztestHighlight;

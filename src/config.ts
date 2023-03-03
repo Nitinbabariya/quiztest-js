@@ -36,7 +36,7 @@ export class Config {
         this.shuffleAnswers = get(options['shuffleAnswers'], true);
         this.shuffleQuestions = get(options['shuffleQuestions'], false);
         this.nQuestions = get(options['nQuestions'], undefined);
-        this.primaryColor = get(options['primaryColor'], 'steelblue');
+        this.primaryColor = get(options['primaryColor'], '#04AA6D');
         this.secondaryColor = get(options['secondaryColor'], '#f2f2f2');
         this.textColor = get(options['textColor'], 'black');
         this.locale = get(options['locale'], null);

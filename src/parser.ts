@@ -12,8 +12,8 @@ import {
 import { Config, mergeAttributes } from './config';
 import marked from './customizedMarked';
 
-function parseQuizdown(rawQuizdown: string, globalConfig: Config): Quiz {
-    let tokens = tokenize(rawQuizdown);
+function parseQuiztest(rawQuiztest: string, globalConfig: Config): Quiz {
+    let tokens = tokenize(rawQuiztest);
     // globalConfig < quizConfig < questionConfig
     let quizConfig = new Config(globalConfig);
 
@@ -25,8 +25,8 @@ function parseQuizdown(rawQuizdown: string, globalConfig: Config): Quiz {
     return new Quiz(questions, quizConfig);
 }
 
-function tokenize(rawQuizdown: string): marked.TokensList {
-    return marked.lexer(htmlDecode(stripIndent(rawQuizdown)));
+function tokenize(rawQuiztest: string): marked.TokensList {
+    return marked.lexer(htmlDecode(stripIndent(rawQuiztest)));
 }
 
 function hasQuizOptions(tokens: marked.TokensList) {
@@ -149,4 +149,4 @@ function htmlDecode(text: string) {
         .replace(/&amp;/g, '&');
 }
 
-export default parseQuizdown;
+export default parseQuiztest;

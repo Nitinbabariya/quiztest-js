@@ -1,5 +1,5 @@
 {
-    "name": "quizdown",
+    "name": "quiztest",
     "version": "0.1.0",
     "description": "Markdown for generating interactive quiz apps in the browser.",
     "private": false,
@@ -57,8 +57,8 @@
         "tslib": "^2.0.0",
         "typescript": "^3.9.3"
     },
-    "repository": "https://github.com/cncfacademy/quizdown-js",
-    "main": "public/build/quizdown.js",
+    "repository": "https://github.com/Nitinbabariya/quiztest-js",
+    "main": "public/build/quiztest.js",
     "dependencies": {
         "@fortawesome/fontawesome-svg-core": "^1.2.35",
         "@fortawesome/free-solid-svg-icons": "^5.15.3",

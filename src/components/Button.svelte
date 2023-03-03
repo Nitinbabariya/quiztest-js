@@ -19,7 +19,7 @@
 
     button {
         background-color: white;
-        color: var(--quizdown-color-text);
+        color: var(--quiztest-color-text);
         padding: 0.5rem 1rem;
         border-radius: 4px;
         border: 1px solid transparent;

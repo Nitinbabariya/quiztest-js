@@ -4,7 +4,8 @@
     "evaluate": "Evaluate",
     "reset": "One more time!",
     "hint": "Show hint",
-    "resultsTitle": "Your quiz results",
-    "resultsText": "You have answered {points} out of {total} questions correctly!",
-    "questionLetter": "Q"
+    "resultsTitle": "Your Results Report\n",
+    "resultsText": "You got {{percentage}}% of the answers correct!",
+    "questionLetter": "Question",
+    "outOf" : "of"
 }

@@ -3,7 +3,6 @@
     export let question: BaseQuestion;
 </script>
 
-<fieldset>
     {#if question.questionType === 'MultipleChoice'}
         {#each question.answers as answer, i}
             <label>
@@ -27,13 +26,11 @@
             </label>
         {/each}
     {/if}
-</fieldset>
 
 <style>
     fieldset {
         border: 0;
     }
-
     [type='checkbox'],
     [type='radio'] {
         position: absolute;
@@ -41,7 +38,6 @@
     }
 
     [type='radio'] + span {
-        border-radius: 0.5em;
     }
 
     [type='checkbox'] + span {
@@ -51,11 +47,11 @@
     [type='checkbox'] + span,
     [type='radio'] + span {
         transition-duration: 0.3s;
-        background-color: var(--quizdown-color-secondary);
-        color: var(--quizdown-color-text);
+        background-color: #E7E9EB;
+        color: var(--quiztest-color-text);
         display: block;
         padding: 0.5rem;
-        margin: 5px;
+        margin:5px 0 5px 0;
         border: 3px solid transparent;
         cursor: pointer;
     }
@@ -69,6 +65,6 @@
 
     [type='checkbox']:checked + span,
     [type='radio']:checked + span {
-        border: 3px solid var(--quizdown-color-primary);
+        border: 3px solid var(--quiztest-color-primary);
     }
 </style>

@@ -86,16 +86,16 @@ let svelte_plugins = [
 
 export default [
     make_config(
-        'src/extensions/quizdownHighlight.ts',
+        'src/extensions/quiztestHighlight.ts',
         'public/build/extensions/',
-        'quizdownHighlight',
+        'quiztestHighlight',
         []
     ),
     make_config(
-        'src/extensions/quizdownKatex.ts',
+        'src/extensions/quiztestKatex.ts',
         'public/build/extensions/',
-        'quizdownKatex',
+        'quiztestKatex',
         []
     ),
-    make_config('src/quizdown.ts', 'public/build/', 'quizdown', svelte_plugins),
+    make_config('src/quiztest.ts', 'public/build/', 'quiztest', svelte_plugins),
 ];
