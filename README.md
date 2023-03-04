@@ -1,4 +1,4 @@
-# quiztest 
+# quiztest  [![Publish](https://github.com/Nitinbabariya/quiztest-js/actions/workflows/release.yml/badge.svg?branch=main)](https://github.com/Nitinbabariya/quiztest-js/actions/workflows/release.yml)
 
 I'm working on this project in my free time to learn more about https://svelte.dev/
 
