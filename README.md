@@ -1,4 +1,4 @@
-# quiztest 
+# quiztest [![npm version](https://badge.fury.io/js/quiztest.svg)](https://badge.fury.io/js/quiztest) [![Build](https://github.com/Nitinbabariya/quiztest-js/actions/workflows/build.yml/badge.svg)](https://github.com/Nitinbabariya/quiztest-js/actions/workflows/build.yml)
 
 I'm working on this project in my free time to learn more about https://svelte.dev/
 
