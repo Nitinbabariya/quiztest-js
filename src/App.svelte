@@ -4,7 +4,6 @@
     import { onMount, getContext } from 'svelte';
     import registerLanguages from './languages/i18n';
     import Card from './components/Card.svelte';
-    import Credits from './components/Credits.svelte';
     import SmoothResize from './components/SmoothResize.svelte';
     import QuestionView from './components/QuestionView.svelte';
     import Row from './components/Row.svelte';
@@ -21,7 +20,6 @@
     import Timer from './components/Timer.svelte';
     import Dialog from './components/Dialog.svelte';
     let dialog
-    let buttonAction = () => alert('1231223 has never Svelte better');
     export let quiz: Quiz;
     // https://github.com/sveltejs/svelte/issues/4079
     $: question = quiz.active;
@@ -58,7 +56,7 @@
         node.style.setProperty('--quiztest-color-text', textColor);
         node.style.minHeight = `${minHeight}px`;
 
-        dialog.showModal();
+        //dialog.showModal();
     });
 
     const onCloseDialog = () => {
@@ -133,13 +131,12 @@
                                         quiz.jump(quiz.questions.length)}"
                                     ><Icon
                                         name="check-double"
-                                        size="lg"
+                                        size="sm"
                                     /></Button
                                 >
                             </div>
                         {/if}
                     </svelte:fragment>
-
 
                     <svelte:fragment slot="right">
                         <svelte:component this={component} {...props}/>
@@ -154,7 +151,33 @@
                     </svelte:fragment>
                 </Row>
 
-                <Credits />
+                {$onLast}
+                <ul class="pagination">
+                    <li><a href="#" on:click="{() => quiz.jump(0)}" disabled={$onFirst} > « </a></li>
+                    <li><a href="#" on:click="{() => quiz.previous()}" disabled={$onFirst}> <Icon name="arrow-left"  /> </a></li>
+                    <li><a href="#" on:click="{() => quiz.next()}" disabled={$onLast}> <Icon name="arrow-right"  /> </a></li>
+                    <li><a href="#" on:click="{() => quiz.jump(quiz.questions.length-1)}" disabled={$onLast}> » </a></li>
+
+                    {#each quiz.questions as q, i}
+                        <li><a href="#" on:click="{() => quiz.jump(i)}" class="{$index === i ? 'active' : ''}">
+                            {i+1} </a></li>
+                    {/each}
+
+                        {#if $onLast || $allVisited || true }
+                            <li in:fly="{{ x: 200, duration: 500 }}">
+                                <a
+                                        href="{}"
+                                        disabled="{!($onLast)}"
+                                        title="{$_('evaluate')}"
+                                        on:click="{() =>
+                                        quiz.jump(quiz.questions.length)}"
+                                ><Icon
+                                        name="check-double"
+                                        size="sm"
+                                /></a>
+                            </li>
+                        {/if}
+                </ul>
             </Container>
         </Loading>
     </Card>
@@ -188,6 +211,43 @@
     a {
         color: var(--quiztest-color-primary);
     }
+
+    ul.pagination {
+        display: inline-block;
+        padding: 0;
+        margin: 0;
+    }
+
+    ul.pagination li {display: inline; border:1px}
+
+    ul.pagination li a {
+        color: black;
+        float: left;
+        padding: 8px 16px;
+        text-decoration: none;
+    }
+
+    .pagination li:first-child a {
+        border-top-left-radius: 5px;
+        border-bottom-left-radius: 5px;
+    }
+
+    .pagination li:last-child a {
+        border-top-right-radius: 5px;
+        border-bottom-right-radius: 5px;
+    }
+
+    ul.pagination li a.active {
+        background-color: #4CAF50;
+        color: white;
+        border: 1px solid #4CAF50;
+    }
+
+    ul.pagination li a.disabled {
+        color:red;
+    }
+
+    ul.pagination li a:hover:not(.active) {background-color: #ddd;}
 
     .quiztest-content {
         padding: 1rem;
@@ -240,5 +300,8 @@
     .button-68:hover {
         box-shadow: rgba(39, 174, 96, .2) 0 6px 12px;
     }
+
+
+
 
 </style>
