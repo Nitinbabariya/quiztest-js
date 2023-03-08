@@ -68,26 +68,19 @@
 </script>
 <div class="quiztest-content" bind:this="{node}">
     <Card>
-        <Dialog bind:dialog on:close={() => console.log('closed')}>
-            <h1>The Test </h1>
-            The test contains 40 questions and there is no time limit.
-
-            The test is not official, it's just a nice way to see how much you know, or don't know, about HTML
-
-            <h1> Count your score </h1>
-            You will get 1 point for each correct answer. At the end of the Quiz, your total score will be displayed. Maximum score is 40 points.
-            <h1> Start the Quiz </h1>
-            Good luck!
+        <Dialog bind:dialog on:close={onCloseDialog}>
+            {@html quiz.config.introduction}
             <p>
-                <button class="button-68" on:click={onCloseDialog}>Start the HTML Quiz > </button>
+                <button class="button-68" on:click={onCloseDialog}>Start the Quiz > </button>
             </p>
         </Dialog>
-
 
         <Loading update="{reloaded}" ms="{800}" minHeight="{minHeight}">
             <Container>
                 <SmoothResize minHeight="{minHeight}">
                     <Animated update="{$index}">
+                        <ProgressBar value="{$index}" max="{quiz.questions.length - 1}" />
+
                         {#if $onResults}
                             <ResultsView quiz="{quiz}" />
                         {:else}
@@ -97,13 +90,14 @@
                                 questionType="{$question.questionType}"
                                 counfOfQuestions="{quiz.questions.length}"
                             />
+                            <br/>
+
                             <Hint hint="{$question.hint}" show="{$showHint}" />
                         {/if}
                     </Animated>
                 </SmoothResize>
-                <br/>
                 <!-- <Modal show="{showModal}">Are you sure?</Modal> -->
-                    <ProgressBar value="{$index}" max="{quiz.questions.length - 1}" />
+
                 <Row>
                     <Button
                         slot="left"
@@ -180,7 +174,6 @@
     }
 
     code {
-        padding: 0 0.4rem;
         font-size: 85%;
         color: #333;
         white-space: pre-wrap;
