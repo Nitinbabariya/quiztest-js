@@ -68,12 +68,14 @@
 </script>
 <div class="quiztest-content" bind:this="{node}">
     <Card>
-        <Dialog bind:dialog on:close={onCloseDialog}>
-            {@html quiz.config.introduction}
-            <p>
-                <button class="button-68" on:click={onCloseDialog}>Start the Quiz > </button>
-            </p>
-        </Dialog>
+            <Dialog bind:dialog on:close={onCloseDialog}>
+                {#if quiz.config.introduction}
+                    {@html quiz.config.introduction}
+                {/if}
+                <p>
+                    <button class="button-68" on:click={onCloseDialog}>Start the Quiz > </button>
+                </p>
+            </Dialog>
 
         <Loading update="{reloaded}" ms="{800}" minHeight="{minHeight}">
             <Container>
