@@ -166,7 +166,6 @@
         background-color: #2196f3;
         border-radius: 10%;
         margin-right: 0.375em;
-        margin-top: 0.3rem;
         transition: 0.25s ease;
         box-shadow: inset 0 0 0 0.14375em #2196f3;
         transform-origin: bottom left;

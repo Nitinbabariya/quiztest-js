@@ -58,6 +58,7 @@ function make_config(input, output, name, extra_plugins) {
             format: 'umd',
             name: name,
             dir: output,
+            inlineDynamicImports: true, //Added this to allow dynamic imports
         },
         plugins: extra_plugins.concat(default_plugins),
         watch: {

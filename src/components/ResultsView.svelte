@@ -62,10 +62,8 @@
                         {#each question.selected as selected}
                             {#if question.answers[selected].comment !== ''}
                                 <li class="list-comment">
-                                    <i
-                                        >{@html question.answers[selected]
-                                            .html}</i
-                                    >:
+                                    <i>{@html question.answers[selected]
+                                            .html}</i>:
                                     {@html question.answers[selected].comment}
                                 </li>
                             {/if}

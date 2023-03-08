@@ -12,8 +12,8 @@
 
 <style>
     .row {
-        padding-top: 2em;
         display: flex;
+        background-color: #e1ebe4;
     }
 
     .left {

@@ -11,7 +11,6 @@
     import Button from './components/Button.svelte';
     import { _ } from 'svelte-i18n';
     import ResultsView from './components/ResultsView.svelte';
-    // import { Linear, CheckFirst } from './progressModes.js';
     import Animated from './components/Animated.svelte';
     import registerIcons from './registerIcons.js';
     import Icon from './components/Icon.svelte';
@@ -19,6 +18,8 @@
     import { fly } from 'svelte/transition';
     import Container from './components/Container.svelte';
     import Loading from './components/Loading.svelte';
+    import Timer from './components/Timer.svelte';
+
     // import Modal from './components/Modal.svelte';
 
     export let quiz: Quiz;
@@ -53,11 +54,14 @@
         node.style.setProperty('--quiztest-color-text', textColor);
         node.style.minHeight = `${minHeight}px`;
     });
+
+
 </script>
 
 <div class="quiztest-content" bind:this="{node}">
     <Card>
         <ProgressBar value="{$index}" max="{quiz.questions.length - 1}" />
+
         <Loading update="{reloaded}" ms="{800}" minHeight="{minHeight}">
             <Container>
                 <SmoothResize minHeight="{minHeight}">
@@ -119,14 +123,19 @@
                         {/if}
                     </svelte:fragment>
 
-                    <Button
-                        slot="right"
-                        title="{$_('reset')}"
-                        buttonAction="{() => {
+
+                    <svelte:fragment slot="right">
+                        <Timer isActive="{!$onResults}"/>
+
+                        <Button
+                                slot="right"
+                                title="{$_('reset')}"
+                                buttonAction="{() => {
                             reloaded = !reloaded;
                             quiz.reset();
-                        }}"><Icon name="redo" /></Button
-                    >
+                        }}"><Icon name="redo" /> </Button
+                        >
+                    </svelte:fragment>
                 </Row>
 
                 <Credits />
@@ -167,7 +176,6 @@
 
     .quiztest-content {
         padding: 1rem;
-        max-width: 900px;
         margin: auto;
     }
 </style>

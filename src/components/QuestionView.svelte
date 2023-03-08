@@ -18,10 +18,12 @@
         SingleChoice: ChoiceView,
     };
 </script>
-<h3 class="badge"> {$_('questionLetter')} {n} {$_('outOf')} {counfOfQuestions} : </h3> <span class="qtype"> It's a {questionType} question</span>
+<h3 class="badge">{$_('questionLetter')} {n} {$_('outOf')} {counfOfQuestions} : </h3> <span class="qtype"> It's a {questionType} question</span>
 <br/>
 {@html question.text}
 <br/>
+<br/>
+
 {#if question.explanation}
     <p>{@html question.explanation}</p>
 {/if}
@@ -31,7 +33,7 @@
         question="{question}"
 />
 <style>
-    .badge{display:inline-block;font-weight: 400}
+    .badge{display:inline-block; font-weight: 400}
     .qtype {
         color:#566573;
         font-size: 0.8em;

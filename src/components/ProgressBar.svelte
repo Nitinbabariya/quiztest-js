@@ -27,7 +27,7 @@
     }
 
     .progress .progress-slider {
-        background-color: var(--quiztest-color-primary);
+        background-color: #61aeed;
         height: 100%;
         display: block;
     }
