@@ -40,7 +40,7 @@ function make_config(input, output, name, extra_plugins) {
     let default_plugins = [
         resolve({
             browser: false,
-            dedupe: ['svelte'],
+            dedupe: ['svelte', 'svelte/transition', 'svelte/internal'],
         }),
         commonjs(),
         typescript({

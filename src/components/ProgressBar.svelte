@@ -21,7 +21,7 @@
     .progress {
         grid-area: auto;
 
-        height: 0.6em;
+        height: 1em;
         width: 100%;
         position: relative;
     }

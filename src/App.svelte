@@ -1,7 +1,7 @@
 <script lang="ts">
     import type { Quiz } from './quiz';
     import ProgressBar from './components/ProgressBar.svelte';
-    import { onMount } from 'svelte';
+    import { onMount, getContext } from 'svelte';
     import registerLanguages from './languages/i18n';
     import Card from './components/Card.svelte';
     import Credits from './components/Credits.svelte';
@@ -19,9 +19,9 @@
     import Container from './components/Container.svelte';
     import Loading from './components/Loading.svelte';
     import Timer from './components/Timer.svelte';
-
-    // import Modal from './components/Modal.svelte';
-
+    import Dialog from './components/Dialog.svelte';
+    let dialog
+    let buttonAction = () => alert('1231223 has never Svelte better');
     export let quiz: Quiz;
     // https://github.com/sveltejs/svelte/issues/4079
     $: question = quiz.active;
@@ -33,16 +33,20 @@
     $: isEvaluated = quiz.isEvaluated;
     $: allVisited = quiz.allVisited;
 
-    //let game = new Linear(quiz);
-
     registerLanguages(quiz.config.locale);
     registerIcons();
 
     let node: HTMLElement;
     let minHeight = 150;
     let reloaded = false;
-    let showModal = true;
 
+    let component;
+    let props;
+
+    const triggerTimerOn = () => {
+        component = Timer;
+        props = {isActive: true};
+    };
     // set global options
     onMount(async () => {
         let primaryColor: string = quiz.config.primaryColor;
@@ -53,14 +57,32 @@
         node.style.setProperty('--quiztest-color-secondary', secondaryColor);
         node.style.setProperty('--quiztest-color-text', textColor);
         node.style.minHeight = `${minHeight}px`;
+
+        dialog.showModal();
     });
 
-
+    const onCloseDialog = () => {
+        dialog.close();
+        triggerTimerOn();
+    };
 </script>
-
 <div class="quiztest-content" bind:this="{node}">
     <Card>
-        <ProgressBar value="{$index}" max="{quiz.questions.length - 1}" />
+        <Dialog bind:dialog on:close={() => console.log('closed')}>
+            <h1>The Test </h1>
+            The test contains 40 questions and there is no time limit.
+
+            The test is not official, it's just a nice way to see how much you know, or don't know, about HTML
+
+            <h1> Count your score </h1>
+            You will get 1 point for each correct answer. At the end of the Quiz, your total score will be displayed. Maximum score is 40 points.
+            <h1> Start the Quiz </h1>
+            Good luck!
+            <p>
+                <button class="button-68" on:click={onCloseDialog}>Start the HTML Quiz > </button>
+            </p>
+        </Dialog>
+
 
         <Loading update="{reloaded}" ms="{800}" minHeight="{minHeight}">
             <Container>
@@ -68,7 +90,6 @@
                     <Animated update="{$index}">
                         {#if $onResults}
                             <ResultsView quiz="{quiz}" />
-                            <hr/>
                         {:else}
                             <QuestionView
                                 question="{$question}"
@@ -76,13 +97,13 @@
                                 questionType="{$question.questionType}"
                                 counfOfQuestions="{quiz.questions.length}"
                             />
-                            <hr/>
                             <Hint hint="{$question.hint}" show="{$showHint}" />
                         {/if}
                     </Animated>
                 </SmoothResize>
-
+                <br/>
                 <!-- <Modal show="{showModal}">Are you sure?</Modal> -->
+                    <ProgressBar value="{$index}" max="{quiz.questions.length - 1}" />
                 <Row>
                     <Button
                         slot="left"
@@ -125,8 +146,7 @@
 
 
                     <svelte:fragment slot="right">
-                        <Timer isActive="{!$onResults}"/>
-
+                        <svelte:component this={component} {...props}/>
                         <Button
                                 slot="right"
                                 title="{$_('reset')}"
@@ -178,4 +198,52 @@
         padding: 1rem;
         margin: auto;
     }
+
+       .button-68 {
+           appearance: none;
+           backface-visibility: hidden;
+           background-color: #27ae60;
+           border-radius: 8px;
+           border-style: none;
+           box-shadow: rgba(39, 174, 96, .15) 0 4px 9px;
+           box-sizing: border-box;
+           color: #fff;
+           cursor: pointer;
+           display: inline-block;
+           font-family: Inter,-apple-system,system-ui,"Segoe UI",Helvetica,Arial,sans-serif;
+           font-size: 16px;
+           font-weight: 600;
+           letter-spacing: normal;
+           line-height: 1.5;
+           outline: none;
+           overflow: hidden;
+           padding: 13px 20px;
+           position: relative;
+           text-align: center;
+           text-decoration: none;
+           transform: translate3d(0, 0, 0);
+           transition: all .3s;
+           user-select: none;
+           -webkit-user-select: none;
+           touch-action: manipulation;
+           vertical-align: top;
+           white-space: nowrap;
+       }
+
+    .button-68:hover {
+        background-color: #1e8449;
+        opacity: 1;
+        transform: translateY(0);
+        transition-duration: .35s;
+    }
+
+    .button-68:active {
+        transform: translateY(2px);
+        transition-duration: .35s;
+    }
+
+    .button-68:hover {
+        box-shadow: rgba(39, 174, 96, .2) 0 6px 12px;
+    }
+
 </style>

@@ -1,5 +1,5 @@
 <script lang="ts">
-    export let isActive=true
+    export let isActive=false
     import { onMount } from 'svelte';
 
     //timer
