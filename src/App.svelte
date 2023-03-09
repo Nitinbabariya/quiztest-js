@@ -79,10 +79,16 @@
             <Container>
                 <SmoothResize minHeight="{minHeight}">
                     <Animated update="{$index}">
+
                         <ProgressBar value="{$index}" max="{quiz.questions.length - 1}" />
 
                         {#if $onResults}
                             <ResultsView quiz="{quiz}" />
+                            <button style="margin-right: 1rem" title="{$_('reset')}"
+                                    on:click="{() => {
+                            reloaded = !reloaded;
+                            quiz.reset();
+                        }}"><Icon name="redo" /> </button>
                         {:else}
                             <QuestionView
                                 question="{$question}"
@@ -93,91 +99,49 @@
                             <br/>
 
                             <Hint hint="{$question.hint}" show="{$showHint}" />
+
+                            <div class="pagination">
+                                <button on:click="{$question.enableHint}" title="{$_('previous')}" disabled="{!$question.hint || $showHint || $onResults}"><Icon name="lightbulb" solid="{false}" /></button>
+                                <button on:click="{() => quiz.jump(0)}" disabled={$onFirst} > « </button>
+                                <button on:click="{() => quiz.previous()}" disabled={$onFirst}> <Icon name="arrow-left"  /></button>
+                                <button on:click="{() => quiz.next()}" disabled={$onLast}> <Icon name="arrow-right"  /> </button>
+                                <button on:click="{() => quiz.jump( quiz.questions.length-1)}" disabled={$onLast} class:active="{$onLast}"> » </button>
+                                {#each quiz.questions as q, i}
+                                    <button  on:click="{() => quiz.jump(i)}" class="{$index === i ? 'active' : ''}">
+                                        {i+1} </button>
+                                {/each}
+
+                                {#if $onLast || $allVisited }
+                                    <button  in:fly="{{ x: 200, duration: 500 }}"
+                                             disabled="{!($onLast)}"
+                                             title="{$_('evaluate')}"
+                                             on:click="{() =>
+                                        quiz.jump(quiz.questions.length)}"
+                                    ><Icon
+                                            name="check-double"
+                                            size="sm"
+                                    />Result</button>
+                                {/if}
+                                <Row>
+                                    <svelte:fragment slot="right">
+                                        <svelte:component this={component} {...props}/>
+
+                                    </svelte:fragment>
+                                </Row>
+                                <button style="margin-right: 1rem" title="{$_('reset')}"
+                                        on:click="{() => {
+                            reloaded = !reloaded;
+                            quiz.reset();
+                        }}"><Icon name="redo" /> </button>
+                            </div>
                         {/if}
                     </Animated>
                 </SmoothResize>
                 <!-- <Modal show="{showModal}">Are you sure?</Modal> -->
 
-                <Row>
-                    <Button
-                        slot="left"
-                        title="{$_('hint')}"
-                        disabled="{!$question.hint || $showHint || $onResults}"
-                        buttonAction="{$question.enableHint}"
-                        ><Icon name="lightbulb" solid="{false}" /></Button
-                    >
-                    <svelte:fragment slot="center">
-                        <Button
-                            title="{$_('previous')}"
-                            disabled="{$onFirst || $onResults || $isEvaluated}"
-                            buttonAction="{quiz.previous}"
-                            ><Icon name="arrow-left" size="lg" /></Button
-                        >
 
-                        <Button
-                            disabled="{$onLast || $onResults || $isEvaluated}"
-                            buttonAction="{quiz.next}"
-                            title="{$_('next')}"
-                            ><Icon name="arrow-right" size="lg" /></Button
-                        >
 
-                        {#if $onLast || $allVisited}
-                            <div in:fly="{{ x: 200, duration: 500 }}">
-                                <Button
-                                    disabled="{!($onLast || $allVisited) ||
-                                        $onResults}"
-                                    title="{$_('evaluate')}"
-                                    buttonAction="{() =>
-                                        quiz.jump(quiz.questions.length)}"
-                                    ><Icon
-                                        name="check-double"
-                                        size="sm"
-                                    /></Button
-                                >
-                            </div>
-                        {/if}
-                    </svelte:fragment>
 
-                    <svelte:fragment slot="right">
-                        <svelte:component this={component} {...props}/>
-                        <Button
-                                slot="right"
-                                title="{$_('reset')}"
-                                buttonAction="{() => {
-                            reloaded = !reloaded;
-                            quiz.reset();
-                        }}"><Icon name="redo" /> </Button
-                        >
-                    </svelte:fragment>
-                </Row>
-
-                {$onLast}
-                <ul class="pagination">
-                    <li><a href="#" on:click="{() => quiz.jump(0)}" disabled={$onFirst} > « </a></li>
-                    <li><a href="#" on:click="{() => quiz.previous()}" disabled={$onFirst}> <Icon name="arrow-left"  /> </a></li>
-                    <li><a href="#" on:click="{() => quiz.next()}" disabled={$onLast}> <Icon name="arrow-right"  /> </a></li>
-                    <li><a href="#" on:click="{() => quiz.jump(quiz.questions.length-1)}" disabled={$onLast}> » </a></li>
-
-                    {#each quiz.questions as q, i}
-                        <li><a href="#" on:click="{() => quiz.jump(i)}" class="{$index === i ? 'active' : ''}">
-                            {i+1} </a></li>
-                    {/each}
-
-                        {#if $onLast || $allVisited || true }
-                            <li in:fly="{{ x: 200, duration: 500 }}">
-                                <a
-                                        href="{}"
-                                        disabled="{!($onLast)}"
-                                        title="{$_('evaluate')}"
-                                        on:click="{() =>
-                                        quiz.jump(quiz.questions.length)}"
-                                ><Icon
-                                        name="check-double"
-                                        size="sm"
-                                /></a>
-                            </li>
-                        {/if}
-                </ul>
             </Container>
         </Loading>
     </Card>
@@ -212,78 +176,66 @@
         color: var(--quiztest-color-primary);
     }
 
+
     ul.pagination {
         display: inline-block;
         padding: 0;
         margin: 0;
     }
 
-    ul.pagination li {display: inline; border:1px}
 
-    ul.pagination li a {
-        color: black;
-        float: left;
-        padding: 8px 16px;
+    .pagination button {
+        background-color: white;
+        padding: 0.5rem 1rem;
+        border-radius: 4px;
+        border: 1px solid #f6f7f0;
+        line-height: 1;
+        text-align: center;
+        transition: opacity 0.2s ease;
         text-decoration: none;
+        display: inline-block;
+        cursor: pointer;
+        font-size: 1em;
     }
 
-    .pagination li:first-child a {
-        border-top-left-radius: 5px;
-        border-bottom-left-radius: 5px;
-    }
-
-    .pagination li:last-child a {
-        border-top-right-radius: 5px;
-        border-bottom-right-radius: 5px;
-    }
-
-    ul.pagination li a.active {
+    .pagination button.active {
         background-color: #4CAF50;
         color: white;
         border: 1px solid #4CAF50;
     }
-
-    ul.pagination li a.disabled {
-        color:red;
-    }
-
-    ul.pagination li a:hover:not(.active) {background-color: #ddd;}
 
     .quiztest-content {
         padding: 1rem;
         margin: auto;
     }
 
-       .button-68 {
-           appearance: none;
-           backface-visibility: hidden;
-           background-color: #27ae60;
-           border-radius: 8px;
-           border-style: none;
-           box-shadow: rgba(39, 174, 96, .15) 0 4px 9px;
-           box-sizing: border-box;
-           color: #fff;
-           cursor: pointer;
-           display: inline-block;
-           font-family: Inter,-apple-system,system-ui,"Segoe UI",Helvetica,Arial,sans-serif;
-           font-size: 16px;
-           font-weight: 600;
-           letter-spacing: normal;
-           line-height: 1.5;
-           outline: none;
-           overflow: hidden;
-           padding: 13px 20px;
-           position: relative;
-           text-align: center;
-           text-decoration: none;
-           transform: translate3d(0, 0, 0);
-           transition: all .3s;
-           user-select: none;
-           -webkit-user-select: none;
-           touch-action: manipulation;
-           vertical-align: top;
-           white-space: nowrap;
-       }
+   .button-68 {
+       appearance: none;
+       backface-visibility: hidden;
+       background-color: #27ae60;
+       border-radius: 8px;
+       border-style: none;
+       box-shadow: rgba(39, 174, 96, .15) 0 4px 9px;
+       box-sizing: border-box;
+       color: #fff;
+       cursor: pointer;
+       display: inline-block;
+       font-family: Inter,-apple-system,system-ui,"Segoe UI",Helvetica,Arial,sans-serif;
+       font-size: 16px;
+       font-weight: 600;
+       outline: none;
+       overflow: hidden;
+       position: relative;
+       text-align: center;
+       text-decoration: none;
+       transform: translate3d(0, 0, 0);
+       transition: all .3s;
+       user-select: none;
+       -webkit-user-select: none;
+       touch-action: manipulation;
+       vertical-align: top;
+       white-space: nowrap;
+   }
 
     .button-68:hover {
         background-color: #1e8449;
