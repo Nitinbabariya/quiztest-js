@@ -1,4 +1,4 @@
-/* Version: 0.1.0 - March 11, 2023 14:57:34 */
+/* Version: 0.1.0 - March 11, 2023 23:16:00 */
 
 (function(l, r) { if (!l || l.getElementById('livereloadscript')) return; r = l.createElement('script'); r.async = 1; r.src = '//' + (self.location.host || 'localhost').split(':')[0] + ':35729/livereload.js?snipver=1'; r.id = 'livereloadscript'; l.getElementsByTagName('head')[0].appendChild(r) })(self.document);
 (function (global, factory) {
@@ -8272,7 +8272,7 @@
     const file$6 = "src/components/ResultsView.svelte";
 
     function add_css$5(target) {
-    	append_styles(target, "svelte-1jvcfkb", "ol.svelte-1jvcfkb.svelte-1jvcfkb{padding-left:0;display:inline-block}.top-list-item.svelte-1jvcfkb.svelte-1jvcfkb{margin-bottom:0.2rem;list-style-type:none;list-style:none}.top-list-item.svelte-1jvcfkb.svelte-1jvcfkb:hover{cursor:pointer;background-color:var(--quiztest-color-secondary)}.top-list-item.svelte-1jvcfkb:hover .list-question.svelte-1jvcfkb{text-decoration:underline}.list-comment.svelte-1jvcfkb.svelte-1jvcfkb{margin-left:2em;list-style-type:initial}.centerParent.svelte-1jvcfkb.svelte-1jvcfkb{text-align:center;display:flex;flex-direction:column-reverse;flex-wrap:wrap;align-content:space-around;align-items:baseline;justify-content:space-around}.center.svelte-1jvcfkb.svelte-1jvcfkb{width:150px;height:150px;border-radius:50%;border-color:#FF7A59;border-width:2rem;display:flex;align-items:center;text-align:center;justify-content:space-around;background-image:linear-gradient(to right, #b8cbb8 0%, #b8cbb8 0%, #b465da 0%, #cf6cc9 33%, #ee609c 66%, #ee609c 100%)}\n/*# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiUmVzdWx0c1ZpZXcuc3ZlbHRlIiwibWFwcGluZ3MiOiJBQUNJLEVBQUEsOEJBQUEsQ0FBQSxBQUNJLFlBQUEsQ0FBQSxDQUFlLENBQ2YsT0FBQSxDQUFBLFlBQXFCLEFBQ3pCLENBQUEsQUFFQSxjQUFBLDhCQUFBLENBQUEsQUFDSSxhQUFBLENBQUEsTUFBcUIsQ0FDckIsZUFBQSxDQUFBLElBQXFCLENBQ3JCLFVBQUEsQ0FBQSxJQUFnQixBQUNwQixDQUFBLEFBRUEsNENBQUEsTUFBQSxBQUFBLENBQUEsQUFDSSxNQUFBLENBQUEsT0FBZSxDQUNmLGdCQUFBLENBQUEsSUFBQSwwQkFBQSxDQUFpRCxBQUNyRCxDQUFBLEFBRUEsNkJBQUEsTUFBQSxDQUFBLGNBQUEsZUFBQSxDQUFBLEFBQ0ksZUFBQSxDQUFBLFNBQTBCLEFBQzlCLENBQUEsQUFFQSxhQUFBLDhCQUFBLENBQUEsQUFDSSxXQUFBLENBQUEsR0FBZ0IsQ0FDaEIsZUFBQSxDQUFBLE9BQXdCLEFBQzVCLENBQUEsQUFFQSxhQUFBLDhCQUFBLENBQUEsQUFDQSxVQUFBLENBQUEsTUFBa0IsQ0FDbEIsT0FBQSxDQUFBLElBQWEsQ0FDYixjQUFBLENBQUEsY0FBOEIsQ0FDOUIsU0FBQSxDQUFBLElBQWUsQ0FDZixhQUFBLENBQUEsWUFBMkIsQ0FDM0IsV0FBQSxDQUFBLFFBQXFCLENBQ2pCLGVBQUEsQ0FBQSxZQUE2QixBQUNqQyxDQUFBLEFBQ0EsT0FBQSw4QkFBQSxDQUFBLEFBQ0ksS0FBQSxDQUFBLEtBQVksQ0FDWixNQUFBLENBQUEsS0FBYSxDQUNiLGFBQUEsQ0FBQSxHQUFrQixDQUNsQixZQUFBLENBQUEsT0FBcUIsQ0FDckIsWUFBQSxDQUFBLElBQWtCLENBQ2xCLE9BQUEsQ0FBQSxJQUFhLENBQ2IsV0FBQSxDQUFBLE1BQW1CLENBQ25CLFVBQUEsQ0FBQSxNQUFrQixDQUNsQixlQUFBLENBQUEsWUFBNkIsQ0FFN0IsZ0JBQUEsQ0FBQSxnQkFBQSxFQUFBLENBQUEsS0FBQSxDQUFBLENBQUEsT0FBQSxDQUFBLEVBQUEsQ0FBQSxDQUFBLE9BQUEsQ0FBQSxFQUFBLENBQUEsQ0FBQSxPQUFBLENBQUEsRUFBQSxDQUFBLENBQUEsT0FBQSxDQUFBLEdBQUEsQ0FBQSxDQUFBLE9BQUEsQ0FBQSxHQUFBLENBQUEsQ0FBQSxPQUFBLENBQUEsSUFBQSxDQUF1SCxBQUMzSCxDQUFBIiwibmFtZXMiOltdLCJzb3VyY2VzIjpbInNyYy9jb21wb25lbnRzL1Jlc3VsdHNWaWV3LnN2ZWx0ZSJdfQ== */");
+    	append_styles(target, "svelte-lodjov", "ol.svelte-lodjov.svelte-lodjov{padding-left:0;display:inline-block}.top-list-item.svelte-lodjov.svelte-lodjov{margin-bottom:0.2rem;list-style-type:none;list-style:none}.top-list-item.svelte-lodjov.svelte-lodjov:hover{cursor:pointer;background-color:var(--quiztest-color-secondary)}.top-list-item.svelte-lodjov:hover .list-question.svelte-lodjov{text-decoration:underline}.list-comment.svelte-lodjov.svelte-lodjov{margin-left:2em;list-style-type:initial}.centerParent.svelte-lodjov.svelte-lodjov{text-align:center;align-content:space-around;align-items:baseline;justify-content:space-around}.center.svelte-lodjov.svelte-lodjov{width:150px;height:150px;border-radius:50%;border-color:#FF7A59;border-width:2rem;display:flex;align-items:center;text-align:center;justify-content:space-around;background-image:linear-gradient(to right, #b8cbb8 0%, #b8cbb8 0%, #b465da 0%, #cf6cc9 33%, #ee609c 66%, #ee609c 100%)}\n/*# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiUmVzdWx0c1ZpZXcuc3ZlbHRlIiwibWFwcGluZ3MiOiJBQUNJLEVBQUEsNEJBQUEsQ0FBQSxBQUNJLFlBQUEsQ0FBQSxDQUFlLENBQ2YsT0FBQSxDQUFBLFlBQXFCLEFBQ3pCLENBQUEsQUFFQSxjQUFBLDRCQUFBLENBQUEsQUFDSSxhQUFBLENBQUEsTUFBcUIsQ0FDckIsZUFBQSxDQUFBLElBQXFCLENBQ3JCLFVBQUEsQ0FBQSxJQUFnQixBQUNwQixDQUFBLEFBRUEsMENBQUEsTUFBQSxBQUFBLENBQUEsQUFDSSxNQUFBLENBQUEsT0FBZSxDQUNmLGdCQUFBLENBQUEsSUFBQSwwQkFBQSxDQUFpRCxBQUNyRCxDQUFBLEFBRUEsNEJBQUEsTUFBQSxDQUFBLGNBQUEsY0FBQSxDQUFBLEFBQ0ksZUFBQSxDQUFBLFNBQTBCLEFBQzlCLENBQUEsQUFFQSxhQUFBLDRCQUFBLENBQUEsQUFDSSxXQUFBLENBQUEsR0FBZ0IsQ0FDaEIsZUFBQSxDQUFBLE9BQXdCLEFBQzVCLENBQUEsQUFFQSxhQUFBLDRCQUFBLENBQUEsQUFDQSxVQUFBLENBQUEsTUFBa0IsQ0FDbEIsYUFBQSxDQUFBLFlBQTJCLENBQzNCLFdBQUEsQ0FBQSxRQUFxQixDQUNqQixlQUFBLENBQUEsWUFBNkIsQUFDakMsQ0FBQSxBQUNBLE9BQUEsNEJBQUEsQ0FBQSxBQUNJLEtBQUEsQ0FBQSxLQUFZLENBQ1osTUFBQSxDQUFBLEtBQWEsQ0FDYixhQUFBLENBQUEsR0FBa0IsQ0FDbEIsWUFBQSxDQUFBLE9BQXFCLENBQ3JCLFlBQUEsQ0FBQSxJQUFrQixDQUNsQixPQUFBLENBQUEsSUFBYSxDQUNiLFdBQUEsQ0FBQSxNQUFtQixDQUNuQixVQUFBLENBQUEsTUFBa0IsQ0FDbEIsZUFBQSxDQUFBLFlBQTZCLENBRTdCLGdCQUFBLENBQUEsZ0JBQUEsRUFBQSxDQUFBLEtBQUEsQ0FBQSxDQUFBLE9BQUEsQ0FBQSxFQUFBLENBQUEsQ0FBQSxPQUFBLENBQUEsRUFBQSxDQUFBLENBQUEsT0FBQSxDQUFBLEVBQUEsQ0FBQSxDQUFBLE9BQUEsQ0FBQSxHQUFBLENBQUEsQ0FBQSxPQUFBLENBQUEsR0FBQSxDQUFBLENBQUEsT0FBQSxDQUFBLElBQUEsQ0FBdUgsQUFDM0gsQ0FBQSIsIm5hbWVzIjpbXSwic291cmNlcyI6WyJzcmMvY29tcG9uZW50cy9SZXN1bHRzVmlldy5zdmVsdGUiXX0= */");
     }
 
     function get_each_context$1(ctx, list, i) {
@@ -8288,7 +8288,7 @@
     	return child_ctx;
     }
 
-    // (60:28) {#if question.answers[selected].comment !== ''}
+    // (58:28) {#if question.answers[selected].comment !== ''}
     function create_if_block$2(ctx) {
     	let li;
     	let i;
@@ -8305,10 +8305,10 @@
     			t0 = text$1(":\n                                    ");
     			html_tag = new HtmlTag(false);
     			t1 = space();
-    			add_location(i, file$6, 61, 36, 2148);
+    			add_location(i, file$6, 59, 36, 2077);
     			html_tag.a = t1;
-    			attr_dev(li, "class", "list-comment svelte-1jvcfkb");
-    			add_location(li, file$6, 60, 32, 2086);
+    			attr_dev(li, "class", "list-comment svelte-lodjov");
+    			add_location(li, file$6, 58, 32, 2015);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, li, anchor);
@@ -8330,14 +8330,14 @@
     		block,
     		id: create_if_block$2.name,
     		type: "if",
-    		source: "(60:28) {#if question.answers[selected].comment !== ''}",
+    		source: "(58:28) {#if question.answers[selected].comment !== ''}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (59:24) {#each question.selected as selected}
+    // (57:24) {#each question.selected as selected}
     function create_each_block_1(ctx) {
     	let if_block_anchor;
     	let if_block = /*question*/ ctx[8].answers[/*selected*/ ctx[11]].comment !== '' && create_if_block$2(ctx);
@@ -8375,14 +8375,14 @@
     		block,
     		id: create_each_block_1.name,
     		type: "each",
-    		source: "(59:24) {#each question.selected as selected}",
+    		source: "(57:24) {#each question.selected as selected}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (51:12) {#each quiz.questions as question, i}
+    // (49:12) {#each quiz.questions as question, i}
     function create_each_block$1(ctx) {
     	let li;
     	let span;
@@ -8424,12 +8424,12 @@
 
     			t3 = space();
     			html_tag.a = null;
-    			attr_dev(span, "class", "list-question svelte-1jvcfkb");
-    			add_location(span, file$6, 52, 20, 1660);
-    			attr_dev(ol, "class", "svelte-1jvcfkb");
-    			add_location(ol, file$6, 56, 20, 1834);
-    			attr_dev(li, "class", "top-list-item svelte-1jvcfkb");
-    			add_location(li, file$6, 51, 16, 1581);
+    			attr_dev(span, "class", "list-question svelte-lodjov");
+    			add_location(span, file$6, 50, 20, 1589);
+    			attr_dev(ol, "class", "svelte-lodjov");
+    			add_location(ol, file$6, 54, 20, 1763);
+    			attr_dev(li, "class", "top-list-item svelte-lodjov");
+    			add_location(li, file$6, 49, 16, 1510);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, li, anchor);
@@ -8492,14 +8492,14 @@
     		block,
     		id: create_each_block$1.name,
     		type: "each",
-    		source: "(51:12) {#each quiz.questions as question, i}",
+    		source: "(49:12) {#each quiz.questions as question, i}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (40:0) <Loading ms="{waitTime}" minHeight="{150}">
+    // (38:0) <Loading ms="{waitTime}" minHeight="{150}">
     function create_default_slot$1(ctx) {
     	let div2;
     	let div0;
@@ -8555,17 +8555,17 @@
     				each_blocks[i].c();
     			}
 
-    			attr_dev(h1, "class", "center svelte-1jvcfkb");
-    			add_location(h1, file$6, 42, 12, 1175);
-    			attr_dev(div0, "class", "centerParent svelte-1jvcfkb");
-    			add_location(div0, file$6, 41, 8, 1136);
+    			attr_dev(h1, "class", "center svelte-lodjov");
+    			add_location(h1, file$6, 40, 12, 1104);
+    			attr_dev(div0, "class", "centerParent svelte-lodjov");
+    			add_location(div0, file$6, 39, 8, 1065);
     			attr_dev(h3, "class", "highlight-circle-sketch");
-    			add_location(h3, file$6, 46, 8, 1301);
-    			add_location(hr, file$6, 47, 8, 1430);
-    			add_location(div1, file$6, 48, 8, 1444);
-    			attr_dev(ol, "class", "svelte-1jvcfkb");
-    			add_location(ol, file$6, 49, 8, 1510);
-    			add_location(div2, file$6, 40, 4, 1091);
+    			add_location(h3, file$6, 44, 8, 1230);
+    			add_location(hr, file$6, 45, 8, 1359);
+    			add_location(div1, file$6, 46, 8, 1373);
+    			attr_dev(ol, "class", "svelte-lodjov");
+    			add_location(ol, file$6, 47, 8, 1439);
+    			add_location(div2, file$6, 38, 4, 1020);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, div2, anchor);
@@ -8639,7 +8639,7 @@
     		block,
     		id: create_default_slot$1.name,
     		type: "slot",
-    		source: "(40:0) <Loading ms=\\\"{waitTime}\\\" minHeight=\\\"{150}\\\">",
+    		source: "(38:0) <Loading ms=\\\"{waitTime}\\\" minHeight=\\\"{150}\\\">",
     		ctx
     	});
 
@@ -8647,7 +8647,7 @@
     }
 
     function create_fragment$6(ctx) {
-    	let div;
+    	let h3;
     	let i;
     	let t0;
     	let t1_value = /*$_*/ ctx[4]('resultsTitle') + "";
@@ -8668,7 +8668,7 @@
 
     	const block = {
     		c: function create() {
-    			div = element("div");
+    			h3 = element("h3");
     			i = element("i");
     			t0 = space();
     			t1 = text$1(t1_value);
@@ -8676,18 +8676,17 @@
     			create_component(loading.$$.fragment);
     			attr_dev(i, "class", "fa-shake fa fa-id-card-o");
     			attr_dev(i, "aria-hidden", "true");
-    			add_location(i, file$6, 37, 32, 952);
-    			set_style(div, "text-align", "center");
-    			add_location(div, file$6, 37, 0, 920);
+    			add_location(i, file$6, 35, 4, 882);
+    			add_location(h3, file$6, 35, 0, 878);
     		},
     		l: function claim(nodes) {
     			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
     		},
     		m: function mount(target, anchor) {
-    			insert_dev(target, div, anchor);
-    			append_dev(div, i);
-    			append_dev(div, t0);
-    			append_dev(div, t1);
+    			insert_dev(target, h3, anchor);
+    			append_dev(h3, i);
+    			append_dev(h3, t0);
+    			append_dev(h3, t1);
     			insert_dev(target, t2, anchor);
     			mount_component(loading, target, anchor);
     			current = true;
@@ -8713,7 +8712,7 @@
     			current = false;
     		},
     		d: function destroy(detaching) {
-    			if (detaching) detach_dev(div);
+    			if (detaching) detach_dev(h3);
     			if (detaching) detach_dev(t2);
     			destroy_component(loading, detaching);
     		}
@@ -8741,10 +8740,6 @@
     	});
 
     	return text;
-    }
-
-    function getResultMessage(percentage) {
-    	
     }
 
     function instance$6($$self, $$props, $$invalidate) {
@@ -8804,7 +8799,6 @@
     		message,
     		format,
     		stringInterpolation,
-    		getResultMessage,
     		$_
     	});
 

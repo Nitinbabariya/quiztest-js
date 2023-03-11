@@ -36,16 +36,10 @@
         });
         return text;
     }
-
-    function getResultMessage(percentage){
-
-    }
-
-
 </script>
 
-<div style="text-align:center;"><i class="fa-shake fa fa-id-card-o" aria-hidden="true"></i>
-    {$_('resultsTitle')}</div>
+<h3><i class="fa-shake fa fa-id-card-o" aria-hidden="true"></i>
+    {$_('resultsTitle')}</h3>
 <Loading ms="{waitTime}" minHeight="{150}">
     <div in:fade="{{ duration: 1000 }}">
         <div class="centerParent">
@@ -109,9 +103,6 @@
 
     .centerParent {
     text-align: center;
-    display: flex;
-    flex-direction: column-reverse;
-    flex-wrap: wrap;
     align-content: space-around;
     align-items: baseline;
         justify-content: space-around;
