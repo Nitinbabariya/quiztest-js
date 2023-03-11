@@ -71,18 +71,46 @@
                     {@html quiz.config.introduction}
                 {/if}
                 <p>
-                    <button class="button-68" on:click={onCloseDialog}>Start the Quiz > </button>
+                    <button class="button-68" on:click={onCloseDialog}><span style="font-size:2em">🎯</span> Start the Quiz</button>
                 </p>
             </Dialog>
 
         <Loading update="{reloaded}" ms="{800}" minHeight="{minHeight}">
             <Container>
                 <SmoothResize minHeight="{minHeight}">
+
+                    {#if !$onResults}
+                        <div class="pagination">
+
+                        {#each quiz.questions as q, i}
+                            <button  on:click="{() => quiz.jump(i)}" class="{$index === i ? 'active' : ''}">
+                                {i+1} </button>
+                        {/each}
+                            <button
+                                    disabled="{!($onLast)}"
+                                    title="{$_('evaluate')}"
+                                    on:click="{() =>
+                                quiz.jump(quiz.questions.length)}"><Icon name="check-double" size="sm" />End Test</button>
+
+                            <button style="margin-right: 1rem" title="{$_('reset')}"
+                                    on:click="{() => { reloaded = !reloaded;
+                                                            quiz.reset();
+                                                        }}"><Icon name="redo" /> Restart Test</button>
+                            <svelte:component this={component} {...props}/>
+                        </div>
+                        <ProgressBar value="{$index}" max="{quiz.questions.length - 1}" />
+                    {/if}
+
                     <Animated update="{$index}">
 
-                        <ProgressBar value="{$index}" max="{quiz.questions.length - 1}" />
                         {#if $onResults}
                             <ResultsView quiz="{quiz}" />
+
+                            <button class="button-68" title="{$_('reset')}"
+                                    on:click="{() => { reloaded = !reloaded;
+                                                            quiz.reset();
+                                                        }}"><Icon name="redo" /> Restart Test</button>
+
                         {:else}
                             <QuestionView
                                 question="{$question}"
@@ -90,8 +118,6 @@
                                 questionType="{$question.questionType}"
                                 counfOfQuestions="{quiz.questions.length}"
                             />
-                            <br/>
-
                             <Hint hint="{$question.hint}" show="{$showHint}" />
 
                             <div class="pagination">
@@ -99,9 +125,9 @@
                                 <button on:click="{() => quiz.jump(0)}" disabled={$onFirst} > <Icon name="step-backward" /></button>
                                 <button on:click="{() => quiz.previous()}" disabled={$onFirst}> <Icon name="arrow-left"  /></button>
                                 <button on:click="{() => quiz.next()}" disabled={$onLast}> <Icon name="arrow-right"  /> </button>
-                                <button on:click="{() => quiz.jump( quiz.questions.length-1)}" disabled={$onLast} class:active="{$onLast}"> <Icon name="step-forward"/> </button>
+                                <button on:click="{() => quiz.jump( quiz.questions.length-1)}" disabled={$onLast} > <Icon name="step-forward"/> </button>
 
-                                <button  in:fly="{{ x: 200, duration: 500 }}"
+                                <button
                                          disabled="{!($onLast)}"
                                          title="{$_('evaluate')}"
                                          on:click="{() =>
@@ -110,13 +136,6 @@
                                         on:click="{() => { reloaded = !reloaded;
                                                             quiz.reset();
                                                         }}"><Icon name="redo" /> </button>
-                                <br/>
-                                <svelte:component this={component} {...props}/>
-
-                                {#each quiz.questions as q, i}
-                                    <button  on:click="{() => quiz.jump(i)}" class="{$index === i ? 'active' : ''}">
-                                        {i+1} </button>
-                                {/each}
 
                             </div>
                         {/if}
@@ -216,6 +235,7 @@
        touch-action: manipulation;
        vertical-align: top;
        white-space: nowrap;
+       padding: 1em;
    }
 
     .button-68:hover {

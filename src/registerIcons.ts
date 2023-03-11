@@ -6,7 +6,8 @@ import {
     faCheckDouble,
     faCog,
     faCircleNotch, faBackward,
-    faStepBackward, faStepForward
+    faStepBackward, faStepForward,
+    faHourglassEnd
 } from '@fortawesome/free-solid-svg-icons';
 import { faLightbulb } from '@fortawesome/free-regular-svg-icons';
 
@@ -22,5 +23,6 @@ export default function () {
         faBackward,
         faStepBackward,
         faStepForward,
+        faHourglassEnd
     );
 }

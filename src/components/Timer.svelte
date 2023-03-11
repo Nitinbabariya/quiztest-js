@@ -16,39 +16,13 @@
     });
 </script>
 
-<table style="text-align: center; border:0px">
-    <tr>
-        <td>
-            {hours-1}
-        </td>
-        <td>
-            :
-        </td>
-        <td>
-            {minutes}
-        </td>
-        <td>
-            :
-        </td>
-        <td>
-            {seconds}
-        </td>
-    </tr>
-    <tr style="color:#808080; font-size:0.8em">
-        <td>
-            hh
-        </td>
-        <td>
-            :
-        </td>
-        <td>
-            mm
-        </td>
-        <td>
-            :
-        </td>
-        <td>
-            ss
-        </td>
-    </tr>
-</table>
+<div>
+    ⏳ {hours-1}:{minutes}:{seconds}
+</div>
+
+<style>
+    div{
+        color: #27ae60;
+        float:right;
+    }
+</style>

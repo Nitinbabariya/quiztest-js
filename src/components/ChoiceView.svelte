@@ -33,15 +33,7 @@
         opacity: 0;
     }
 
-    [type='radio'] + span {
-        transition-duration: 0.3s;
-        background-color: #E7E9EB;
-        color: var(--quiztest-color-text);
-        padding: 0.5rem;
-        margin:5px 0 5px 0;
-        border: 3px solid transparent;
-        cursor: pointer;
-    }
+
 
     [type='radio']:hover + span,
     [type='radio']:focus + span {
@@ -75,7 +67,6 @@
         height: 1.3em;
         border-radius: 50%;
         margin-right: 0.375em;
-        margin-top: 0.3rem;
         transition: 0.25s ease;
         box-shadow: inset 0 0 0 0.14375em #fff;
     }
@@ -118,13 +109,14 @@
         /* Windows High Contrast Mode */
         background-color: CanvasText;
     }
+
     [type='checkbox'] + span,
     [type='radio'] + span {
         transition-duration: 0.3s;
         background-color: #E7E9EB;
         color: var(--quiztest-color-text);
         padding: 0.5rem;
-        margin:5px 0 5px 0;
+        margin:1px 0 1px 0;
         border: 3px solid transparent;
         cursor: pointer;
     }
@@ -133,7 +125,7 @@
     [type='checkbox']:focus + span,
     [type='radio']:hover + span,
     [type='radio']:focus + span {
-        filter: brightness(0.9);
+        background-color: #ddd;
     }
 
     [type='checkbox']:checked + span,
@@ -152,7 +144,6 @@
         height: 1.3em;
         border-radius: 10%;
         margin-right: 0.375em;
-        margin-top: 0.3rem;
         transition: 0.25s ease;
         box-shadow: inset 0 0 0 0.14375em #fff;
     }
@@ -165,7 +156,6 @@
         height: 1.3em;
         background-color: #2196f3;
         border-radius: 10%;
-        margin-right: 0.375em;
         transition: 0.25s ease;
         box-shadow: inset 0 0 0 0.14375em #2196f3;
         transform-origin: bottom left;
