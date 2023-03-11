@@ -5,7 +5,7 @@
 </script>
 
 {#if show}
-    <p in:fade|local="{{ duration: 400 }}" class="hint">
+    <div class="alert simple-alert hint" in:fade|local="{{ duration: 400 }}">
         💡 {@html hint}
-    </p>
+    </div>
 {/if}

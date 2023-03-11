@@ -56,7 +56,7 @@
         node.style.setProperty('--quiztest-color-text', textColor);
         node.style.minHeight = `${minHeight}px`;
 
-        //dialog.showModal();
+        dialog.showModal();
     });
 
     const onCloseDialog = () => {
@@ -81,14 +81,8 @@
                     <Animated update="{$index}">
 
                         <ProgressBar value="{$index}" max="{quiz.questions.length - 1}" />
-
                         {#if $onResults}
                             <ResultsView quiz="{quiz}" />
-                            <button style="margin-right: 1rem" title="{$_('reset')}"
-                                    on:click="{() => {
-                            reloaded = !reloaded;
-                            quiz.reset();
-                        }}"><Icon name="redo" /> </button>
                         {:else}
                             <QuestionView
                                 question="{$question}"
@@ -102,46 +96,33 @@
 
                             <div class="pagination">
                                 <button on:click="{$question.enableHint}" title="{$_('previous')}" disabled="{!$question.hint || $showHint || $onResults}"><Icon name="lightbulb" solid="{false}" /></button>
-                                <button on:click="{() => quiz.jump(0)}" disabled={$onFirst} > « </button>
+                                <button on:click="{() => quiz.jump(0)}" disabled={$onFirst} > <Icon name="step-backward" /></button>
                                 <button on:click="{() => quiz.previous()}" disabled={$onFirst}> <Icon name="arrow-left"  /></button>
                                 <button on:click="{() => quiz.next()}" disabled={$onLast}> <Icon name="arrow-right"  /> </button>
-                                <button on:click="{() => quiz.jump( quiz.questions.length-1)}" disabled={$onLast} class:active="{$onLast}"> » </button>
+                                <button on:click="{() => quiz.jump( quiz.questions.length-1)}" disabled={$onLast} class:active="{$onLast}"> <Icon name="step-forward"/> </button>
+
+                                <button  in:fly="{{ x: 200, duration: 500 }}"
+                                         disabled="{!($onLast)}"
+                                         title="{$_('evaluate')}"
+                                         on:click="{() =>
+                                quiz.jump(quiz.questions.length)}"><Icon name="check-double" size="sm" />End Test</button>
+                                <button style="margin-right: 1rem" title="{$_('reset')}"
+                                        on:click="{() => { reloaded = !reloaded;
+                                                            quiz.reset();
+                                                        }}"><Icon name="redo" /> </button>
+                                <br/>
+                                <svelte:component this={component} {...props}/>
+
                                 {#each quiz.questions as q, i}
                                     <button  on:click="{() => quiz.jump(i)}" class="{$index === i ? 'active' : ''}">
                                         {i+1} </button>
                                 {/each}
 
-                                {#if $onLast || $allVisited }
-                                    <button  in:fly="{{ x: 200, duration: 500 }}"
-                                             disabled="{!($onLast)}"
-                                             title="{$_('evaluate')}"
-                                             on:click="{() =>
-                                        quiz.jump(quiz.questions.length)}"
-                                    ><Icon
-                                            name="check-double"
-                                            size="sm"
-                                    />Result</button>
-                                {/if}
-                                <Row>
-                                    <svelte:fragment slot="right">
-                                        <svelte:component this={component} {...props}/>
-
-                                    </svelte:fragment>
-                                </Row>
-                                <button style="margin-right: 1rem" title="{$_('reset')}"
-                                        on:click="{() => {
-                            reloaded = !reloaded;
-                            quiz.reset();
-                        }}"><Icon name="redo" /> </button>
                             </div>
                         {/if}
                     </Animated>
                 </SmoothResize>
                 <!-- <Modal show="{showModal}">Are you sure?</Modal> -->
-
-
-
-
             </Container>
         </Loading>
     </Card>
@@ -195,7 +176,7 @@
         text-decoration: none;
         display: inline-block;
         cursor: pointer;
-        font-size: 1em;
+        font-size: 0.9em;
     }
 
     .pagination button.active {

@@ -21,6 +21,7 @@
 <h3 class="badge">{$_('questionLetter')} {n} {$_('outOf')} {counfOfQuestions} : </h3> <span class="qtype"> It's a {questionType} question</span>
 <br/>
 {@html question.text}
+
 {#if question.explanation}
     <p>{@html question.explanation}</p>
 {/if}
