@@ -36,6 +36,12 @@
         });
         return text;
     }
+
+    function getResultMessage(percentage){
+
+    }
+
+
 </script>
 
 <div style="text-align:center;"><i class="fa-shake fa fa-id-card-o" aria-hidden="true"></i>
@@ -111,9 +117,8 @@
         justify-content: space-around;
     }
     .center {
-        background:#f2f2f2;
-        width: 100px;
-        height: 100px;
+        width: 150px;
+        height: 150px;
         border-radius: 50%;
         border-color: #FF7A59;
         border-width: 2rem;
@@ -121,5 +126,9 @@
         align-items: center;
         text-align: center;
         justify-content: space-around;
+
+        background-image: linear-gradient(to right, #b8cbb8 0%, #b8cbb8 0%, #b465da 0%, #cf6cc9 33%, #ee609c 66%, #ee609c 100%);
     }
+
+
 </style>
