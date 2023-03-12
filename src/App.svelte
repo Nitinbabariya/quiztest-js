@@ -56,7 +56,7 @@
         node.style.setProperty('--quiztest-color-text', textColor);
         node.style.minHeight = `${minHeight}px`;
 
-        dialog.showModal();
+        //dialog.showModal();
     });
 
     const onCloseDialog = () => {
@@ -100,7 +100,6 @@
                     {/if}
 
                     <Animated update="{$index}">
-
                         {#if $onResults}
                             <ResultsView quiz="{quiz}" />
 
@@ -108,13 +107,13 @@
                                     on:click="{() => { reloaded = !reloaded;
                                                             quiz.reset();
                                                         }}"><Icon name="redo" /> Restart Test</button>
-
                         {:else}
                             <QuestionView
                                 question="{$question}"
                                 n="{$index + 1}"
                                 questionType="{$question.questionType}"
-                                counfOfQuestions="{quiz.questions.length}"
+                                countOfQuestions="{quiz.questions.length}"
+                                reviewModeActivated="{quiz.isReviewModeActivated()}"
                             />
                             <Hint hint="{$question.hint}" show="{$showHint}" />
 

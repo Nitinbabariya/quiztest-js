@@ -1,7 +1,9 @@
 <script lang="ts">
-    import type { BaseQuestion } from '../quiz';
+    import type { Quiz, BaseQuestion } from '../quiz';
     export let question: BaseQuestion;
+    export let reviewModeActivated: boolean;
 </script>
+{reviewModeActivated}
 
     {#if question.questionType === 'MultipleChoice'}
         {#each question.answers as answer, i}
@@ -10,8 +12,26 @@
                     type="checkbox"
                     bind:group="{question.selected}"
                     value="{i}"
+                    disabled="{reviewModeActivated}"
                 />
-                <span>{@html answer.html}</span>
+                <span>{@html answer.html}
+                    {#if reviewModeActivated}
+                        {#if answer.correct && question.selected.includes(i)}
+                            <span class="reviewAnswer givenAnswerIsCorrect">
+                                👍 your answer
+                            </span>
+                        {:else if question.selected.includes(i)}
+                            <span class="reviewAnswer givenAnswerIsInCorrect">
+                                ❌ your answer
+                            </span>
+
+                        {:else if answer.correct}
+                             <span class="reviewAnswer correctAnswer">
+                                correct answer
+                            </span>
+                        {/if}
+                    {/if}
+                </span>
             </label>
         {/each}
     {:else}
@@ -21,19 +41,54 @@
                     type="radio"
                     bind:group="{question.selected[0]}"
                     value="{i}"
+                    disabled="{reviewModeActivated}"
                 />
-                <span>{@html answer.html}</span>
+
+                <span>{@html answer.html}
+
+                    {#if reviewModeActivated}
+                        {#if answer.correct && question.selected.includes(i)}
+                            <span class="reviewAnswer givenAnswerIsCorrect">
+                                👍 your answer
+                            </span>
+                        {:else if question.selected.includes(i)}
+                            <span class="reviewAnswer givenAnswerIsInCorrect">
+                                ❌ your answer
+                            </span>
+
+                        {:else if answer.correct}
+                             <span class="reviewAnswer correctAnswer">
+                                correct answer
+                            </span>
+                        {/if}
+                    {/if}
+                </span>
             </label>
         {/each}
     {/if}
 
+
 <style>
+    .reviewAnswer{
+        position: absolute;
+        right: 10px;
+        top:10px;
+    }
+    .givenAnswerIsCorrect{
+        background-color: green !important;
+    }
+    .givenAnswerIsInCorrect{
+        background-color: red  !important;
+    }
+    .correctAnswer{
+        background-color: yellow  !important;
+    }
+
+
     [type='radio'] {
         position: fixed;
         opacity: 0;
     }
-
-
 
     [type='radio']:hover + span,
     [type='radio']:focus + span {
@@ -54,6 +109,7 @@
     label span {
         display: flex;
         transition: 0.25s ease;
+        position:relative;
     }
     label span:hover {
         background-color: #d6d6e5;

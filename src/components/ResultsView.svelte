@@ -20,6 +20,7 @@
     let message=0;
     beforeUpdate(() => {
         points = quiz.evaluate();
+        quiz.activateReviewMode()
         percentage = points/quiz.questions.length * 100;
     });
 
