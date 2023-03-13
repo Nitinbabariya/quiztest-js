@@ -5,9 +5,9 @@
     //timer
     const startDate : Date=  new Date();
     let dateNow : Date =new Date(startDate - startDate)
-    $: hours = dateNow.getHours();
-    $: minutes = dateNow.getMinutes();
-    $: seconds = dateNow.getSeconds();
+    let hours = dateNow.getHours();
+    let minutes = dateNow.getMinutes();
+    let seconds = dateNow.getSeconds();
     onMount( () => {
         setInterval(() => {
             if(isActive)

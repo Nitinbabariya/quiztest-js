@@ -1,4 +1,4 @@
-/* Version: 0.1.0 - March 13, 2023 23:27:11 */
+/* Version: 0.1.0 - March 13, 2023 23:35:20 */
 
 (function(l, r) { if (!l || l.getElementById('livereloadscript')) return; r = l.createElement('script'); r.async = 1; r.src = '//' + (self.location.host || 'localhost').split(':')[0] + ':35729/livereload.js?snipver=1'; r.id = 'livereloadscript'; l.getElementsByTagName('head')[0].appendChild(r) })(self.document);
 (function (global, factory) {
@@ -499,14 +499,6 @@
      */
     function onMount(fn) {
         get_current_component().$$.on_mount.push(fn);
-    }
-    /**
-     * Schedules a callback to run immediately after the component has been updated.
-     *
-     * The first time the callback runs will be after the initial `onMount`
-     */
-    function afterUpdate(fn) {
-        get_current_component().$$.after_update.push(fn);
     }
     /**
      * Retrieves the context that belongs to the closest parent component with the specified `key`.
@@ -3586,7 +3578,7 @@
             }
         });
     }
-    function parse$2(message, opts) {
+    function parse$1(message, opts) {
         if (opts === void 0) { opts = {}; }
         opts = __assign({ shouldParseSkeletons: true, requiresOtherClause: true }, opts);
         var result = new Parser$2(message, opts).parse();
@@ -4063,7 +4055,7 @@
             configurable: true
         });
         IntlMessageFormat.memoizedDefaultLocale = null;
-        IntlMessageFormat.__parse = parse$2;
+        IntlMessageFormat.__parse = parse$1;
         // Default format options used as the prototype of the `formats` provided to the
         // constructor. These are used when constructing the internal Intl.NumberFormat
         // and Intl.DateTimeFormat instances.
@@ -7954,75 +7946,6 @@
       }
     }
 
-    var parseTransformString = function parseTransformString(transformString) {
-      var transform = {
-        size: 16,
-        x: 0,
-        y: 0,
-        flipX: false,
-        flipY: false,
-        rotate: 0
-      };
-
-      if (!transformString) {
-        return transform;
-      } else {
-        return transformString.toLowerCase().split(' ').reduce(function (acc, n) {
-          var parts = n.toLowerCase().split('-');
-          var first = parts[0];
-          var rest = parts.slice(1).join('-');
-
-          if (first && rest === 'h') {
-            acc.flipX = true;
-            return acc;
-          }
-
-          if (first && rest === 'v') {
-            acc.flipY = true;
-            return acc;
-          }
-
-          rest = parseFloat(rest);
-
-          if (isNaN(rest)) {
-            return acc;
-          }
-
-          switch (first) {
-            case 'grow':
-              acc.size = acc.size + rest;
-              break;
-
-            case 'shrink':
-              acc.size = acc.size - rest;
-              break;
-
-            case 'left':
-              acc.x = acc.x - rest;
-              break;
-
-            case 'right':
-              acc.x = acc.x + rest;
-              break;
-
-            case 'up':
-              acc.y = acc.y - rest;
-              break;
-
-            case 'down':
-              acc.y = acc.y + rest;
-              break;
-
-            case 'rotate':
-              acc.rotate = acc.rotate + rest;
-              break;
-          }
-
-          return acc;
-        }, transform);
-      }
-    };
-
     function MissingIcon(error) {
       this.name = 'MissingIcon';
       this.message = error || 'Icon unavailable';
@@ -8276,11 +8199,6 @@
 
     var library = new Library();
     var _cssInserted = false;
-    var parse$1 = {
-      transform: function transform(transformString) {
-        return parseTransformString(transformString);
-      }
-    };
     var icon = resolveIcons(function (iconDefinition) {
       var params = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
       var _params$transform = params.transform,
@@ -8427,12 +8345,8 @@
     	};
 
     	$$self.$capture_state = () => ({
-    		onMount,
     		beforeUpdate,
-    		afterUpdate,
-    		parse: parse$1,
     		icon,
-    		findIconDefinition,
     		size,
     		spin,
     		name,
@@ -9798,7 +9712,7 @@
     			if (local) {
     				if (!div_intro) {
     					add_render_callback(() => {
-    						div_intro = create_in_transition(div, fade, { x: 200, duration: 500 });
+    						div_intro = create_in_transition(div, fade, { duration: 200 });
     						div_intro.start();
     					});
     				}
@@ -10062,42 +9976,20 @@
 
     function create_fragment$2(ctx) {
     	let span;
-    	let t0;
-    	let t1_value = /*hours*/ ctx[2] - 1 + "";
-    	let t1;
-    	let t2;
-    	let t3;
-    	let t4;
-    	let t5;
 
     	const block = {
     		c: function create() {
     			span = element("span");
-    			t0 = text$1("⏳ ");
-    			t1 = text$1(t1_value);
-    			t2 = text$1(":");
-    			t3 = text$1(/*minutes*/ ctx[1]);
-    			t4 = text$1(":");
-    			t5 = text$1(/*seconds*/ ctx[0]);
-    			add_location(span, file$2, 16, 0, 414);
+    			span.textContent = `⏳ ${/*hours*/ ctx[0] - 1}:${/*minutes*/ ctx[1]}:${/*seconds*/ ctx[2]}`;
+    			add_location(span, file$2, 16, 0, 417);
     		},
     		l: function claim(nodes) {
     			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, span, anchor);
-    			append_dev(span, t0);
-    			append_dev(span, t1);
-    			append_dev(span, t2);
-    			append_dev(span, t3);
-    			append_dev(span, t4);
-    			append_dev(span, t5);
     		},
-    		p: function update(ctx, [dirty]) {
-    			if (dirty & /*hours*/ 4 && t1_value !== (t1_value = /*hours*/ ctx[2] - 1 + "")) set_data_dev(t1, t1_value);
-    			if (dirty & /*minutes*/ 2) set_data_dev(t3, /*minutes*/ ctx[1]);
-    			if (dirty & /*seconds*/ 1) set_data_dev(t5, /*seconds*/ ctx[0]);
-    		},
+    		p: noop$2,
     		i: noop$2,
     		o: noop$2,
     		d: function destroy(detaching) {
@@ -10117,9 +10009,6 @@
     }
 
     function instance$2($$self, $$props, $$invalidate) {
-    	let hours;
-    	let minutes;
-    	let seconds;
     	let { $$slots: slots = {}, $$scope } = $$props;
     	validate_slots('Timer', slots, []);
     	let { isActive = false } = $$props;
@@ -10128,11 +10017,14 @@
     	const startDate = new Date();
 
     	let dateNow = new Date(startDate - startDate);
+    	let hours = dateNow.getHours();
+    	let minutes = dateNow.getMinutes();
+    	let seconds = dateNow.getSeconds();
 
     	onMount(() => {
     		setInterval(
     			() => {
-    				if (isActive) $$invalidate(4, dateNow = new Date(new Date() - startDate));
+    				if (isActive) dateNow = new Date(new Date() - startDate);
     			},
     			1000
     		);
@@ -10153,38 +10045,24 @@
     		onMount,
     		startDate,
     		dateNow,
-    		seconds,
+    		hours,
     		minutes,
-    		hours
+    		seconds
     	});
 
     	$$self.$inject_state = $$props => {
     		if ('isActive' in $$props) $$invalidate(3, isActive = $$props.isActive);
-    		if ('dateNow' in $$props) $$invalidate(4, dateNow = $$props.dateNow);
-    		if ('seconds' in $$props) $$invalidate(0, seconds = $$props.seconds);
+    		if ('dateNow' in $$props) dateNow = $$props.dateNow;
+    		if ('hours' in $$props) $$invalidate(0, hours = $$props.hours);
     		if ('minutes' in $$props) $$invalidate(1, minutes = $$props.minutes);
-    		if ('hours' in $$props) $$invalidate(2, hours = $$props.hours);
+    		if ('seconds' in $$props) $$invalidate(2, seconds = $$props.seconds);
     	};
 
     	if ($$props && "$$inject" in $$props) {
     		$$self.$inject_state($$props.$$inject);
     	}
 
-    	$$self.$$.update = () => {
-    		if ($$self.$$.dirty & /*dateNow*/ 16) {
-    			$$invalidate(2, hours = dateNow.getHours());
-    		}
-
-    		if ($$self.$$.dirty & /*dateNow*/ 16) {
-    			$$invalidate(1, minutes = dateNow.getMinutes());
-    		}
-
-    		if ($$self.$$.dirty & /*dateNow*/ 16) {
-    			$$invalidate(0, seconds = dateNow.getSeconds());
-    		}
-    	};
-
-    	return [seconds, minutes, hours, isActive, dateNow];
+    	return [hours, minutes, seconds, isActive];
     }
 
     class Timer extends SvelteComponentDev {
