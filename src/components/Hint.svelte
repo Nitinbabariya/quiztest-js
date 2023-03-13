@@ -5,7 +5,19 @@
 </script>
 
 {#if show}
-    <p in:fade|local="{{ duration: 400 }}" class="hint">
+    <div class="hint" in:fade|local="{{  x: 200, duration: 500  }}">
         💡 {@html hint}
-    </p>
+    </div>
 {/if}
+
+<style>
+    .hint{
+        display: block;
+        padding: 6px;
+        margin: 6px;
+        border-radius: 3px;
+        border: 1px solid #E7E9EB;
+        background: rgb(239,244,152);
+        background: linear-gradient(90deg, rgba(239,244,152,0.327249649859944) 0%, rgba(187,240,243,0.4981179971988795) 5%);
+    }
+</style>

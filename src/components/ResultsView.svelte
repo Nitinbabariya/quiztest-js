@@ -20,12 +20,20 @@
     let message=0;
     beforeUpdate(() => {
         points = quiz.evaluate();
-        percentage = points/quiz.questions.length * 100;
+        quiz.activateReviewMode()
+        percentage = points/quiz.questions.length;
     });
 
     function format(n: number) {
         return n.toLocaleString('en-US', {
             minimumIntegerDigits: 1,
+        });
+    }
+
+    function formatPercentage(n: number) {
+        return n.toLocaleString('en-US', {
+            minimumIntegerDigits: 1,
+            style: 'percent'
         });
     }
     function stringInterpolation(text,vars)
@@ -38,8 +46,8 @@
     }
 </script>
 
-<div style="text-align:center;"><i class="fa-shake fa fa-id-card-o" aria-hidden="true"></i>
-    {$_('resultsTitle')}</div>
+<h3><i class="fa-shake fa fa-id-card-o" aria-hidden="true"></i>
+    {$_('resultsTitle')}</h3>
 <Loading ms="{waitTime}" minHeight="{150}">
     <div in:fade="{{ duration: 1000 }}">
         <div class="centerParent">
@@ -47,9 +55,9 @@
                 {format(points)}/{format(quiz.questions.length)}
             </h1>
         </div>
-        <h3 class="highlight-circle-sketch">{stringInterpolation( $_('resultsText'),{'percentage' : format(percentage)})}  </h3>
+        <h3 class="highlight-circle-sketch">{stringInterpolation( $_('resultsText'),{'percentage' : formatPercentage(percentage)})}  </h3>
         <hr/>
-        <div>This is how you answered each of the questions</div>
+        <h3>This is how you answered each of the questions</h3>
         <ol>
             {#each quiz.questions as question, i}
                 <li class="top-list-item" on:click="{() => quiz.jump(i)}">
@@ -62,10 +70,8 @@
                         {#each question.selected as selected}
                             {#if question.answers[selected].comment !== ''}
                                 <li class="list-comment">
-                                    <i
-                                        >{@html question.answers[selected]
-                                            .html}</i
-                                    >:
+                                    <i>{@html question.answers[selected]
+                                            .html}</i>:
                                     {@html question.answers[selected].comment}
                                 </li>
                             {/if}
@@ -80,7 +86,7 @@
 <style>
     ol {
         padding-left: 0;
-        display: inline-block;
+        display: block;
     }
 
     .top-list-item {
@@ -101,21 +107,18 @@
     .list-comment {
         margin-left: 2em;
         list-style-type: initial;
+        display: list-item;
     }
 
     .centerParent {
     text-align: center;
-    display: flex;
-    flex-direction: column-reverse;
-    flex-wrap: wrap;
     align-content: space-around;
     align-items: baseline;
         justify-content: space-around;
     }
     .center {
-        background:#f2f2f2;
-        width: 100px;
-        height: 100px;
+        width: 150px;
+        height: 150px;
         border-radius: 50%;
         border-color: #FF7A59;
         border-width: 2rem;
@@ -123,5 +126,9 @@
         align-items: center;
         text-align: center;
         justify-content: space-around;
+
+        background-image: linear-gradient(to right, #b8cbb8 0%, #b8cbb8 0%, #b465da 0%, #cf6cc9 33%, #ee609c 66%, #ee609c 100%);
     }
+
+
 </style>

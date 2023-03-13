@@ -9,7 +9,8 @@
     export let question: BaseQuestion;
     export let questionType: string;
     export let n: number;
-    export let counfOfQuestions: number;
+    export let countOfQuestions: number;
+    export let reviewModeActivated: boolean;
 
     // a mapping from quiz types to svelte components
     let componentMap: Record<QuestionType, typeof SvelteComponent> = {
@@ -18,22 +19,22 @@
         SingleChoice: ChoiceView,
     };
 </script>
-<h3 class="badge"> {$_('questionLetter')} {n} {$_('outOf')} {counfOfQuestions} : </h3> <span class="qtype"> It's a {questionType} question</span>
+<h3 class="badge">{$_('questionLetter')} {n} {$_('outOf')} {countOfQuestions} : </h3>
+<span class="qtype"> {questionType} question</span>
 <br/>
 {@html question.text}
-<br/>
+
 {#if question.explanation}
     <p>{@html question.explanation}</p>
 {/if}
 
-<span class="qtype"> Your options are:</span>
-
 <svelte:component
         this="{componentMap[question.questionType]}"
         question="{question}"
+        reviewModeActivated="{reviewModeActivated}"
 />
 <style>
-    .badge,.tag{display:inline-block;padding-left:5px;padding-right:5px;text-align:center}.badge{border-radius:10px}
+    .badge{display:inline-block; font-weight: 400}
     .qtype {
         color:#566573;
         font-size: 0.8em;

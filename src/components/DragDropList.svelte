@@ -1,10 +1,12 @@
 <script lang="ts">
     //copied and adopted from https://github.com/jwlarocque/svelte-dragdroplist
     import { flip } from 'svelte/animate';
-    import type { HtmlTag } from 'svelte/internal';
+    import { onMount } from 'svelte';
+    import {debug} from "svelte/internal";
 
     export let data = [];
     export let removesItems = false;
+    export let reviewModeActivated: boolean;
 
     let ghost: HTMLElement;
     let grabbed: HTMLElement;
@@ -87,139 +89,173 @@
     }
 </script>
 
-<div class="dragdroplist">
-    <div
-        bind:this="{ghost}"
-        id="ghost"
-        class="{grabbed ? 'item haunting' : 'item'}"
-        style="{'top: ' + (mouseY + offsetY - layerY) + 'px'}"
-    >
-        <p></p>
+
+{#if reviewModeActivated}
+    <div class="item" style="padding:0.5em 0 0.5em 1em;display:inherit">
+        <div class="content" style="height:1.5em;display:block;clear:both">
+            <span style="padding:0.2em 0.8em; border:1px solid #41444e;position:absolute;right:10px;background-color: #fff">
+                Correct sequence:
+            </span>
+        </div>
     </div>
-    <div
-        class="list"
-        on:mousemove="{function (ev) {
+
+    <div class="dragdroplist">
+        <div class="list" style="cursor:default;">
+            {#each data as datum, i (datum.id ? datum.id : JSON.stringify(datum))}
+                <div class="item" style="padding:0.5em 0 0.5em 1em;display:inherit">
+                    <div class="content" style="display:block;clear:both">
+                        {#if datum.html}
+                            <span style="float:left">
+                            {@html datum.html}
+                                </span>
+                            <span style="padding:0.2em 0.8em; border:1px solid #41444e; border-radius:50%;position:absolute;right:10px;background-color:#fff;">
+                                {datum.id+1}</span>
+                        {:else if datum.text}
+                            <p>{datum.text}</p>
+                        {:else}
+                            <p>{datum}</p>
+                        {/if}
+                    </div>
+                </div>
+            {/each}
+        </div>
+    </div>
+{:else}
+    <div class="dragdroplist">
+        <div
+                bind:this="{ghost}"
+                id="ghost"
+                class="{grabbed ? 'item haunting' : 'item'}"
+                style="{'top: ' + (mouseY + offsetY - layerY) + 'px'}"
+        >
+            <p></p>
+        </div>
+        <div
+                class="list"
+                on:mousemove="{function (ev) {
             ev.stopPropagation();
             drag(ev.clientY);
         }}"
-        on:touchmove="{function (ev) {
+                on:touchmove="{function (ev) {
             ev.stopPropagation();
             drag(ev.touches[0].clientY);
         }}"
-        on:mouseup="{function (ev) {
+                on:mouseup="{function (ev) {
             ev.stopPropagation();
             release(ev);
         }}"
-        on:mouseleave="{function (ev) {
+                on:mouseleave="{function (ev) {
             ev.stopPropagation();
             release(ev);
         }}"
-        on:touchend="{function (ev) {
+                on:touchend="{function (ev) {
             ev.stopPropagation();
             release(ev.touches[0]);
         }}"
-    >
-        {#each data as datum, i (datum.id ? datum.id : JSON.stringify(datum))}
-            <div
-                id="{grabbed &&
+        >
+            {#each data as datum, i (datum.id ? datum.id : JSON.stringify(datum))}
+                <div
+                        id="{grabbed &&
                 (datum.id ? datum.id : JSON.stringify(datum)) ==
                     grabbed.dataset.id
                     ? 'grabbed'
                     : ''}"
-                class="item"
-                data-index="{i}"
-                data-id="{datum.id ? datum.id : JSON.stringify(datum)}"
-                data-grabY="0"
-                on:mousedown="{function (ev) {
+                        class="item"
+                        data-index="{i}"
+                        data-id="{datum.id ? datum.id : JSON.stringify(datum)}"
+                        data-grabY="0"
+                        on:mousedown="{function (ev) {
                     grab(ev.clientY, this);
                 }}"
-                on:touchstart="{function (ev) {
+                        on:touchstart="{function (ev) {
                     grab(ev.touches[0].clientY, this);
                 }}"
-                on:mouseenter="{function (ev) {
+                        on:mouseenter="{function (ev) {
                     ev.stopPropagation();
                     dragEnter(ev, ev.target);
                 }}"
-                on:touchmove="{function (ev) {
+                        on:touchmove="{function (ev) {
                     ev.stopPropagation();
                     ev.preventDefault();
                     touchEnter(ev.touches[0]);
                 }}"
-                animate:flip="{{ duration: 200 }}"
-            >
-                <div class="buttons">
-                    <button
-                        class="up"
-                        style="{'visibility: ' + (i > 0 ? '' : 'hidden') + ';'}"
-                        on:click="{function (ev) {
+                        animate:flip="{{ duration: 200 }}"
+                >
+                    <div class="buttons">
+                        <button
+                                class="up"
+                                style="{'visibility: ' + (i > 0 ? '' : 'hidden') + ';'}"
+                                on:click="{function (ev) {
                             moveDatum(i, i - 1);
                         }}"
-                    >
-                        <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            viewBox="0 0 24 24"
-                            width="16px"
-                            height="16px"
-                            ><path d="M0 0h24v24H0V0z" fill="none"></path><path
-                                d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6 1.41 1.41z"
-                            ></path></svg
-                        >
-                    </button>
-                    <button
-                        class="down"
-                        style="{'visibility: ' +
-                            (i < data.length - 1 ? '' : 'hidden') +
-                            ';'}"
-                        on:click="{function (ev) {
-                            moveDatum(i, i + 1);
-                        }}"
-                    >
-                        <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            viewBox="0 0 24 24"
-                            width="16px"
-                            height="16px"
-                            ><path d="M0 0h24v24H0V0z" fill="none"></path><path
-                                d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z"
-                            ></path></svg
-                        >
-                    </button>
-                </div>
-
-                <div class="content">
-                    {#if datum.html}
-                        {@html datum.html}
-                    {:else if datum.text}
-                        <p>{datum.text}</p>
-                    {:else}
-                        <p>{datum}</p>
-                    {/if}
-                </div>
-
-                <div class="buttons delete">
-                    {#if removesItems}
-                        <button
-                            on:click="{function (ev) {
-                                removeDatum(i);
-                            }}"
                         >
                             <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                height="16"
-                                viewBox="0 0 24 24"
-                                width="16"
-                                ><path d="M0 0h24v24H0z" fill="none"
-                                ></path><path
-                                    d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"
-                                ></path></svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    viewBox="0 0 24 24"
+                                    width="16px"
+                                    height="16px"
+                            ><path d="M0 0h24v24H0V0z" fill="none"></path><path
+                                    d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6 1.41 1.41z"
+                            ></path></svg
                             >
                         </button>
-                    {/if}
+                        <button
+                                class="down"
+                                style="{'visibility: ' +
+                            (i < data.length - 1 ? '' : 'hidden') +
+                            ';'}"
+                                on:click="{function (ev) {
+                            moveDatum(i, i + 1);
+                        }}"
+                        >
+                            <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    viewBox="0 0 24 24"
+                                    width="16px"
+                                    height="16px"
+                            ><path d="M0 0h24v24H0V0z" fill="none"></path><path
+                                    d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z"
+                            ></path></svg
+                            >
+                        </button>
+                    </div>
+
+                    <div class="content">
+                        {#if datum.html}
+                            {@html datum.html}
+                        {:else if datum.text}
+                            <p>{datum.text}</p>
+                        {:else}
+                            <p>{datum}</p>
+                        {/if}
+                    </div>
+
+                    <div class="buttons delete">
+                        {#if removesItems}
+                            <button
+                                    on:click="{function (ev) {
+                                removeDatum(i);
+                            }}"
+                            >
+                                <svg
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        height="16"
+                                        viewBox="0 0 24 24"
+                                        width="16"
+                                ><path d="M0 0h24v24H0z" fill="none"
+                                ></path><path
+                                        d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"
+                                ></path></svg
+                                >
+                            </button>
+                        {/if}
+                    </div>
                 </div>
-            </div>
-        {/each}
+            {/each}
+        </div>
     </div>
-</div>
+{/if}
+
 
 <style>
     .dragdroplist {
@@ -228,7 +264,6 @@
     }
 
     .list {
-        cursor: grab;
         z-index: 5;
         display: flex;
         flex-direction: column;
@@ -241,7 +276,7 @@
         margin-bottom: 0.5em;
         border-radius: 2px;
         user-select: none;
-        margin: 5px;
+        margin: 1px;
         padding: 0;
         background-color: var(--quiztest-color-secondary);
         border: 3px solid transparent;

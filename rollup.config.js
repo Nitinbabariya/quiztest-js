@@ -40,7 +40,7 @@ function make_config(input, output, name, extra_plugins) {
     let default_plugins = [
         resolve({
             browser: false,
-            dedupe: ['svelte'],
+            dedupe: ['svelte', 'svelte/transition', 'svelte/internal'],
         }),
         commonjs(),
         typescript({
@@ -58,6 +58,7 @@ function make_config(input, output, name, extra_plugins) {
             format: 'umd',
             name: name,
             dir: output,
+            inlineDynamicImports: true, //Added this to allow dynamic imports
         },
         plugins: extra_plugins.concat(default_plugins),
         watch: {

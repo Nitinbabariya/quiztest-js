@@ -179,6 +179,7 @@ export class Quiz {
     onFirst: Writable<boolean>;
     isEvaluated: Writable<boolean>;
     allVisited: Writable<boolean>;
+    reviewModeActivated: Writable<boolean>;
 
     constructor(questions: Array<BaseQuestion>, config: Config) {
         this.index = writable(0);
@@ -198,6 +199,7 @@ export class Quiz {
         this.onFirst = writable(true);
         this.allVisited = writable(this.questions.length == 1);
         this.isEvaluated = writable(false);
+        this.reviewModeActivated = writable(false);
         autoBind(this);
     }
 
@@ -245,12 +247,20 @@ export class Quiz {
         return this.jump(get(this.index) - 1);
     }
 
+    activateReviewMode() {
+        this.reviewModeActivated.set(true);
+    }
+
+    isReviewModeActivated():boolean {
+        return get(this.reviewModeActivated);
+    }
+
     reset(): Boolean {
         this.onLast.set(false);
         this.onResults.set(false);
         this.allVisited.set(false);
         this.isEvaluated.set(false);
-
+        this.reviewModeActivated.set(false);
         this.questions.forEach((q) => q.reset());
         return this.jump(0);
     }

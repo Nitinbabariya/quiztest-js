@@ -21,14 +21,30 @@
     .progress {
         grid-area: auto;
 
-        height: 0.4em;
+        height: 1em;
         width: 100%;
         position: relative;
     }
 
     .progress .progress-slider {
-        background-color: var(--quiztest-color-primary);
         height: 100%;
         display: block;
+
+        justify-content: center;
+        align-items: center;
+        position: relative;
+        background: #ff00cc;
+        background: -webkit-linear-gradient(
+                to right,
+                #333399,
+                #ff00cc
+        );
+        background: linear-gradient(
+                to right,
+                #333399,
+                #ff00cc
+        );
+        border-radius: 2rem;
+
     }
 </style>
