@@ -5,7 +5,7 @@
     "reset": "One more time!",
     "hint": "Show hint",
     "resultsTitle": "Your Results Report\n",
-    "resultsText": "You got {{percentage}}% of the answers correct!",
+    "resultsText": "You got {{percentage}} of the answers correct!",
     "questionLetter": "Question",
     "outOf" : "of"
 }

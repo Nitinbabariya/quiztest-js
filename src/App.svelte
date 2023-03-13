@@ -77,45 +77,36 @@
         <Loading update="{reloaded}" ms="{800}" minHeight="{minHeight}">
             <Container>
                 <SmoothResize minHeight="{minHeight}">
-
-                    {#if !$onResults}
-                        <div class="pagination">
+                    <div class="pagination">
 
                         {#each quiz.questions as q, i}
                             <button  on:click="{() => quiz.jump(i)}" class="{$index === i ? 'active' : ''}">{i+1} </button>
                         {/each}
-                            <button title="{$_('evaluate')}"
-                                    on:click="{() => quiz.jump(quiz.questions.length)}"><Icon name="check-double" size="sm" />End Test</button>
 
-                            {#if !quiz.isReviewModeActivated()}
-                                <svelte:component this={component} {...props}/>
-                            {/if}
+                        <button title="{$_('evaluate')}"
+                                on:click="{() => quiz.jump(quiz.questions.length)}"><Icon name="check-double" size="sm" />End Test</button>
 
-                        </div>
+                        {#if !quiz.isReviewModeActivated()}
+                            <svelte:component this={component} {...props}/>
+                        {/if}
+                    </div>
+                    {#if !$onResults}
                         <ProgressBar value="{$index}" max="{quiz.questions.length - 1}" />
                     {/if}
+                    <hr/>
 
                     <Animated update="{$index}">
                         {#if $onResults}
-                            <div class="pagination">
-                                <Button buttonAction="{() => {
-                                                            quiz.jump(0)
-                                                        }}"> 🧐 Review your answers </Button>
-                            <Button title="{$_('reset')}"
-                                    buttonAction="{() => { reloaded = !reloaded;
-                                                            quiz.reset();
-                                                        }}"><Icon name="redo" /> Restart Test</Button>
-                            </div>
                             <ResultsView quiz="{quiz}" />
                         {:else}
 
                             {#if quiz.isReviewModeActivated()}
-                                <div style="margin:1rem;padding:1rem;background-color: #f2e6bf; background-image: linear-gradient(90deg, #f2e6bf 0%, #fefbc7 100%);">
-                                    You are reviewing your answers. To give this quiz once again please restart the test.
+                                <div style="border-radius:0.5rem; margin:1rem;padding:1rem;" class="gradient-background">
+                                    Please keep it calm and review your answers. To practice the quiz once again please restart the test.
                                     <Button style="margin-right: 1rem" title="{$_('reset')}"
                                         buttonAction="{() => { reloaded = !reloaded;
                                         quiz.reset();
-                                        }}"><Icon name="redo" /> Restart Test</Button>
+                                        }}"><Icon name="redo" /> Restart</Button>
                                 </div>
                             {/if}
                             <QuestionView
@@ -128,21 +119,14 @@
 
                             <Hint hint="{$question.hint}" show="{$showHint || ($question.hint.length && quiz.isReviewModeActivated())}" />
                             <div class="pagination">
-                                <Button buttonAction="{$question.enableHint}" title="{$_('previous')}" class="hint" disabled="{!$question.hint || $showHint || $onResults}"><Icon name="lightbulb" solid="{false}" /></Button>
-                                <Button buttonAction="{() => quiz.jump(0)}" disabled={$onFirst} > <Icon name="step-backward" /></Button>
-                                <Button buttonAction="{() => quiz.previous()}" disabled={$onFirst}> <Icon name="arrow-left"  /></Button>
-                                <Button buttonAction="{() => quiz.next()}" disabled={$onLast}> <Icon name="arrow-right"  /> </Button>
-                                <Button buttonAction="{() => quiz.jump( quiz.questions.length-1)}" disabled={$onLast} > <Icon name="step-forward"/> </Button>
-
-                                <button
-                                         title="{$_('evaluate')}"
-                                         on:click="{() =>
-                                quiz.jump(quiz.questions.length)}"><Icon name="check-double" size="sm" />End Test</button>
-                                <Button style="margin-right: 1rem" title="{$_('reset')}"
-                                        buttonAction="{() => { reloaded = !reloaded;
-                                                            quiz.reset();
-                                                        }}"><Icon name="redo" /> Restart Test </Button>
-
+                                <button class="active" on:click="{() => quiz.next()}">
+                                    {#if !quiz.isReviewModeActivated()}
+                                        Answer
+                                    {:else}
+                                        Next
+                                    {/if}
+                                </button>
+                                <Button buttonAction="{$question.enableHint}" title="Hint" class="hint" disabled="{!$question.hint || $showHint || $onResults}"><Icon name="lightbulb" solid="{false}" /></Button>
                             </div>
                         {/if}
                     </Animated>
@@ -189,7 +173,6 @@
     }
 
     .pagination button {
-        background-color: white;
         padding: 0.5rem 1rem;
         border-radius: 4px;
         border: 1px solid #f6f7f0;
@@ -257,7 +240,22 @@
         box-shadow: rgba(39, 174, 96, .2) 0 6px 12px;
     }
 
+    .gradient-background {
+        background: linear-gradient(37deg,#a18ef3,#fcd15f,#7cf5d9,#60d3ff);
+        background-size: 240% 240%;
+        animation: gradient-animation 32s ease infinite;
+    }
 
-
+    @keyframes gradient-animation {
+        0% {
+            background-position: 0% 50%;
+        }
+        50% {
+            background-position: 100% 50%;
+        }
+        100% {
+            background-position: 0% 50%;
+        }
+    }
 
 </style>

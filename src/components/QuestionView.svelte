@@ -20,7 +20,7 @@
     };
 </script>
 <h3 class="badge">{$_('questionLetter')} {n} {$_('outOf')} {countOfQuestions} : </h3>
-<span class="qtype"> It's a {questionType} question</span>
+<span class="qtype"> {questionType} question</span>
 <br/>
 {@html question.text}
 

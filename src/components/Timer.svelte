@@ -16,9 +16,9 @@
     });
 </script>
 
-<div>
+<span>
     ⏳ {hours-1}:{minutes}:{seconds}
-</div>
+</span>
 
 <style>
     div{

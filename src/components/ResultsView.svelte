@@ -21,12 +21,19 @@
     beforeUpdate(() => {
         points = quiz.evaluate();
         quiz.activateReviewMode()
-        percentage = points/quiz.questions.length * 100;
+        percentage = points/quiz.questions.length;
     });
 
     function format(n: number) {
         return n.toLocaleString('en-US', {
             minimumIntegerDigits: 1,
+        });
+    }
+
+    function formatPercentage(n: number) {
+        return n.toLocaleString('en-US', {
+            minimumIntegerDigits: 1,
+            style: 'percent'
         });
     }
     function stringInterpolation(text,vars)
@@ -48,9 +55,9 @@
                 {format(points)}/{format(quiz.questions.length)}
             </h1>
         </div>
-        <h3 class="highlight-circle-sketch">{stringInterpolation( $_('resultsText'),{'percentage' : format(percentage)})}  </h3>
+        <h3 class="highlight-circle-sketch">{stringInterpolation( $_('resultsText'),{'percentage' : formatPercentage(percentage)})}  </h3>
         <hr/>
-        <div>This is how you answered each of the questions</div>
+        <h3>This is how you answered each of the questions</h3>
         <ol>
             {#each quiz.questions as question, i}
                 <li class="top-list-item" on:click="{() => quiz.jump(i)}">
@@ -79,7 +86,7 @@
 <style>
     ol {
         padding-left: 0;
-        display: inline-block;
+        display: block;
     }
 
     .top-list-item {
@@ -100,6 +107,7 @@
     .list-comment {
         margin-left: 2em;
         list-style-type: initial;
+        display: list-item;
     }
 
     .centerParent {
