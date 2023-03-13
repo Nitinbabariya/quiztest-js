@@ -6,7 +6,6 @@
     import Card from './components/Card.svelte';
     import SmoothResize from './components/SmoothResize.svelte';
     import QuestionView from './components/QuestionView.svelte';
-    import Row from './components/Row.svelte';
     import Button from './components/Button.svelte';
     import { _ } from 'svelte-i18n';
     import ResultsView from './components/ResultsView.svelte';
@@ -45,7 +44,7 @@
         component = Timer;
         props = {isActive: true};
     };
-    // set global options
+
     onMount(async () => {
         let primaryColor: string = quiz.config.primaryColor;
         let secondaryColor: string = quiz.config.secondaryColor;
@@ -56,7 +55,7 @@
         node.style.setProperty('--quiztest-color-text', textColor);
         node.style.minHeight = `${minHeight}px`;
 
-        //dialog.showModal();
+        dialog.showModal();
     });
 
     const onCloseDialog = () => {
@@ -83,31 +82,42 @@
                         <div class="pagination">
 
                         {#each quiz.questions as q, i}
-                            <button  on:click="{() => quiz.jump(i)}" class="{$index === i ? 'active' : ''}">
-                                {i+1} </button>
+                            <button  on:click="{() => quiz.jump(i)}" class="{$index === i ? 'active' : ''}">{i+1} </button>
                         {/each}
                             <button title="{$_('evaluate')}"
-                                    on:click="{() =>
-                                quiz.jump(quiz.questions.length)}"><Icon name="check-double" size="sm" />End Test</button>
+                                    on:click="{() => quiz.jump(quiz.questions.length)}"><Icon name="check-double" size="sm" />End Test</button>
 
-                            <button style="margin-right: 1rem" title="{$_('reset')}"
-                                    on:click="{() => { reloaded = !reloaded;
-                                                            quiz.reset();
-                                                        }}"><Icon name="redo" /> Restart Test</button>
-                            <svelte:component this={component} {...props}/>
+                            {#if !quiz.isReviewModeActivated()}
+                                <svelte:component this={component} {...props}/>
+                            {/if}
+
                         </div>
                         <ProgressBar value="{$index}" max="{quiz.questions.length - 1}" />
                     {/if}
 
                     <Animated update="{$index}">
                         {#if $onResults}
-                            <ResultsView quiz="{quiz}" />
-
-                            <button class="button-68" title="{$_('reset')}"
-                                    on:click="{() => { reloaded = !reloaded;
+                            <div class="pagination">
+                                <Button buttonAction="{() => {
+                                                            quiz.jump(0)
+                                                        }}"> 🧐 Review your answers </Button>
+                            <Button title="{$_('reset')}"
+                                    buttonAction="{() => { reloaded = !reloaded;
                                                             quiz.reset();
-                                                        }}"><Icon name="redo" /> Restart Test</button>
+                                                        }}"><Icon name="redo" /> Restart Test</Button>
+                            </div>
+                            <ResultsView quiz="{quiz}" />
                         {:else}
+
+                            {#if quiz.isReviewModeActivated()}
+                                <div style="margin:1rem;padding:1rem;background-color: #f2e6bf; background-image: linear-gradient(90deg, #f2e6bf 0%, #fefbc7 100%);">
+                                    You are reviewing your answers. To give this quiz once again please restart the test.
+                                    <Button style="margin-right: 1rem" title="{$_('reset')}"
+                                        buttonAction="{() => { reloaded = !reloaded;
+                                        quiz.reset();
+                                        }}"><Icon name="redo" /> Restart Test</Button>
+                                </div>
+                            {/if}
                             <QuestionView
                                 question="{$question}"
                                 n="{$index + 1}"
@@ -115,23 +125,23 @@
                                 countOfQuestions="{quiz.questions.length}"
                                 reviewModeActivated="{quiz.isReviewModeActivated()}"
                             />
-                            <Hint hint="{$question.hint}" show="{$showHint}" />
 
+                            <Hint hint="{$question.hint}" show="{$showHint || ($question.hint.length && quiz.isReviewModeActivated())}" />
                             <div class="pagination">
-                                <button on:click="{$question.enableHint}" title="{$_('previous')}" class="hint" disabled="{!$question.hint || $showHint || $onResults}"><Icon name="lightbulb" solid="{false}" /></button>
-                                <button on:click="{() => quiz.jump(0)}" disabled={$onFirst} > <Icon name="step-backward" /></button>
-                                <button on:click="{() => quiz.previous()}" disabled={$onFirst}> <Icon name="arrow-left"  /></button>
-                                <button on:click="{() => quiz.next()}" disabled={$onLast}> <Icon name="arrow-right"  /> </button>
-                                <button on:click="{() => quiz.jump( quiz.questions.length-1)}" disabled={$onLast} > <Icon name="step-forward"/> </button>
+                                <Button buttonAction="{$question.enableHint}" title="{$_('previous')}" class="hint" disabled="{!$question.hint || $showHint || $onResults}"><Icon name="lightbulb" solid="{false}" /></Button>
+                                <Button buttonAction="{() => quiz.jump(0)}" disabled={$onFirst} > <Icon name="step-backward" /></Button>
+                                <Button buttonAction="{() => quiz.previous()}" disabled={$onFirst}> <Icon name="arrow-left"  /></Button>
+                                <Button buttonAction="{() => quiz.next()}" disabled={$onLast}> <Icon name="arrow-right"  /> </Button>
+                                <Button buttonAction="{() => quiz.jump( quiz.questions.length-1)}" disabled={$onLast} > <Icon name="step-forward"/> </Button>
 
                                 <button
                                          title="{$_('evaluate')}"
                                          on:click="{() =>
                                 quiz.jump(quiz.questions.length)}"><Icon name="check-double" size="sm" />End Test</button>
-                                <button style="margin-right: 1rem" title="{$_('reset')}"
-                                        on:click="{() => { reloaded = !reloaded;
+                                <Button style="margin-right: 1rem" title="{$_('reset')}"
+                                        buttonAction="{() => { reloaded = !reloaded;
                                                             quiz.reset();
-                                                        }}"><Icon name="redo" /> Restart Test </button>
+                                                        }}"><Icon name="redo" /> Restart Test </Button>
 
                             </div>
                         {/if}

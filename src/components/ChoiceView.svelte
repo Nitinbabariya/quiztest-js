@@ -3,8 +3,6 @@
     export let question: BaseQuestion;
     export let reviewModeActivated: boolean;
 </script>
-{reviewModeActivated}
-
     {#if question.questionType === 'MultipleChoice'}
         {#each question.answers as answer, i}
             <label>
@@ -18,16 +16,16 @@
                     {#if reviewModeActivated}
                         {#if answer.correct && question.selected.includes(i)}
                             <span class="reviewAnswer givenAnswerIsCorrect">
-                                👍 your answer
+                               ✔️ Your answer
                             </span>
                         {:else if question.selected.includes(i)}
                             <span class="reviewAnswer givenAnswerIsInCorrect">
-                                ❌ your answer
+                                ❌ Your answer
                             </span>
 
                         {:else if answer.correct}
                              <span class="reviewAnswer correctAnswer">
-                                correct answer
+                                Correct answer
                             </span>
                         {/if}
                     {/if}
@@ -49,16 +47,16 @@
                     {#if reviewModeActivated}
                         {#if answer.correct && question.selected.includes(i)}
                             <span class="reviewAnswer givenAnswerIsCorrect">
-                                👍 your answer
+                                ✔️ Your answer
                             </span>
                         {:else if question.selected.includes(i)}
                             <span class="reviewAnswer givenAnswerIsInCorrect">
-                                ❌ your answer
+                                ❌ Your answer
                             </span>
 
                         {:else if answer.correct}
                              <span class="reviewAnswer correctAnswer">
-                                correct answer
+                                Correct answer
                             </span>
                         {/if}
                     {/if}
@@ -73,15 +71,9 @@
         position: absolute;
         right: 10px;
         top:10px;
-    }
-    .givenAnswerIsCorrect{
-        background-color: green !important;
-    }
-    .givenAnswerIsInCorrect{
-        background-color: red  !important;
-    }
-    .correctAnswer{
-        background-color: yellow  !important;
+        padding:0 1em 0 1em;
+        border:1px solid #41444e;
+        background-color: #fff !important;
     }
 
 

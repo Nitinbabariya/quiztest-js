@@ -195,7 +195,7 @@ export class Quiz {
         this.active = writable(this.questions[0]);
         this.questions[0].visited = true;
         this.onLast = writable(this.questions.length == 1);
-        this.onResults = writable(true);
+        this.onResults = writable(false);
         this.onFirst = writable(true);
         this.allVisited = writable(this.questions.length == 1);
         this.isEvaluated = writable(false);
