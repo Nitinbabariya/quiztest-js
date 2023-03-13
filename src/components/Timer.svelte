@@ -3,8 +3,8 @@
     import { onMount } from 'svelte';
 
     //timer
-    let startDate =  new Date();
-    let dateNow=new Date(startDate - startDate)
+    const startDate : Date=  new Date();
+    let dateNow : Date =new Date(startDate - startDate)
     $: hours = dateNow.getHours();
     $: minutes = dateNow.getMinutes();
     $: seconds = dateNow.getSeconds();

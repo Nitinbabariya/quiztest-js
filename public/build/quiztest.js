@@ -1,4 +1,4 @@
-/* Version: 0.1.0 - March 13, 2023 23:19:33 */
+/* Version: 0.1.0 - March 13, 2023 23:27:11 */
 
 (function(l, r) { if (!l || l.getElementById('livereloadscript')) return; r = l.createElement('script'); r.async = 1; r.src = '//' + (self.location.host || 'localhost').split(':')[0] + ':35729/livereload.js?snipver=1'; r.id = 'livereloadscript'; l.getElementsByTagName('head')[0].appendChild(r) })(self.document);
 (function (global, factory) {
@@ -10079,7 +10079,7 @@
     			t3 = text$1(/*minutes*/ ctx[1]);
     			t4 = text$1(":");
     			t5 = text$1(/*seconds*/ ctx[0]);
-    			add_location(span, file$2, 16, 0, 412);
+    			add_location(span, file$2, 16, 0, 414);
     		},
     		l: function claim(nodes) {
     			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
@@ -10125,7 +10125,7 @@
     	let { isActive = false } = $$props;
 
     	//timer
-    	let startDate = new Date();
+    	const startDate = new Date();
 
     	let dateNow = new Date(startDate - startDate);
 
@@ -10160,7 +10160,6 @@
 
     	$$self.$inject_state = $$props => {
     		if ('isActive' in $$props) $$invalidate(3, isActive = $$props.isActive);
-    		if ('startDate' in $$props) startDate = $$props.startDate;
     		if ('dateNow' in $$props) $$invalidate(4, dateNow = $$props.dateNow);
     		if ('seconds' in $$props) $$invalidate(0, seconds = $$props.seconds);
     		if ('minutes' in $$props) $$invalidate(1, minutes = $$props.minutes);
