@@ -1,5 +1,5 @@
 <script lang="ts">
-    import type { Quiz, BaseQuestion } from '../quiz';
+    import type { BaseQuestion } from '../quiz';
     export let question: BaseQuestion;
     export let reviewModeActivated: boolean;
 </script>

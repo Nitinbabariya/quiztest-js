@@ -20,7 +20,7 @@
 </span>
 
 <style>
-    div{
+    span{
         color: #27ae60;
         float:right;
     }
