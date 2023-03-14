@@ -1,6 +1,6 @@
 {
     "name": "quiztest",
-    "version": "0.1.0",
+    "version": "0.1.1",
     "description": "Markdown for generating interactive quiz apps in the browser.",
     "private": false,
     "type": "module",
