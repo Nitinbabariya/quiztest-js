@@ -2,9 +2,8 @@
     export let isActive=false
     import { onMount } from 'svelte';
 
-    //timer
-    const startDate : Date=  new Date();
-    let dateNow : Date =new Date(startDate - startDate)
+    let startDate =  new Date();
+    let dateNow : Date = new Date( new Date().valueOf() - startDate.valueOf())
     let hours = dateNow.getHours();
     let minutes = dateNow.getMinutes();
     let seconds = dateNow.getSeconds();

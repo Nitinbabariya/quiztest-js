@@ -1,4 +1,4 @@
-/* Version: 0.1.0 - March 13, 2023 23:35:20 */
+/* Version: 0.1.0 - March 14, 2023 10:10:16 */
 
 (function(l, r) { if (!l || l.getElementById('livereloadscript')) return; r = l.createElement('script'); r.async = 1; r.src = '//' + (self.location.host || 'localhost').split(':')[0] + ':35729/livereload.js?snipver=1'; r.id = 'livereloadscript'; l.getElementsByTagName('head')[0].appendChild(r) })(self.document);
 (function (global, factory) {
@@ -9981,7 +9981,7 @@
     		c: function create() {
     			span = element("span");
     			span.textContent = `⏳ ${/*hours*/ ctx[0] - 1}:${/*minutes*/ ctx[1]}:${/*seconds*/ ctx[2]}`;
-    			add_location(span, file$2, 16, 0, 417);
+    			add_location(span, file$2, 15, 0, 428);
     		},
     		l: function claim(nodes) {
     			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
@@ -10012,11 +10012,8 @@
     	let { $$slots: slots = {}, $$scope } = $$props;
     	validate_slots('Timer', slots, []);
     	let { isActive = false } = $$props;
-
-    	//timer
-    	const startDate = new Date();
-
-    	let dateNow = new Date(startDate - startDate);
+    	let startDate = new Date();
+    	let dateNow = new Date(new Date().valueOf() - startDate.valueOf());
     	let hours = dateNow.getHours();
     	let minutes = dateNow.getMinutes();
     	let seconds = dateNow.getSeconds();
@@ -10052,6 +10049,7 @@
 
     	$$self.$inject_state = $$props => {
     		if ('isActive' in $$props) $$invalidate(3, isActive = $$props.isActive);
+    		if ('startDate' in $$props) startDate = $$props.startDate;
     		if ('dateNow' in $$props) dateNow = $$props.dateNow;
     		if ('hours' in $$props) $$invalidate(0, hours = $$props.hours);
     		if ('minutes' in $$props) $$invalidate(1, minutes = $$props.minutes);
