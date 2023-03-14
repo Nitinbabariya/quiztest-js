@@ -1,7 +1,7 @@
 <script lang="ts">
     import type { Quiz } from './quiz';
     import ProgressBar from './components/ProgressBar.svelte';
-    import { onMount, getContext } from 'svelte';
+    import { onMount } from 'svelte';
     import registerLanguages from './languages/i18n';
     import Card from './components/Card.svelte';
     import SmoothResize from './components/SmoothResize.svelte';
@@ -13,7 +13,7 @@
     import registerIcons from './registerIcons.js';
     import Icon from './components/Icon.svelte';
     import Hint from './components/Hint.svelte';
-    import { fly } from 'svelte/transition';
+
     import Container from './components/Container.svelte';
     import Loading from './components/Loading.svelte';
     import Timer from './components/Timer.svelte';
@@ -29,6 +29,7 @@
     $: onResults = quiz.onResults;
     $: isEvaluated = quiz.isEvaluated;
     $: allVisited = quiz.allVisited;
+
 
     registerLanguages(quiz.config.locale);
     registerIcons();
@@ -77,6 +78,10 @@
         <Loading update="{reloaded}" ms="{800}" minHeight="{minHeight}">
             <Container>
                 <SmoothResize minHeight="{minHeight}">
+                    {#if !$onResults}
+                        <ProgressBar value="{$index}" max="{quiz.questions.length - 1}" />
+                    {/if}
+
                     <div class="pagination">
 
                         {#each quiz.questions as q, i}
@@ -90,32 +95,29 @@
                             <svelte:component this={component} {...props}/>
                         {/if}
                     </div>
-                    {#if !$onResults}
-                        <ProgressBar value="{$index}" max="{quiz.questions.length - 1}" />
-                    {/if}
                     <hr/>
-
                     <Animated update="{$index}">
                         {#if $onResults}
                             <ResultsView quiz="{quiz}" />
                         {:else}
-
                             {#if quiz.isReviewModeActivated()}
                                 <div style="border-radius:0.5rem; margin:1rem;padding:1rem;" class="gradient-background">
                                     Please keep it calm and review your answers. To practice the quiz once again please restart the test.
-                                    <Button style="margin-right: 1rem" title="{$_('reset')}"
-                                        buttonAction="{() => { reloaded = !reloaded;
+                                    <button style="margin-right: 1rem" title="{$_('reset')}"
+                                        on:click="{() => { reloaded = !reloaded;
                                         quiz.reset();
-                                        }}"><Icon name="redo" /> Restart</Button>
+                                        }}"><Icon name="redo" /> Restart</button>
                                 </div>
                             {/if}
-                            <QuestionView
-                                question="{$question}"
-                                n="{$index + 1}"
-                                questionType="{$question.questionType}"
-                                countOfQuestions="{quiz.questions.length}"
-                                reviewModeActivated="{quiz.isReviewModeActivated()}"
-                            />
+
+                                <QuestionView
+                                    question="{$question}"
+                                    n="{$index + 1}"
+                                    questionType="{$question.questionType}"
+                                    countOfQuestions="{quiz.questions.length}"
+                                    reviewModeActivated="{quiz.isReviewModeActivated()}"
+                                />
+
 
                             <Hint hint="{$question.hint}" show="{$showHint || ($question.hint.length && quiz.isReviewModeActivated())}" />
                             <div class="pagination">
@@ -126,7 +128,7 @@
                                         Next
                                     {/if}
                                 </button>
-                                <Button buttonAction="{$question.enableHint}" title="Hint" class="hint" disabled="{!$question.hint || $showHint || $onResults}"><Icon name="lightbulb" solid="{false}" /></Button>
+                                <button on:click="{$question.enableHint}" title="Hint" class="hint" disabled="{!$question.hint || $showHint || $onResults}"><Icon name="lightbulb" solid="{false}" /></button>
                             </div>
                         {/if}
                     </Animated>
@@ -258,4 +260,31 @@
         }
     }
 
+    button:disabled {
+        background-color: white;
+        filter: grayscale(100%);
+        color: gray;
+        cursor: initial;
+        opacity: 50%;
+    }
+
+    button {
+        background-color: white;
+        color: var(--quiztest-color-text);
+        padding: 0.5rem 1rem;
+        border-radius: 4px;
+        border: 1px solid transparent;
+        line-height: 1;
+        text-align: center;
+        transition: opacity 0.2s ease;
+        text-decoration: none;
+        display: inline-block;
+        cursor: pointer;
+        margin: 0.2rem;
+        font-size: 1em;
+    }
+
+    button:hover:not(:checked):not(:active):not(:disabled) {
+        filter: brightness(0.9);
+    }
 </style>

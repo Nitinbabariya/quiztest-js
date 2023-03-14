@@ -18,6 +18,8 @@
         MultipleChoice: ChoiceView,
         SingleChoice: ChoiceView,
     };
+
+
 </script>
 <h3 class="badge">{$_('questionLetter')} {n} {$_('outOf')} {countOfQuestions} : </h3>
 <span class="qtype"> {questionType} question</span>
@@ -38,7 +40,6 @@
     .qtype {
         color:#566573;
         font-size: 0.8em;
-        text-space: 10px !important;
     }
 
     .highlight-simple{

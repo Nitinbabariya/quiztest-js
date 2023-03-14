@@ -1,9 +1,7 @@
 <script lang="ts">
-    import { onMount, beforeUpdate, afterUpdate } from 'svelte';
+    import { beforeUpdate } from 'svelte';
     import {
-        parse,
         icon,
-        findIconDefinition,
     } from '@fortawesome/fontawesome-svg-core';
     //https://stackoverflow.com/questions/56334381/why-my-font-awesome-icons-are-being-displayed-big-at-first-and-then-updated-to-t
 

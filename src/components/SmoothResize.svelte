@@ -1,6 +1,5 @@
 <script lang="ts">
     import { tweened } from 'svelte/motion';
-    import { cubicOut } from 'svelte/easing';
     import { onMount } from 'svelte';
 
     export let minHeight = 0;
