@@ -6,7 +6,7 @@
     export let max: number;
 
     const progress = tweened(0, {
-        duration: 400,
+        duration: 300,
         easing: cubicOut,
     });
     $: progress.set(Math.min(max, value) + 0.5);
@@ -20,7 +20,7 @@
 <style>
     .progress {
         grid-area: auto;
-        height: 1em;
+        height: 5px;
         width: 100%;
         position: relative;
         margin-bottom: 0.5rem;
@@ -34,17 +34,8 @@
         align-items: center;
         position: relative;
         background: #ff00cc;
-        background: -webkit-linear-gradient(
-                to right,
-                #333399,
-                #ff00cc
-        );
-        background: linear-gradient(
-                to right,
-                #333399,
-                #ff00cc
-        );
-        border-radius: 2rem;
-
+        background-color: #FBDA61;
+        background-image: linear-gradient(45deg, #FBDA61 0%, #FF5ACD 100%);
+        border-radius:1rem;
     }
 </style>

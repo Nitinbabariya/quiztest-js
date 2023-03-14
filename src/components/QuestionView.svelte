@@ -21,15 +21,16 @@
 
 
 </script>
-<h3 class="badge">{$_('questionLetter')} {n} {$_('outOf')} {countOfQuestions} : </h3>
-<span class="qtype"> {questionType} question</span>
+<h3 class="badge">{$_('questionLetter')} {n} {$_('outOf')} {countOfQuestions}:</h3>
+<span class="qtype"> ({questionType})</span>
 <br/>
-{@html question.text}
+<fieldset style="border:1px solid #ddd;border-radius: 5px;margin-bottom: 0.5em">
+    {@html question.text}
 
-{#if question.explanation}
-    <p>{@html question.explanation}</p>
-{/if}
-
+    {#if question.explanation}
+        <p>{@html question.explanation}</p>
+    {/if}
+</fieldset>
 <svelte:component
         this="{componentMap[question.questionType]}"
         question="{question}"
