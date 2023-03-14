@@ -95,6 +95,7 @@
                                     Please keep it calm and review your answers. To practice the quiz once again please restart the test.
                                     <button style="margin-right: 1rem" title="{$_('reset')}" class="button-68"
                                         on:click="{() => {
+                                            reloaded=!reloaded
                                             quiz.reset();
                                             triggerTimer(true);
                                         }}"><Icon name="redo" /> Restart</button>
