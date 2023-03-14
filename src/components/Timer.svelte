@@ -10,7 +10,7 @@
     onMount( () => {
         setInterval(() => {
             if(isActive)
-                dateNow = new Date(new Date() - startDate);
+                dateNow = new Date( new Date().valueOf() - startDate.valueOf())
         }, 1000);
     });
 </script>

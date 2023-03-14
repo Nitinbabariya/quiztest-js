@@ -1,4 +1,4 @@
-/* Version: 0.1.0 - March 14, 2023 10:10:16 */
+/* Version: 0.1.0 - March 14, 2023 10:22:36 */
 
 (function(l, r) { if (!l || l.getElementById('livereloadscript')) return; r = l.createElement('script'); r.async = 1; r.src = '//' + (self.location.host || 'localhost').split(':')[0] + ':35729/livereload.js?snipver=1'; r.id = 'livereloadscript'; l.getElementsByTagName('head')[0].appendChild(r) })(self.document);
 (function (global, factory) {
@@ -9981,7 +9981,7 @@
     		c: function create() {
     			span = element("span");
     			span.textContent = `⏳ ${/*hours*/ ctx[0] - 1}:${/*minutes*/ ctx[1]}:${/*seconds*/ ctx[2]}`;
-    			add_location(span, file$2, 15, 0, 428);
+    			add_location(span, file$2, 15, 0, 448);
     		},
     		l: function claim(nodes) {
     			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
@@ -10021,7 +10021,7 @@
     	onMount(() => {
     		setInterval(
     			() => {
-    				if (isActive) dateNow = new Date(new Date() - startDate);
+    				if (isActive) dateNow = new Date(new Date().valueOf() - startDate.valueOf());
     			},
     			1000
     		);
