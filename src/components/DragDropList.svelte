@@ -1,8 +1,6 @@
 <script lang="ts">
     //copied and adopted from https://github.com/jwlarocque/svelte-dragdroplist
     import { flip } from 'svelte/animate';
-    import { onMount } from 'svelte';
-    import {debug} from "svelte/internal";
 
     export let data = [];
     export let removesItems = false;

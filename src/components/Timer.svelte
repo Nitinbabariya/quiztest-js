@@ -2,16 +2,15 @@
     export let isActive=false
     import { onMount } from 'svelte';
 
-    //timer
     let startDate =  new Date();
-    let dateNow=new Date(startDate - startDate)
-    $: hours = dateNow.getHours();
-    $: minutes = dateNow.getMinutes();
-    $: seconds = dateNow.getSeconds();
+    let dateNow : Date = new Date( new Date().valueOf() - startDate.valueOf())
+    let hours = dateNow.getHours();
+    let minutes = dateNow.getMinutes();
+    let seconds = dateNow.getSeconds();
     onMount( () => {
         setInterval(() => {
             if(isActive)
-                dateNow = new Date(new Date() - startDate);
+                dateNow = new Date( new Date().valueOf() - startDate.valueOf())
         }, 1000);
     });
 </script>
@@ -21,7 +20,7 @@
 </span>
 
 <style>
-    div{
+    span{
         color: #27ae60;
         float:right;
     }

@@ -6,7 +6,6 @@
     let emojis = ['❌', '✅'];
     import { _ } from 'svelte-i18n';
     import { fade } from 'svelte/transition';
-    import Icon from './Icon.svelte';
     import Loading from './Loading.svelte';
     import { get } from 'svelte/store';
 
@@ -16,12 +15,9 @@
         waitTime = 300;
     }
     let points = 0;
-    let percentage=0;
-    let message=0;
     beforeUpdate(() => {
         points = quiz.evaluate();
         quiz.activateReviewMode()
-        percentage = points/quiz.questions.length;
     });
 
     function format(n: number) {
@@ -55,7 +51,7 @@
                 {format(points)}/{format(quiz.questions.length)}
             </h1>
         </div>
-        <h3 class="highlight-circle-sketch">{stringInterpolation( $_('resultsText'),{'percentage' : formatPercentage(percentage)})}  </h3>
+        <h3 class="highlight-circle-sketch">{stringInterpolation( $_('resultsText'),{'percentage' : formatPercentage(points/quiz.questions.length)})}  </h3>
         <hr/>
         <h3>This is how you answered each of the questions</h3>
         <ol>

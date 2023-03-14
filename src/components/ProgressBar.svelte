@@ -20,10 +20,10 @@
 <style>
     .progress {
         grid-area: auto;
-
         height: 1em;
         width: 100%;
         position: relative;
+        margin-bottom: 0.5rem;
     }
 
     .progress .progress-slider {
