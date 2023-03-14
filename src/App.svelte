@@ -19,6 +19,7 @@
     import Timer from './components/Timer.svelte';
     import Dialog from './components/Dialog.svelte';
     let dialog
+    let timer;
     export let quiz: Quiz;
     // https://github.com/sveltejs/svelte/issues/4079
     $: question = quiz.active;
@@ -38,13 +39,7 @@
     let minHeight = 150;
     let reloaded = false;
 
-    let component;
     let props;
-
-    const triggerTimerOn = () => {
-        component = Timer;
-        props = {isActive: true};
-    };
 
     onMount(async () => {
         let primaryColor: string = quiz.config.primaryColor;
@@ -59,10 +54,12 @@
         dialog.showModal();
     });
 
-    const onCloseDialog = () => {
+    let triggerTimer;
+
+    function onCloseDialog() {
+        triggerTimer(true);
         dialog.close();
-        triggerTimerOn();
-    };
+    }
 </script>
 <div class="quiztest-content" bind:this="{node}">
     <Card>
@@ -71,31 +68,24 @@
                     {@html quiz.config.introduction}
                 {/if}
                 <p>
-                    <button class="button-68" on:click={onCloseDialog}> 👍 Start the quiz</button>
+                    <button class="button-68" on:click={onCloseDialog}> Start the quiz 🚀</button>
                 </p>
             </Dialog>
 
         <Loading update="{reloaded}" ms="{800}" minHeight="{minHeight}">
             <Container>
                 <SmoothResize minHeight="{minHeight}">
-                    {#if !$onResults}
-                        <ProgressBar value="{$index}" max="{quiz.questions.length - 1}" />
-                    {/if}
 
-                    <div class="pagination">
-
+                    <div class="pagination" style=";width:100%">
                         {#each quiz.questions as q, i}
                             <button  on:click="{() => quiz.jump(i)}" class="{$index === i ? 'active' : ''}">{i+1} </button>
                         {/each}
 
-                        <button title="{$_('evaluate')}"
-                                on:click="{() => quiz.jump(quiz.questions.length)}"><Icon name="check-double" size="sm" />End Test</button>
 
                         {#if !quiz.isReviewModeActivated()}
-                            <svelte:component this={component} {...props}/>
+                            <Timer bind:trigger={triggerTimer}></Timer>
                         {/if}
                     </div>
-                    <hr/>
                     <Animated update="{$index}">
                         {#if $onResults}
                             <ResultsView quiz="{quiz}" />
@@ -103,14 +93,15 @@
                             {#if quiz.isReviewModeActivated()}
                                 <div style="border-radius:0.5rem; margin:1rem;padding:1rem;" class="gradient-background">
                                     Please keep it calm and review your answers. To practice the quiz once again please restart the test.
-                                    <button style="margin-right: 1rem" title="{$_('reset')}"
-                                        on:click="{() => { reloaded = !reloaded;
-                                        quiz.reset();
+                                    <button style="margin-right: 1rem" title="{$_('reset')}" class="button-68"
+                                        on:click="{() => {
+                                            quiz.reset();
+                                            triggerTimer(true);
                                         }}"><Icon name="redo" /> Restart</button>
                                 </div>
                             {/if}
 
-                                <QuestionView
+                            <QuestionView
                                     question="{$question}"
                                     n="{$index + 1}"
                                     questionType="{$question.questionType}"
@@ -120,16 +111,16 @@
 
 
                             <Hint hint="{$question.hint}" show="{$showHint || ($question.hint.length && quiz.isReviewModeActivated())}" />
-                            <div class="pagination">
-                                <button class="active" on:click="{() => quiz.next()}">
-                                    {#if !quiz.isReviewModeActivated()}
-                                        Answer
-                                    {:else}
-                                        Next
-                                    {/if}
-                                </button>
+                            <div class="pagination" style="margin-top:10px">
+                                <button class="active" on:click="{() => quiz.next()}"> Next</button>
                                 <button on:click="{$question.enableHint}" title="Hint" class="hint" disabled="{!$question.hint || $showHint || $onResults}"><Icon name="lightbulb" solid="{false}" /></button>
+                                <button title="{$_('evaluate')}"
+                                        on:click="{() => quiz.jump(quiz.questions.length)}"><Icon name="check-double" size="sm" />End Test</button>
                             </div>
+                            {#if !$onResults}
+                                <ProgressBar value="{$index}" max="{quiz.questions.length - 1}" />
+                            {/if}
+
                         {/if}
                     </Animated>
                 </SmoothResize>
@@ -168,34 +159,21 @@
         color: var(--quiztest-color-primary);
     }
 
-    div.pagination {
-        display: inline-block;
-        padding: 0;
-        margin-bottom: 0.5em;
-    }
-
     .pagination button {
         padding: 0.5rem 1rem;
         border-radius: 4px;
         border: 1px solid #f6f7f0;
         line-height: 1;
         text-align: center;
-        transition: opacity 0.2s ease;
-        text-decoration: none;
         display: inline-block;
         cursor: pointer;
-        font-size: 0.9em;
+        margin-bottom: 5px;
     }
 
     .pagination button.active {
         background-color: #4CAF50;
         color: white;
         border: 1px solid #4CAF50;
-    }
-
-    .quiztest-content {
-        padding: 1rem;
-        margin: auto;
     }
 
    .button-68 {
@@ -228,14 +206,6 @@
 
     .button-68:hover {
         background-color: #1e8449;
-        opacity: 1;
-        transform: translateY(0);
-        transition-duration: .35s;
-    }
-
-    .button-68:active {
-        transform: translateY(2px);
-        transition-duration: .35s;
     }
 
     .button-68:hover {
@@ -260,31 +230,9 @@
         }
     }
 
-    button:disabled {
-        background-color: white;
-        filter: grayscale(100%);
-        color: gray;
-        cursor: initial;
-        opacity: 50%;
-    }
-
-    button {
-        background-color: white;
-        color: var(--quiztest-color-text);
-        padding: 0.5rem 1rem;
-        border-radius: 4px;
-        border: 1px solid transparent;
-        line-height: 1;
-        text-align: center;
-        transition: opacity 0.2s ease;
-        text-decoration: none;
-        display: inline-block;
-        cursor: pointer;
-        margin: 0.2rem;
-        font-size: 1em;
-    }
-
     button:hover:not(:checked):not(:active):not(:disabled) {
-        filter: brightness(0.9);
+        background-color: #4CAF50;
+        color: white;
+        border: 1px solid #4CAF50;
     }
 </style>

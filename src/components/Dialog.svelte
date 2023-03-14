@@ -1,5 +1,9 @@
 <script>
     export let dialog
+
+    function handleMessage(event) {
+        alert("dialog close");
+    }
 </script>
 <dialog bind:this={dialog} on:close>
     <slot/>

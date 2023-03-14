@@ -51,26 +51,29 @@
                 {format(points)}/{format(quiz.questions.length)}
             </h1>
         </div>
-        <h3 class="highlight-circle-sketch">{stringInterpolation( $_('resultsText'),{'percentage' : formatPercentage(points/quiz.questions.length)})}  </h3>
+        <p class="highlight-circle-sketch">{stringInterpolation( $_('resultsText'),{'percentage' : formatPercentage(points/quiz.questions.length)})}  </p>
+        <h3>
+            We recommend you to reflect on answers, please conduct a self review by browsing through the quizzes!
+        </h3>
         <hr/>
-        <h3>This is how you answered each of the questions</h3>
+        <p>This is how you answered each of the questions</p>
         <ol>
             {#each quiz.questions as question, i}
                 <li class="top-list-item" on:click="{() => quiz.jump(i)}">
-                    <span class="list-question">
-                        {emojis[+question.solved]}
-                        {@html question.text}
-                    </span>
+                        <span class="list-question">
+                            {emojis[+question.solved]}
+                            {@html question.text}
+                        </span>
                     <ol>
                         <!-- answer comments when selected and available -->
                         {#each question.selected as selected}
-                            {#if question.answers[selected].comment !== ''}
                                 <li class="list-comment">
                                     <i>{@html question.answers[selected]
                                             .html}</i>:
-                                    {@html question.answers[selected].comment}
+                                    {#if question.answers[selected].comment !== ''}
+                                     {@html question.answers[selected].comment}
+                                    {/if}
                                 </li>
-                            {/if}
                         {/each}
                     </ol>
                 </li>
@@ -122,8 +125,8 @@
         align-items: center;
         text-align: center;
         justify-content: space-around;
-
-        background-image: linear-gradient(to right, #b8cbb8 0%, #b8cbb8 0%, #b465da 0%, #cf6cc9 33%, #ee609c 66%, #ee609c 100%);
+        color:#ffffff !important;
+        background-image: linear-gradient(to top, #0250c5 0%, #d43f8d 100%);
     }
 
 
