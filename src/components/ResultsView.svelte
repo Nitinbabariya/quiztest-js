@@ -5,7 +5,6 @@
     export let quiz: Quiz;
     let emojis = ['❌', '✅'];
     import { _ } from 'svelte-i18n';
-    import { fade } from 'svelte/transition';
     import Loading from './Loading.svelte';
     import { get } from 'svelte/store';
 
@@ -45,7 +44,7 @@
 <h3><i class="fa-shake fa fa-id-card-o" aria-hidden="true"></i>
     {$_('resultsTitle')}</h3>
 <Loading ms="{waitTime}" minHeight="{150}">
-    <div in:fade="{{ duration: 1000 }}">
+    <div>
         <div class="centerParent">
             <h1 class="center">
                 {format(points)}/{format(quiz.questions.length)}

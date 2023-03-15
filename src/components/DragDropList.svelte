@@ -1,7 +1,5 @@
 <script lang="ts">
     //copied and adopted from https://github.com/jwlarocque/svelte-dragdroplist
-    import { flip } from 'svelte/animate';
-
     export let data = [];
     export let removesItems = false;
     export let reviewModeActivated: boolean;
@@ -177,7 +175,6 @@
                     ev.preventDefault();
                     touchEnter(ev.touches[0]);
                 }}"
-                        animate:flip="{{ duration: 200 }}"
                 >
                     <div class="buttons">
                         <button
