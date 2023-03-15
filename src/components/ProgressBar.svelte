@@ -1,13 +1,11 @@
 <script lang="ts">
     import { tweened } from 'svelte/motion';
-    import { cubicOut } from 'svelte/easing';
 
     export let value: number;
     export let max: number;
 
     const progress = tweened(0, {
-        duration: 300,
-        easing: cubicOut,
+        duration: 0
     });
     $: progress.set(Math.min(max, value) + 0.5);
     $: progressPercent = String(($progress / (max + 0.5)) * 100) + '%';

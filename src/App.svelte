@@ -4,12 +4,10 @@
     import { onMount } from 'svelte';
     import registerLanguages from './languages/i18n';
     import Card from './components/Card.svelte';
-    import SmoothResize from './components/SmoothResize.svelte';
     import QuestionView from './components/QuestionView.svelte';
     import Button from './components/Button.svelte';
     import { _ } from 'svelte-i18n';
     import ResultsView from './components/ResultsView.svelte';
-    import Animated from './components/Animated.svelte';
     import registerIcons from './registerIcons.js';
     import Icon from './components/Icon.svelte';
     import Hint from './components/Hint.svelte';
@@ -74,8 +72,6 @@
 
         <Loading update="{reloaded}" ms="{800}" minHeight="{minHeight}">
             <Container>
-                <SmoothResize minHeight="{minHeight}">
-
                     <div class="pagination" style=";width:100%">
                         {#each quiz.questions as q, i}
                             <button  on:click="{() => quiz.jump(i)}" class="{$index === i ? 'active' : ''}">{i+1} </button>
@@ -86,7 +82,6 @@
                             <Timer bind:trigger={triggerTimer}></Timer>
                         {/if}
                     </div>
-                    <Animated update="{$index}">
                         {#if $onResults}
                             <ResultsView quiz="{quiz}" />
                         {:else}
@@ -123,9 +118,6 @@
                             {/if}
 
                         {/if}
-                    </Animated>
-                </SmoothResize>
-                <!-- <Modal show="{showModal}">Are you sure?</Modal> -->
             </Container>
         </Loading>
     </Card>
