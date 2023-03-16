@@ -180,6 +180,7 @@ export class Quiz {
     isEvaluated: Writable<boolean>;
     allVisited: Writable<boolean>;
     reviewModeActivated: Writable<boolean>;
+    shouldPresentIntroductionScreen:Writable<boolean>;
 
     constructor(questions: Array<BaseQuestion>, config: Config) {
         this.index = writable(0);
@@ -200,9 +201,9 @@ export class Quiz {
         this.allVisited = writable(this.questions.length == 1);
         this.isEvaluated = writable(false);
         this.reviewModeActivated = writable(false);
+        this.shouldPresentIntroductionScreen = writable(this.config.introduction!=undefined);
         autoBind(this);
     }
-
     private setActive() {
         let idx = get(this.index);
         this.active.update((act) => this.questions[idx]);

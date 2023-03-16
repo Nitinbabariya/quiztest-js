@@ -1,11 +1,14 @@
 <script lang="ts">
     import { onMount } from 'svelte';
-
+    let modal
     let startDate =  undefined
     let elapsedTime;
     export const trigger = (timerOn=true) => startDate = timerOn ? new Date() : undefined;
+    export const alert1 = () => alert('hiii');
 
     onMount( () => {
+        startDate = new Date();
+
         setInterval(() => {
             if(startDate)
             {

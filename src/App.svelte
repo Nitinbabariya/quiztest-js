@@ -15,9 +15,6 @@
     import Container from './components/Container.svelte';
     import Loading from './components/Loading.svelte';
     import Timer from './components/Timer.svelte';
-    import Dialog from './components/Dialog.svelte';
-    let dialog
-    let timer;
     export let quiz: Quiz;
     // https://github.com/sveltejs/svelte/issues/4079
     $: question = quiz.active;
@@ -28,6 +25,7 @@
     $: onResults = quiz.onResults;
     $: isEvaluated = quiz.isEvaluated;
     $: allVisited = quiz.allVisited;
+    $: shouldPresentIntroductionScreen = quiz.shouldPresentIntroductionScreen;
 
 
     registerLanguages(quiz.config.locale);
@@ -48,38 +46,37 @@
         node.style.setProperty('--quiztest-color-secondary', secondaryColor);
         node.style.setProperty('--quiztest-color-text', textColor);
         node.style.minHeight = `${minHeight}px`;
-
-        dialog.showModal();
     });
 
-    let triggerTimer;
-
-    function onCloseDialog() {
-        triggerTimer(true);
-        dialog.close();
+    let trigger;
+    function triggerTimer(){
+        trigger(true);
+    }
+    function startUpScreenOnClose() {
+        $shouldPresentIntroductionScreen=false;
     }
 </script>
 <div class="quiztest-content" bind:this="{node}">
     <Card>
-            <Dialog bind:dialog on:close={onCloseDialog}>
-                {#if quiz.config.introduction}
+        {#if $shouldPresentIntroductionScreen}
+            <div class="dialog">
                     {@html quiz.config.introduction}
-                {/if}
-                <p>
-                    <button class="button-68" on:click={onCloseDialog}> Start the quiz 🚀</button>
-                </p>
-            </Dialog>
-
-        <Loading update="{reloaded}" ms="{800}" minHeight="{minHeight}">
+                    <p>
+                        <button class="button-68" on:click={startUpScreenOnClose}> Start the quiz 🚀</button>
+                    </p>
+            </div>
+        {:else}
+        <Loading update="{reloaded}">
             <Container>
-                    <div class="pagination" style=";width:100%">
+
+                <div class="pagination" style=";width:100%">
                         {#each quiz.questions as q, i}
                             <button  on:click="{() => quiz.jump(i)}" class="{$index === i ? 'active' : ''}">{i+1} </button>
                         {/each}
 
 
                         {#if !quiz.isReviewModeActivated()}
-                            <Timer bind:trigger={triggerTimer}></Timer>
+                            <Timer bind:trigger={trigger}></Timer>
                         {/if}
                     </div>
                         {#if $onResults}
@@ -116,10 +113,10 @@
                             {#if !$onResults}
                                 <ProgressBar value="{$index}" max="{quiz.questions.length - 1}" />
                             {/if}
-
                         {/if}
             </Container>
         </Loading>
+        {/if}
     </Card>
 </div>
 
@@ -227,5 +224,15 @@
         background-color: #4CAF50;
         color: white;
         border: 1px solid #4CAF50;
+    }
+
+    .dialog {
+        border-radius: 5px;
+        border-width: 1px;
+        transition: all 2s;
+        padding:1rem;
+        background-color: #FAACA8;
+        background-image: linear-gradient(19deg, #FAACA8 0%, #DDD6F3 100%);
+        animation: gradient 15s ease infinite;
     }
 </style>
