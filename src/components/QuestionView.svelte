@@ -21,10 +21,10 @@
 
 
 </script>
-<h3 class="badge">{$_('questionLetter')} {n} {$_('outOf')} {countOfQuestions}:</h3>
-<span class="qtype"> ({questionType})</span>
+<h3 class="badge">{$_('questionLetter')} {n} {$_('outOf')} {countOfQuestions}: <span class="qtype"> ({questionType})</span></h3>
+
 <br/>
-<fieldset style="border:1px solid #ddd;border-radius: 5px;margin-bottom: 0.5em">
+<fieldset style="border:1px solid #ddd;border-radius: 5px;margin-bottom: 0.5rem">
     {@html question.text}
 
     {#if question.explanation}
@@ -40,7 +40,7 @@
     .badge{display:inline-block; font-weight: 400}
     .qtype {
         color:#566573;
-        font-size: 0.8em;
+        font-size: 0.7em;
     }
 
     .highlight-simple{

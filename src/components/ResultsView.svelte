@@ -40,22 +40,21 @@
         return text;
     }
 </script>
-
-<h3><i class="fa-shake fa fa-id-card-o" aria-hidden="true"></i>
+<div class="result">
+<h3 style="color:#D80159"><i class="fa-shake fa fa-id-card-o" aria-hidden="true"></i>
     {$_('resultsTitle')}</h3>
 <Loading ms="{waitTime}" minHeight="{150}">
-    <div>
+
         <div class="centerParent">
             <h1 class="center">
                 {format(points)}/{format(quiz.questions.length)}
             </h1>
         </div>
         <p class="highlight-circle-sketch">{stringInterpolation( $_('resultsText'),{'percentage' : formatPercentage(points/quiz.questions.length)})}  </p>
-        <h3>
-            We recommend you to reflect on answers, please conduct a self review by browsing through the quizzes!
-        </h3>
         <hr/>
-        <p>This is how you answered each of the questions</p>
+
+
+    <h3 style="color:#79455A">This is how you answered each of the questions</h3>
         <ol>
             {#each quiz.questions as question, i}
                 <li class="top-list-item" on:click="{() => quiz.jump(i)}">
@@ -78,8 +77,12 @@
                 </li>
             {/each}
         </ol>
-    </div>
+
+    <h3 style="color:#D5407D">
+        We recommend you to reflect on answers, please conduct a self review by browsing through the quizzes!
+    </h3>
 </Loading>
+</div>
 
 <style>
     ol {
@@ -109,9 +112,9 @@
     }
 
     .centerParent {
-    text-align: center;
-    align-content: space-around;
-    align-items: baseline;
+        text-align: center;
+        align-content: space-around;
+        align-items: baseline;
         justify-content: space-around;
     }
     .center {
@@ -126,6 +129,15 @@
         justify-content: space-around;
         color:#ffffff !important;
         background-image: linear-gradient(to top, #0250c5 0%, #d43f8d 100%);
+    }
+
+    .result
+    {
+        padding:1rem;
+        background: #FFDCE2;
+        background: -webkit-linear-gradient(top left, #F5FBD7, #FFDCE2);
+        background: -moz-linear-gradient(top left, #F5FBD7, #FFDCE2);
+        background: linear-gradient(to bottom right, #F5FBD7, #FFDCE2);
     }
 
 
