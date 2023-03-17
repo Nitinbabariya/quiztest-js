@@ -56,7 +56,7 @@
 
                         {:else if answer.correct}
                              <span class="reviewAnswer correctAnswer">
-                                Correct answer
+                                💡Correct answer
                             </span>
                         {/if}
                     {/if}
@@ -72,8 +72,24 @@
         right: 10px;
         top:10px;
         padding:0 1em 0 1em;
-        border:1px solid #41444e;
-        background-color: #fff !important;
+        border-radius: 5px;
+        border-style: solid;
+    }
+    .givenAnswerIsCorrect{
+        background-color: #27ae60 !important;
+        color:#fff;
+        border-color:#27ae60;
+    }
+
+    .givenAnswerIsInCorrect{
+        background-color: #D73D3D !important;
+        border-color: #D73D3D;
+    }
+
+    .correctAnswer{
+        background-color: #F9F8ED !important;
+        border-color: #F0E552;
+        color:#2C3E50;
     }
 
 

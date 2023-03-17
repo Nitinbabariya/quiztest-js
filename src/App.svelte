@@ -48,10 +48,7 @@
         node.style.minHeight = `${minHeight}px`;
     });
 
-    let trigger;
-    function triggerTimer(){
-        trigger(true);
-    }
+    let timer;
     function startUpScreenOnClose() {
         $shouldPresentIntroductionScreen=false;
     }
@@ -66,34 +63,32 @@
                     </p>
             </div>
         {:else}
-        <Loading update="{reloaded}">
+                <Timer bind:this={timer}></Timer>
+            <Loading update="{reloaded}" ms="{800}" minHeight="{minHeight}">
             <Container>
 
                 <div class="pagination" style=";width:100%">
                         {#each quiz.questions as q, i}
                             <button  on:click="{() => quiz.jump(i)}" class="{$index === i ? 'active' : ''}">{i+1} </button>
                         {/each}
-
-
-                        {#if !quiz.isReviewModeActivated()}
-                            <Timer bind:trigger={trigger}></Timer>
-                        {/if}
                     </div>
                         {#if $onResults}
                             <ResultsView quiz="{quiz}" />
-                        {:else}
-                            {#if quiz.isReviewModeActivated()}
-                                <div style="border-radius:0.5rem; margin:1rem;padding:1rem;" class="gradient-background">
-                                    Please keep it calm and review your answers. To practice the quiz once again please restart the test.
-                                    <button style="margin-right: 1rem" title="{$_('reset')}" class="button-68"
+                            {timer.stop()}
+
+                            <div class="pagination" style="margin-top:10px">
+                                <button
+                                        on:click="{() => {quiz.jump(0)}}"><Icon name="redo" /> Review your answers </button>
+
+                                <button style="margin-right: 1rem" title="{$_('reset')}"
                                         on:click="{() => {
                                             reloaded=!reloaded
                                             quiz.reset();
-                                            triggerTimer(true);
                                         }}"><Icon name="redo" /> Restart</button>
-                                </div>
-                            {/if}
 
+                            </div>
+
+                        {:else}
                             <QuestionView
                                     question="{$question}"
                                     n="{$index + 1}"
@@ -107,8 +102,22 @@
                             <div class="pagination" style="margin-top:10px">
                                 <button class="active" on:click="{() => quiz.next()}"> Next</button>
                                 <button on:click="{$question.enableHint}" title="Hint" class="hint" disabled="{!$question.hint || $showHint || $onResults}"><Icon name="lightbulb" solid="{false}" /></button>
-                                <button title="{$_('evaluate')}"
-                                        on:click="{() => quiz.jump(quiz.questions.length)}"><Icon name="check-double" size="sm" />End Test</button>
+
+
+                                {#if quiz.isReviewModeActivated()}
+                                    <button style="margin-right: 1rem" title="{$_('reset')}" class="button-68"
+                                            on:click="{() => {
+                                        timer.start();
+                                        reloaded=!reloaded
+                                        quiz.reset();
+                                    }}"><Icon name="redo" /> Restart</button>
+                                    {:else}
+                                    <button title="{$_('evaluate')}"
+                                            on:click="{() => quiz.jump(quiz.questions.length)}"><Icon name="check-double" size="sm" />
+                                            End Test
+                                    </button>
+                                {/if}
+
                             </div>
                             {#if !$onResults}
                                 <ProgressBar value="{$index}" max="{quiz.questions.length - 1}" />
