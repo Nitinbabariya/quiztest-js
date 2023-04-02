@@ -349,7 +349,7 @@
    * @param {RegExp | string } re
    * @returns {string}
    */
-  function source$5(re) {
+  function source$6(re) {
     if (!re) return null;
     if (typeof re === "string") return re;
 
@@ -360,8 +360,8 @@
    * @param {...(RegExp | string) } args
    * @returns {string}
    */
-  function concat$5(...args) {
-    const joined = args.map((x) => source$5(x)).join("");
+  function concat$6(...args) {
+    const joined = args.map((x) => source$6(x)).join("");
     return joined;
   }
 
@@ -373,7 +373,7 @@
    * @returns {string}
    */
   function either$1(...args) {
-    const joined = '(' + args.map((x) => source$5(x)).join("|") + ")";
+    const joined = '(' + args.map((x) => source$6(x)).join("|") + ")";
     return joined;
   }
 
@@ -420,7 +420,7 @@
     return regexps.map((regex) => {
       numCaptures += 1;
       const offset = numCaptures;
-      let re = source$5(regex);
+      let re = source$6(regex);
       let out = '';
 
       while (re.length > 0) {
@@ -460,7 +460,7 @@
   const SHEBANG = (opts = {}) => {
     const beginShebang = /^#![ ]*\//;
     if (opts.binary) {
-      opts.begin = concat$5(
+      opts.begin = concat$6(
         beginShebang,
         /.*\b/,
         opts.binary,
@@ -840,7 +840,7 @@
      */
     function langRe(value, global) {
       return new RegExp(
-        source$5(value),
+        source$6(value),
         'm' + (language.case_insensitive ? 'i' : '') + (global ? 'g' : '')
       );
     }
@@ -1143,7 +1143,7 @@
         if (mode.endSameAsBegin) mode.end = mode.begin;
         if (!mode.end && !mode.endsWithParent) mode.end = /\B|\b/;
         if (mode.end) cmode.endRe = langRe(mode.end);
-        cmode.terminatorEnd = source$5(mode.end) || '';
+        cmode.terminatorEnd = source$6(mode.end) || '';
         if (mode.endsWithParent && parent.terminatorEnd) {
           cmode.terminatorEnd += (mode.end ? '|' : '') + parent.terminatorEnd;
         }
@@ -2531,7 +2531,7 @@
    * @param {RegExp | string } re
    * @returns {string}
    */
-  function source$4(re) {
+  function source$5(re) {
     if (!re) return null;
     if (typeof re === "string") return re;
 
@@ -2542,8 +2542,8 @@
    * @param {...(RegExp | string) } args
    * @returns {string}
    */
-  function concat$4(...args) {
-    const joined = args.map((x) => source$4(x)).join("");
+  function concat$5(...args) {
+    const joined = args.map((x) => source$5(x)).join("");
     return joined;
   }
 
@@ -2572,7 +2572,7 @@
     Object.assign(VAR,{
       className: 'variable',
       variants: [
-        {begin: concat$4(/\$[\w\d#@][\w\d_]*/,
+        {begin: concat$5(/\$[\w\d#@][\w\d_]*/,
           // negative look-ahead tries to avoid matching patterns that are not
           // Perl at all like $ident$, @ident@, etc.
           `(?![\\w\\d])(?![$])`) },
@@ -3095,7 +3095,7 @@
    * @param {RegExp | string } re
    * @returns {string}
    */
-  function source$3(re) {
+  function source$4(re) {
     if (!re) return null;
     if (typeof re === "string") return re;
 
@@ -3107,15 +3107,15 @@
    * @returns {string}
    */
   function lookahead$3(re) {
-    return concat$3('(?=', re, ')');
+    return concat$4('(?=', re, ')');
   }
 
   /**
    * @param {...(RegExp | string) } args
    * @returns {string}
    */
-  function concat$3(...args) {
-    const joined = args.map((x) => source$3(x)).join("");
+  function concat$4(...args) {
+    const joined = args.map((x) => source$4(x)).join("");
     return joined;
   }
 
@@ -3360,7 +3360,7 @@
         COMMENT,
         NUMBER,
         { // object attr container
-          begin: concat$3(/[{,\n]\s*/,
+          begin: concat$4(/[{,\n]\s*/,
             // we need to look ahead to make sure that we actually have an
             // attribute coming up so we don't steal a comma from a potential
             // "value" container
@@ -3371,7 +3371,7 @@
             // fails to find any actual attrs. But this still does the job because
             // it prevents the value contain rule from grabbing this instead and
             // prevening this rule from firing when we actually DO have keys.
-            lookahead$3(concat$3(
+            lookahead$3(concat$4(
               // we also need to allow for multiple possible comments inbetween
               // the first key:value pairing
               /(((\/\/.*$)|(\/\*(\*[^/]|[^*])*\*\/))\s*)*/,
@@ -3579,7 +3579,7 @@
    * @param {RegExp | string } re
    * @returns {string}
    */
-  function source$2(re) {
+  function source$3(re) {
     if (!re) return null;
     if (typeof re === "string") return re;
 
@@ -3591,15 +3591,15 @@
    * @returns {string}
    */
   function lookahead$2(re) {
-    return concat$2('(?=', re, ')');
+    return concat$3('(?=', re, ')');
   }
 
   /**
    * @param {...(RegExp | string) } args
    * @returns {string}
    */
-  function concat$2(...args) {
-    const joined = args.map((x) => source$2(x)).join("");
+  function concat$3(...args) {
+    const joined = args.map((x) => source$3(x)).join("");
     return joined;
   }
 
@@ -4167,7 +4167,7 @@
    * @param {RegExp | string } re
    * @returns {string}
    */
-  function source$1(re) {
+  function source$2(re) {
     if (!re) return null;
     if (typeof re === "string") return re;
 
@@ -4179,15 +4179,15 @@
    * @returns {string}
    */
   function lookahead$1(re) {
-    return concat$1('(?=', re, ')');
+    return concat$2('(?=', re, ')');
   }
 
   /**
    * @param {...(RegExp | string) } args
    * @returns {string}
    */
-  function concat$1(...args) {
-    const joined = args.map((x) => source$1(x)).join("");
+  function concat$2(...args) {
+    const joined = args.map((x) => source$2(x)).join("");
     return joined;
   }
 
@@ -4432,7 +4432,7 @@
         COMMENT,
         NUMBER,
         { // object attr container
-          begin: concat$1(/[{,\n]\s*/,
+          begin: concat$2(/[{,\n]\s*/,
             // we need to look ahead to make sure that we actually have an
             // attribute coming up so we don't steal a comma from a potential
             // "value" container
@@ -4443,7 +4443,7 @@
             // fails to find any actual attrs. But this still does the job because
             // it prevents the value contain rule from grabbing this instead and
             // prevening this rule from firing when we actually DO have keys.
-            lookahead$1(concat$1(
+            lookahead$1(concat$2(
               // we also need to allow for multiple possible comments inbetween
               // the first key:value pairing
               /(((\/\/.*$)|(\/\*(\*[^/]|[^*])*\*\/))\s*)*/,
@@ -4724,7 +4724,7 @@
    * @param {RegExp | string } re
    * @returns {string}
    */
-  function source(re) {
+  function source$1(re) {
     if (!re) return null;
     if (typeof re === "string") return re;
 
@@ -4736,23 +4736,23 @@
    * @returns {string}
    */
   function lookahead(re) {
-    return concat('(?=', re, ')');
+    return concat$1('(?=', re, ')');
   }
 
   /**
    * @param {RegExp | string } re
    * @returns {string}
    */
-  function optional(re) {
-    return concat('(', re, ')?');
+  function optional$1(re) {
+    return concat$1('(', re, ')?');
   }
 
   /**
    * @param {...(RegExp | string) } args
    * @returns {string}
    */
-  function concat(...args) {
-    const joined = args.map((x) => source(x)).join("");
+  function concat$1(...args) {
+    const joined = args.map((x) => source$1(x)).join("");
     return joined;
   }
 
@@ -4764,7 +4764,7 @@
    * @returns {string}
    */
   function either(...args) {
-    const joined = '(' + args.map((x) => source(x)).join("|") + ")";
+    const joined = '(' + args.map((x) => source$1(x)).join("|") + ")";
     return joined;
   }
 
@@ -4778,7 +4778,7 @@
   /** @type LanguageFn */
   function xml(hljs) {
     // Element names can contain letters, digits, hyphens, underscores, and periods
-    const TAG_NAME_RE = concat(/[A-Z_]/, optional(/[A-Z0-9_.-]*:/), /[A-Z0-9_.-]*/);
+    const TAG_NAME_RE = concat$1(/[A-Z_]/, optional$1(/[A-Z0-9_.-]*:/), /[A-Z0-9_.-]*/);
     const XML_IDENT_RE = /[A-Za-z0-9._:-]+/;
     const XML_ENTITIES = {
       className: 'symbol',
@@ -4955,9 +4955,9 @@
         // open tag
         {
           className: 'tag',
-          begin: concat(
+          begin: concat$1(
             /</,
-            lookahead(concat(
+            lookahead(concat$1(
               TAG_NAME_RE,
               // <tag/>
               // <tag>
@@ -4978,9 +4978,9 @@
         // close tag
         {
           className: 'tag',
-          begin: concat(
+          begin: concat$1(
             /<\//,
-            lookahead(concat(
+            lookahead(concat$1(
               TAG_NAME_RE, />/
             ))
           ),
@@ -5003,6 +5003,1293 @@
 
   var xml_1 = xml;
 
+  /*
+  Language: Go
+  Author: Stephan Kountso aka StepLg <steplg@gmail.com>
+  Contributors: Evgeny Stepanischev <imbolk@gmail.com>
+  Description: Google go language (golang). For info about language
+  Website: http://golang.org/
+  Category: common, system
+  */
+
+  function go(hljs) {
+    const GO_KEYWORDS = {
+      keyword:
+        'break default func interface select case map struct chan else goto package switch ' +
+        'const fallthrough if range type continue for import return var go defer ' +
+        'bool byte complex64 complex128 float32 float64 int8 int16 int32 int64 string uint8 ' +
+        'uint16 uint32 uint64 int uint uintptr rune',
+      literal:
+         'true false iota nil',
+      built_in:
+        'append cap close complex copy imag len make new panic print println real recover delete'
+    };
+    return {
+      name: 'Go',
+      aliases: ['golang'],
+      keywords: GO_KEYWORDS,
+      illegal: '</',
+      contains: [
+        hljs.C_LINE_COMMENT_MODE,
+        hljs.C_BLOCK_COMMENT_MODE,
+        {
+          className: 'string',
+          variants: [
+            hljs.QUOTE_STRING_MODE,
+            hljs.APOS_STRING_MODE,
+            {
+              begin: '`',
+              end: '`'
+            }
+          ]
+        },
+        {
+          className: 'number',
+          variants: [
+            {
+              begin: hljs.C_NUMBER_RE + '[i]',
+              relevance: 1
+            },
+            hljs.C_NUMBER_MODE
+          ]
+        },
+        {
+          begin: /:=/ // relevance booster
+        },
+        {
+          className: 'function',
+          beginKeywords: 'func',
+          end: '\\s*(\\{|$)',
+          excludeEnd: true,
+          contains: [
+            hljs.TITLE_MODE,
+            {
+              className: 'params',
+              begin: /\(/,
+              end: /\)/,
+              keywords: GO_KEYWORDS,
+              illegal: /["']/
+            }
+          ]
+        }
+      ]
+    };
+  }
+
+  var go_1 = go;
+
+  /**
+   * @param {string} value
+   * @returns {RegExp}
+   * */
+
+  /**
+   * @param {RegExp | string } re
+   * @returns {string}
+   */
+  function source(re) {
+    if (!re) return null;
+    if (typeof re === "string") return re;
+
+    return re.source;
+  }
+
+  /**
+   * @param {RegExp | string } re
+   * @returns {string}
+   */
+  function optional(re) {
+    return concat('(', re, ')?');
+  }
+
+  /**
+   * @param {...(RegExp | string) } args
+   * @returns {string}
+   */
+  function concat(...args) {
+    const joined = args.map((x) => source(x)).join("");
+    return joined;
+  }
+
+  /*
+  Language: C
+  Category: common, system
+  Website: https://en.wikipedia.org/wiki/C_(programming_language)
+  */
+
+  /** @type LanguageFn */
+  function c(hljs) {
+    // added for historic reasons because `hljs.C_LINE_COMMENT_MODE` does
+    // not include such support nor can we be sure all the grammars depending
+    // on it would desire this behavior
+    const C_LINE_COMMENT_MODE = hljs.COMMENT('//', '$', {
+      contains: [
+        {
+          begin: /\\\n/
+        }
+      ]
+    });
+    const DECLTYPE_AUTO_RE = 'decltype\\(auto\\)';
+    const NAMESPACE_RE = '[a-zA-Z_]\\w*::';
+    const TEMPLATE_ARGUMENT_RE = '<[^<>]+>';
+    const FUNCTION_TYPE_RE = '(' +
+      DECLTYPE_AUTO_RE + '|' +
+      optional(NAMESPACE_RE) +
+      '[a-zA-Z_]\\w*' + optional(TEMPLATE_ARGUMENT_RE) +
+    ')';
+    const CPP_PRIMITIVE_TYPES = {
+      className: 'keyword',
+      begin: '\\b[a-z\\d_]*_t\\b'
+    };
+
+    // https://en.cppreference.com/w/cpp/language/escape
+    // \\ \x \xFF \u2837 \u00323747 \374
+    const CHARACTER_ESCAPES = '\\\\(x[0-9A-Fa-f]{2}|u[0-9A-Fa-f]{4,8}|[0-7]{3}|\\S)';
+    const STRINGS = {
+      className: 'string',
+      variants: [
+        {
+          begin: '(u8?|U|L)?"',
+          end: '"',
+          illegal: '\\n',
+          contains: [ hljs.BACKSLASH_ESCAPE ]
+        },
+        {
+          begin: '(u8?|U|L)?\'(' + CHARACTER_ESCAPES + "|.)",
+          end: '\'',
+          illegal: '.'
+        },
+        hljs.END_SAME_AS_BEGIN({
+          begin: /(?:u8?|U|L)?R"([^()\\ ]{0,16})\(/,
+          end: /\)([^()\\ ]{0,16})"/
+        })
+      ]
+    };
+
+    const NUMBERS = {
+      className: 'number',
+      variants: [
+        {
+          begin: '\\b(0b[01\']+)'
+        },
+        {
+          begin: '(-?)\\b([\\d\']+(\\.[\\d\']*)?|\\.[\\d\']+)((ll|LL|l|L)(u|U)?|(u|U)(ll|LL|l|L)?|f|F|b|B)'
+        },
+        {
+          begin: '(-?)(\\b0[xX][a-fA-F0-9\']+|(\\b[\\d\']+(\\.[\\d\']*)?|\\.[\\d\']+)([eE][-+]?[\\d\']+)?)'
+        }
+      ],
+      relevance: 0
+    };
+
+    const PREPROCESSOR = {
+      className: 'meta',
+      begin: /#\s*[a-z]+\b/,
+      end: /$/,
+      keywords: {
+        'meta-keyword':
+          'if else elif endif define undef warning error line ' +
+          'pragma _Pragma ifdef ifndef include'
+      },
+      contains: [
+        {
+          begin: /\\\n/,
+          relevance: 0
+        },
+        hljs.inherit(STRINGS, {
+          className: 'meta-string'
+        }),
+        {
+          className: 'meta-string',
+          begin: /<.*?>/
+        },
+        C_LINE_COMMENT_MODE,
+        hljs.C_BLOCK_COMMENT_MODE
+      ]
+    };
+
+    const TITLE_MODE = {
+      className: 'title',
+      begin: optional(NAMESPACE_RE) + hljs.IDENT_RE,
+      relevance: 0
+    };
+
+    const FUNCTION_TITLE = optional(NAMESPACE_RE) + hljs.IDENT_RE + '\\s*\\(';
+
+    const CPP_KEYWORDS = {
+      keyword: 'int float while private char char8_t char16_t char32_t catch import module export virtual operator sizeof ' +
+        'dynamic_cast|10 typedef const_cast|10 const for static_cast|10 union namespace ' +
+        'unsigned long volatile static protected bool template mutable if public friend ' +
+        'do goto auto void enum else break extern using asm case typeid wchar_t ' +
+        'short reinterpret_cast|10 default double register explicit signed typename try this ' +
+        'switch continue inline delete alignas alignof constexpr consteval constinit decltype ' +
+        'concept co_await co_return co_yield requires ' +
+        'noexcept static_assert thread_local restrict final override ' +
+        'atomic_bool atomic_char atomic_schar ' +
+        'atomic_uchar atomic_short atomic_ushort atomic_int atomic_uint atomic_long atomic_ulong atomic_llong ' +
+        'atomic_ullong new throw return ' +
+        'and and_eq bitand bitor compl not not_eq or or_eq xor xor_eq',
+      built_in: 'std string wstring cin cout cerr clog stdin stdout stderr stringstream istringstream ostringstream ' +
+        'auto_ptr deque list queue stack vector map set pair bitset multiset multimap unordered_set ' +
+        'unordered_map unordered_multiset unordered_multimap priority_queue make_pair array shared_ptr abort terminate abs acos ' +
+        'asin atan2 atan calloc ceil cosh cos exit exp fabs floor fmod fprintf fputs free frexp ' +
+        'fscanf future isalnum isalpha iscntrl isdigit isgraph islower isprint ispunct isspace isupper ' +
+        'isxdigit tolower toupper labs ldexp log10 log malloc realloc memchr memcmp memcpy memset modf pow ' +
+        'printf putchar puts scanf sinh sin snprintf sprintf sqrt sscanf strcat strchr strcmp ' +
+        'strcpy strcspn strlen strncat strncmp strncpy strpbrk strrchr strspn strstr tanh tan ' +
+        'vfprintf vprintf vsprintf endl initializer_list unique_ptr _Bool complex _Complex imaginary _Imaginary',
+      literal: 'true false nullptr NULL'
+    };
+
+    const EXPRESSION_CONTAINS = [
+      PREPROCESSOR,
+      CPP_PRIMITIVE_TYPES,
+      C_LINE_COMMENT_MODE,
+      hljs.C_BLOCK_COMMENT_MODE,
+      NUMBERS,
+      STRINGS
+    ];
+
+    const EXPRESSION_CONTEXT = {
+      // This mode covers expression context where we can't expect a function
+      // definition and shouldn't highlight anything that looks like one:
+      // `return some()`, `else if()`, `(x*sum(1, 2))`
+      variants: [
+        {
+          begin: /=/,
+          end: /;/
+        },
+        {
+          begin: /\(/,
+          end: /\)/
+        },
+        {
+          beginKeywords: 'new throw return else',
+          end: /;/
+        }
+      ],
+      keywords: CPP_KEYWORDS,
+      contains: EXPRESSION_CONTAINS.concat([
+        {
+          begin: /\(/,
+          end: /\)/,
+          keywords: CPP_KEYWORDS,
+          contains: EXPRESSION_CONTAINS.concat([ 'self' ]),
+          relevance: 0
+        }
+      ]),
+      relevance: 0
+    };
+
+    const FUNCTION_DECLARATION = {
+      className: 'function',
+      begin: '(' + FUNCTION_TYPE_RE + '[\\*&\\s]+)+' + FUNCTION_TITLE,
+      returnBegin: true,
+      end: /[{;=]/,
+      excludeEnd: true,
+      keywords: CPP_KEYWORDS,
+      illegal: /[^\w\s\*&:<>.]/,
+      contains: [
+        { // to prevent it from being confused as the function title
+          begin: DECLTYPE_AUTO_RE,
+          keywords: CPP_KEYWORDS,
+          relevance: 0
+        },
+        {
+          begin: FUNCTION_TITLE,
+          returnBegin: true,
+          contains: [ TITLE_MODE ],
+          relevance: 0
+        },
+        {
+          className: 'params',
+          begin: /\(/,
+          end: /\)/,
+          keywords: CPP_KEYWORDS,
+          relevance: 0,
+          contains: [
+            C_LINE_COMMENT_MODE,
+            hljs.C_BLOCK_COMMENT_MODE,
+            STRINGS,
+            NUMBERS,
+            CPP_PRIMITIVE_TYPES,
+            // Count matching parentheses.
+            {
+              begin: /\(/,
+              end: /\)/,
+              keywords: CPP_KEYWORDS,
+              relevance: 0,
+              contains: [
+                'self',
+                C_LINE_COMMENT_MODE,
+                hljs.C_BLOCK_COMMENT_MODE,
+                STRINGS,
+                NUMBERS,
+                CPP_PRIMITIVE_TYPES
+              ]
+            }
+          ]
+        },
+        CPP_PRIMITIVE_TYPES,
+        C_LINE_COMMENT_MODE,
+        hljs.C_BLOCK_COMMENT_MODE,
+        PREPROCESSOR
+      ]
+    };
+
+    return {
+      name: "C",
+      aliases: [
+        'h'
+      ],
+      keywords: CPP_KEYWORDS,
+      // Until differentiations are added between `c` and `cpp`, `c` will
+      // not be auto-detected to avoid auto-detect conflicts between C and C++
+      disableAutodetect: true,
+      illegal: '</',
+      contains: [].concat(
+        EXPRESSION_CONTEXT,
+        FUNCTION_DECLARATION,
+        EXPRESSION_CONTAINS,
+        [
+          PREPROCESSOR,
+          { // containers: ie, `vector <int> rooms (9);`
+            begin: '\\b(deque|list|queue|priority_queue|pair|stack|vector|map|set|bitset|multiset|multimap|unordered_map|unordered_set|unordered_multiset|unordered_multimap|array)\\s*<',
+            end: '>',
+            keywords: CPP_KEYWORDS,
+            contains: [
+              'self',
+              CPP_PRIMITIVE_TYPES
+            ]
+          },
+          {
+            begin: hljs.IDENT_RE + '::',
+            keywords: CPP_KEYWORDS
+          },
+          {
+            className: 'class',
+            beginKeywords: 'enum class struct union',
+            end: /[{;:<>=]/,
+            contains: [
+              {
+                beginKeywords: "final class struct"
+              },
+              hljs.TITLE_MODE
+            ]
+          }
+        ]),
+      exports: {
+        preprocessor: PREPROCESSOR,
+        strings: STRINGS,
+        keywords: CPP_KEYWORDS
+      }
+    };
+  }
+
+  var c_1 = c;
+
+  /*
+  Language: C#
+  Author: Jason Diamond <jason@diamond.name>
+  Contributor: Nicolas LLOBERA <nllobera@gmail.com>, Pieter Vantorre <pietervantorre@gmail.com>, David Pine <david.pine@microsoft.com>
+  Website: https://docs.microsoft.com/en-us/dotnet/csharp/
+  Category: common
+  */
+
+  /** @type LanguageFn */
+  function csharp(hljs) {
+    const BUILT_IN_KEYWORDS = [
+      'bool',
+      'byte',
+      'char',
+      'decimal',
+      'delegate',
+      'double',
+      'dynamic',
+      'enum',
+      'float',
+      'int',
+      'long',
+      'nint',
+      'nuint',
+      'object',
+      'sbyte',
+      'short',
+      'string',
+      'ulong',
+      'uint',
+      'ushort'
+    ];
+    const FUNCTION_MODIFIERS = [
+      'public',
+      'private',
+      'protected',
+      'static',
+      'internal',
+      'protected',
+      'abstract',
+      'async',
+      'extern',
+      'override',
+      'unsafe',
+      'virtual',
+      'new',
+      'sealed',
+      'partial'
+    ];
+    const LITERAL_KEYWORDS = [
+      'default',
+      'false',
+      'null',
+      'true'
+    ];
+    const NORMAL_KEYWORDS = [
+      'abstract',
+      'as',
+      'base',
+      'break',
+      'case',
+      'class',
+      'const',
+      'continue',
+      'do',
+      'else',
+      'event',
+      'explicit',
+      'extern',
+      'finally',
+      'fixed',
+      'for',
+      'foreach',
+      'goto',
+      'if',
+      'implicit',
+      'in',
+      'interface',
+      'internal',
+      'is',
+      'lock',
+      'namespace',
+      'new',
+      'operator',
+      'out',
+      'override',
+      'params',
+      'private',
+      'protected',
+      'public',
+      'readonly',
+      'record',
+      'ref',
+      'return',
+      'sealed',
+      'sizeof',
+      'stackalloc',
+      'static',
+      'struct',
+      'switch',
+      'this',
+      'throw',
+      'try',
+      'typeof',
+      'unchecked',
+      'unsafe',
+      'using',
+      'virtual',
+      'void',
+      'volatile',
+      'while'
+    ];
+    const CONTEXTUAL_KEYWORDS = [
+      'add',
+      'alias',
+      'and',
+      'ascending',
+      'async',
+      'await',
+      'by',
+      'descending',
+      'equals',
+      'from',
+      'get',
+      'global',
+      'group',
+      'init',
+      'into',
+      'join',
+      'let',
+      'nameof',
+      'not',
+      'notnull',
+      'on',
+      'or',
+      'orderby',
+      'partial',
+      'remove',
+      'select',
+      'set',
+      'unmanaged',
+      'value|0',
+      'var',
+      'when',
+      'where',
+      'with',
+      'yield'
+    ];
+
+    const KEYWORDS = {
+      keyword: NORMAL_KEYWORDS.concat(CONTEXTUAL_KEYWORDS),
+      built_in: BUILT_IN_KEYWORDS,
+      literal: LITERAL_KEYWORDS
+    };
+    const TITLE_MODE = hljs.inherit(hljs.TITLE_MODE, {
+      begin: '[a-zA-Z](\\.?\\w)*'
+    });
+    const NUMBERS = {
+      className: 'number',
+      variants: [
+        {
+          begin: '\\b(0b[01\']+)'
+        },
+        {
+          begin: '(-?)\\b([\\d\']+(\\.[\\d\']*)?|\\.[\\d\']+)(u|U|l|L|ul|UL|f|F|b|B)'
+        },
+        {
+          begin: '(-?)(\\b0[xX][a-fA-F0-9\']+|(\\b[\\d\']+(\\.[\\d\']*)?|\\.[\\d\']+)([eE][-+]?[\\d\']+)?)'
+        }
+      ],
+      relevance: 0
+    };
+    const VERBATIM_STRING = {
+      className: 'string',
+      begin: '@"',
+      end: '"',
+      contains: [
+        {
+          begin: '""'
+        }
+      ]
+    };
+    const VERBATIM_STRING_NO_LF = hljs.inherit(VERBATIM_STRING, {
+      illegal: /\n/
+    });
+    const SUBST = {
+      className: 'subst',
+      begin: /\{/,
+      end: /\}/,
+      keywords: KEYWORDS
+    };
+    const SUBST_NO_LF = hljs.inherit(SUBST, {
+      illegal: /\n/
+    });
+    const INTERPOLATED_STRING = {
+      className: 'string',
+      begin: /\$"/,
+      end: '"',
+      illegal: /\n/,
+      contains: [
+        {
+          begin: /\{\{/
+        },
+        {
+          begin: /\}\}/
+        },
+        hljs.BACKSLASH_ESCAPE,
+        SUBST_NO_LF
+      ]
+    };
+    const INTERPOLATED_VERBATIM_STRING = {
+      className: 'string',
+      begin: /\$@"/,
+      end: '"',
+      contains: [
+        {
+          begin: /\{\{/
+        },
+        {
+          begin: /\}\}/
+        },
+        {
+          begin: '""'
+        },
+        SUBST
+      ]
+    };
+    const INTERPOLATED_VERBATIM_STRING_NO_LF = hljs.inherit(INTERPOLATED_VERBATIM_STRING, {
+      illegal: /\n/,
+      contains: [
+        {
+          begin: /\{\{/
+        },
+        {
+          begin: /\}\}/
+        },
+        {
+          begin: '""'
+        },
+        SUBST_NO_LF
+      ]
+    });
+    SUBST.contains = [
+      INTERPOLATED_VERBATIM_STRING,
+      INTERPOLATED_STRING,
+      VERBATIM_STRING,
+      hljs.APOS_STRING_MODE,
+      hljs.QUOTE_STRING_MODE,
+      NUMBERS,
+      hljs.C_BLOCK_COMMENT_MODE
+    ];
+    SUBST_NO_LF.contains = [
+      INTERPOLATED_VERBATIM_STRING_NO_LF,
+      INTERPOLATED_STRING,
+      VERBATIM_STRING_NO_LF,
+      hljs.APOS_STRING_MODE,
+      hljs.QUOTE_STRING_MODE,
+      NUMBERS,
+      hljs.inherit(hljs.C_BLOCK_COMMENT_MODE, {
+        illegal: /\n/
+      })
+    ];
+    const STRING = {
+      variants: [
+        INTERPOLATED_VERBATIM_STRING,
+        INTERPOLATED_STRING,
+        VERBATIM_STRING,
+        hljs.APOS_STRING_MODE,
+        hljs.QUOTE_STRING_MODE
+      ]
+    };
+
+    const GENERIC_MODIFIER = {
+      begin: "<",
+      end: ">",
+      contains: [
+        {
+          beginKeywords: "in out"
+        },
+        TITLE_MODE
+      ]
+    };
+    const TYPE_IDENT_RE = hljs.IDENT_RE + '(<' + hljs.IDENT_RE + '(\\s*,\\s*' + hljs.IDENT_RE + ')*>)?(\\[\\])?';
+    const AT_IDENTIFIER = {
+      // prevents expressions like `@class` from incorrect flagging
+      // `class` as a keyword
+      begin: "@" + hljs.IDENT_RE,
+      relevance: 0
+    };
+
+    return {
+      name: 'C#',
+      aliases: [
+        'cs',
+        'c#'
+      ],
+      keywords: KEYWORDS,
+      illegal: /::/,
+      contains: [
+        hljs.COMMENT(
+          '///',
+          '$',
+          {
+            returnBegin: true,
+            contains: [
+              {
+                className: 'doctag',
+                variants: [
+                  {
+                    begin: '///',
+                    relevance: 0
+                  },
+                  {
+                    begin: '<!--|-->'
+                  },
+                  {
+                    begin: '</?',
+                    end: '>'
+                  }
+                ]
+              }
+            ]
+          }
+        ),
+        hljs.C_LINE_COMMENT_MODE,
+        hljs.C_BLOCK_COMMENT_MODE,
+        {
+          className: 'meta',
+          begin: '#',
+          end: '$',
+          keywords: {
+            'meta-keyword': 'if else elif endif define undef warning error line region endregion pragma checksum'
+          }
+        },
+        STRING,
+        NUMBERS,
+        {
+          beginKeywords: 'class interface',
+          relevance: 0,
+          end: /[{;=]/,
+          illegal: /[^\s:,]/,
+          contains: [
+            {
+              beginKeywords: "where class"
+            },
+            TITLE_MODE,
+            GENERIC_MODIFIER,
+            hljs.C_LINE_COMMENT_MODE,
+            hljs.C_BLOCK_COMMENT_MODE
+          ]
+        },
+        {
+          beginKeywords: 'namespace',
+          relevance: 0,
+          end: /[{;=]/,
+          illegal: /[^\s:]/,
+          contains: [
+            TITLE_MODE,
+            hljs.C_LINE_COMMENT_MODE,
+            hljs.C_BLOCK_COMMENT_MODE
+          ]
+        },
+        {
+          beginKeywords: 'record',
+          relevance: 0,
+          end: /[{;=]/,
+          illegal: /[^\s:]/,
+          contains: [
+            TITLE_MODE,
+            GENERIC_MODIFIER,
+            hljs.C_LINE_COMMENT_MODE,
+            hljs.C_BLOCK_COMMENT_MODE
+          ]
+        },
+        {
+          // [Attributes("")]
+          className: 'meta',
+          begin: '^\\s*\\[',
+          excludeBegin: true,
+          end: '\\]',
+          excludeEnd: true,
+          contains: [
+            {
+              className: 'meta-string',
+              begin: /"/,
+              end: /"/
+            }
+          ]
+        },
+        {
+          // Expression keywords prevent 'keyword Name(...)' from being
+          // recognized as a function definition
+          beginKeywords: 'new return throw await else',
+          relevance: 0
+        },
+        {
+          className: 'function',
+          begin: '(' + TYPE_IDENT_RE + '\\s+)+' + hljs.IDENT_RE + '\\s*(<.+>\\s*)?\\(',
+          returnBegin: true,
+          end: /\s*[{;=]/,
+          excludeEnd: true,
+          keywords: KEYWORDS,
+          contains: [
+            // prevents these from being highlighted `title`
+            {
+              beginKeywords: FUNCTION_MODIFIERS.join(" "),
+              relevance: 0
+            },
+            {
+              begin: hljs.IDENT_RE + '\\s*(<.+>\\s*)?\\(',
+              returnBegin: true,
+              contains: [
+                hljs.TITLE_MODE,
+                GENERIC_MODIFIER
+              ],
+              relevance: 0
+            },
+            {
+              className: 'params',
+              begin: /\(/,
+              end: /\)/,
+              excludeBegin: true,
+              excludeEnd: true,
+              keywords: KEYWORDS,
+              relevance: 0,
+              contains: [
+                STRING,
+                NUMBERS,
+                hljs.C_BLOCK_COMMENT_MODE
+              ]
+            },
+            hljs.C_LINE_COMMENT_MODE,
+            hljs.C_BLOCK_COMMENT_MODE
+          ]
+        },
+        AT_IDENTIFIER
+      ]
+    };
+  }
+
+  var csharp_1 = csharp;
+
+  /*
+  Language: Dockerfile
+  Requires: bash.js
+  Author: Alexis Hénaut <alexis@henaut.net>
+  Description: language definition for Dockerfile files
+  Website: https://docs.docker.com/engine/reference/builder/
+  Category: config
+  */
+
+  /** @type LanguageFn */
+  function dockerfile(hljs) {
+    return {
+      name: 'Dockerfile',
+      aliases: ['docker'],
+      case_insensitive: true,
+      keywords: 'from maintainer expose env arg user onbuild stopsignal',
+      contains: [
+        hljs.HASH_COMMENT_MODE,
+        hljs.APOS_STRING_MODE,
+        hljs.QUOTE_STRING_MODE,
+        hljs.NUMBER_MODE,
+        {
+          beginKeywords: 'run cmd entrypoint volume add copy workdir label healthcheck shell',
+          starts: {
+            end: /[^\\]$/,
+            subLanguage: 'bash'
+          }
+        }
+      ],
+      illegal: '</'
+    };
+  }
+
+  var dockerfile_1 = dockerfile;
+
+  /*
+  Language: Makefile
+  Author: Ivan Sagalaev <maniac@softwaremaniacs.org>
+  Contributors: Joël Porquet <joel@porquet.org>
+  Website: https://www.gnu.org/software/make/manual/html_node/Introduction.html
+  Category: common
+  */
+
+  function makefile(hljs) {
+    /* Variables: simple (eg $(var)) and special (eg $@) */
+    const VARIABLE = {
+      className: 'variable',
+      variants: [
+        {
+          begin: '\\$\\(' + hljs.UNDERSCORE_IDENT_RE + '\\)',
+          contains: [ hljs.BACKSLASH_ESCAPE ]
+        },
+        {
+          begin: /\$[@%<?\^\+\*]/
+        }
+      ]
+    };
+    /* Quoted string with variables inside */
+    const QUOTE_STRING = {
+      className: 'string',
+      begin: /"/,
+      end: /"/,
+      contains: [
+        hljs.BACKSLASH_ESCAPE,
+        VARIABLE
+      ]
+    };
+    /* Function: $(func arg,...) */
+    const FUNC = {
+      className: 'variable',
+      begin: /\$\([\w-]+\s/,
+      end: /\)/,
+      keywords: {
+        built_in:
+          'subst patsubst strip findstring filter filter-out sort ' +
+          'word wordlist firstword lastword dir notdir suffix basename ' +
+          'addsuffix addprefix join wildcard realpath abspath error warning ' +
+          'shell origin flavor foreach if or and call eval file value'
+      },
+      contains: [ VARIABLE ]
+    };
+    /* Variable assignment */
+    const ASSIGNMENT = {
+      begin: '^' + hljs.UNDERSCORE_IDENT_RE + '\\s*(?=[:+?]?=)'
+    };
+    /* Meta targets (.PHONY) */
+    const META = {
+      className: 'meta',
+      begin: /^\.PHONY:/,
+      end: /$/,
+      keywords: {
+        $pattern: /[\.\w]+/,
+        'meta-keyword': '.PHONY'
+      }
+    };
+    /* Targets */
+    const TARGET = {
+      className: 'section',
+      begin: /^[^\s]+:/,
+      end: /$/,
+      contains: [ VARIABLE ]
+    };
+    return {
+      name: 'Makefile',
+      aliases: [
+        'mk',
+        'mak',
+        'make',
+      ],
+      keywords: {
+        $pattern: /[\w-]+/,
+        keyword: 'define endef undefine ifdef ifndef ifeq ifneq else endif ' +
+        'include -include sinclude override export unexport private vpath'
+      },
+      contains: [
+        hljs.HASH_COMMENT_MODE,
+        VARIABLE,
+        QUOTE_STRING,
+        FUNC,
+        ASSIGNMENT,
+        META,
+        TARGET
+      ]
+    };
+  }
+
+  var makefile_1 = makefile;
+
+  /*
+  Language: PowerShell
+  Description: PowerShell is a task-based command-line shell and scripting language built on .NET.
+  Author: David Mohundro <david@mohundro.com>
+  Contributors: Nicholas Blumhardt <nblumhardt@nblumhardt.com>, Victor Zhou <OiCMudkips@users.noreply.github.com>, Nicolas Le Gall <contact@nlegall.fr>
+  Website: https://docs.microsoft.com/en-us/powershell/
+  */
+
+  function powershell(hljs) {
+    const TYPES = [
+      "string",
+      "char",
+      "byte",
+      "int",
+      "long",
+      "bool",
+      "decimal",
+      "single",
+      "double",
+      "DateTime",
+      "xml",
+      "array",
+      "hashtable",
+      "void"
+    ];
+
+    // https://docs.microsoft.com/en-us/powershell/scripting/developer/cmdlet/approved-verbs-for-windows-powershell-commands
+    const VALID_VERBS =
+      'Add|Clear|Close|Copy|Enter|Exit|Find|Format|Get|Hide|Join|Lock|' +
+      'Move|New|Open|Optimize|Pop|Push|Redo|Remove|Rename|Reset|Resize|' +
+      'Search|Select|Set|Show|Skip|Split|Step|Switch|Undo|Unlock|' +
+      'Watch|Backup|Checkpoint|Compare|Compress|Convert|ConvertFrom|' +
+      'ConvertTo|Dismount|Edit|Expand|Export|Group|Import|Initialize|' +
+      'Limit|Merge|Mount|Out|Publish|Restore|Save|Sync|Unpublish|Update|' +
+      'Approve|Assert|Build|Complete|Confirm|Deny|Deploy|Disable|Enable|Install|Invoke|' +
+      'Register|Request|Restart|Resume|Start|Stop|Submit|Suspend|Uninstall|' +
+      'Unregister|Wait|Debug|Measure|Ping|Repair|Resolve|Test|Trace|Connect|' +
+      'Disconnect|Read|Receive|Send|Write|Block|Grant|Protect|Revoke|Unblock|' +
+      'Unprotect|Use|ForEach|Sort|Tee|Where';
+
+    const COMPARISON_OPERATORS =
+      '-and|-as|-band|-bnot|-bor|-bxor|-casesensitive|-ccontains|-ceq|-cge|-cgt|' +
+      '-cle|-clike|-clt|-cmatch|-cne|-cnotcontains|-cnotlike|-cnotmatch|-contains|' +
+      '-creplace|-csplit|-eq|-exact|-f|-file|-ge|-gt|-icontains|-ieq|-ige|-igt|' +
+      '-ile|-ilike|-ilt|-imatch|-in|-ine|-inotcontains|-inotlike|-inotmatch|' +
+      '-ireplace|-is|-isnot|-isplit|-join|-le|-like|-lt|-match|-ne|-not|' +
+      '-notcontains|-notin|-notlike|-notmatch|-or|-regex|-replace|-shl|-shr|' +
+      '-split|-wildcard|-xor';
+
+    const KEYWORDS = {
+      $pattern: /-?[A-z\.\-]+\b/,
+      keyword:
+        'if else foreach return do while until elseif begin for trap data dynamicparam ' +
+        'end break throw param continue finally in switch exit filter try process catch ' +
+        'hidden static parameter',
+      // "echo" relevance has been set to 0 to avoid auto-detect conflicts with shell transcripts
+      built_in:
+        'ac asnp cat cd CFS chdir clc clear clhy cli clp cls clv cnsn compare copy cp ' +
+        'cpi cpp curl cvpa dbp del diff dir dnsn ebp echo|0 epal epcsv epsn erase etsn exsn fc fhx ' +
+        'fl ft fw gal gbp gc gcb gci gcm gcs gdr gerr ghy gi gin gjb gl gm gmo gp gps gpv group ' +
+        'gsn gsnp gsv gtz gu gv gwmi h history icm iex ihy ii ipal ipcsv ipmo ipsn irm ise iwmi ' +
+        'iwr kill lp ls man md measure mi mount move mp mv nal ndr ni nmo npssc nsn nv ogv oh ' +
+        'popd ps pushd pwd r rbp rcjb rcsn rd rdr ren ri rjb rm rmdir rmo rni rnp rp rsn rsnp ' +
+        'rujb rv rvpa rwmi sajb sal saps sasv sbp sc scb select set shcm si sl sleep sls sort sp ' +
+        'spjb spps spsv start stz sujb sv swmi tee trcm type wget where wjb write'
+      // TODO: 'validate[A-Z]+' can't work in keywords
+    };
+
+    const TITLE_NAME_RE = /\w[\w\d]*((-)[\w\d]+)*/;
+
+    const BACKTICK_ESCAPE = {
+      begin: '`[\\s\\S]',
+      relevance: 0
+    };
+
+    const VAR = {
+      className: 'variable',
+      variants: [
+        {
+          begin: /\$\B/
+        },
+        {
+          className: 'keyword',
+          begin: /\$this/
+        },
+        {
+          begin: /\$[\w\d][\w\d_:]*/
+        }
+      ]
+    };
+
+    const LITERAL = {
+      className: 'literal',
+      begin: /\$(null|true|false)\b/
+    };
+
+    const QUOTE_STRING = {
+      className: "string",
+      variants: [
+        {
+          begin: /"/,
+          end: /"/
+        },
+        {
+          begin: /@"/,
+          end: /^"@/
+        }
+      ],
+      contains: [
+        BACKTICK_ESCAPE,
+        VAR,
+        {
+          className: 'variable',
+          begin: /\$[A-z]/,
+          end: /[^A-z]/
+        }
+      ]
+    };
+
+    const APOS_STRING = {
+      className: 'string',
+      variants: [
+        {
+          begin: /'/,
+          end: /'/
+        },
+        {
+          begin: /@'/,
+          end: /^'@/
+        }
+      ]
+    };
+
+    const PS_HELPTAGS = {
+      className: "doctag",
+      variants: [
+        /* no paramater help tags */
+        {
+          begin: /\.(synopsis|description|example|inputs|outputs|notes|link|component|role|functionality)/
+        },
+        /* one parameter help tags */
+        {
+          begin: /\.(parameter|forwardhelptargetname|forwardhelpcategory|remotehelprunspace|externalhelp)\s+\S+/
+        }
+      ]
+    };
+
+    const PS_COMMENT = hljs.inherit(
+      hljs.COMMENT(null, null),
+      {
+        variants: [
+          /* single-line comment */
+          {
+            begin: /#/,
+            end: /$/
+          },
+          /* multi-line comment */
+          {
+            begin: /<#/,
+            end: /#>/
+          }
+        ],
+        contains: [ PS_HELPTAGS ]
+      }
+    );
+
+    const CMDLETS = {
+      className: 'built_in',
+      variants: [
+        {
+          begin: '('.concat(VALID_VERBS, ')+(-)[\\w\\d]+')
+        }
+      ]
+    };
+
+    const PS_CLASS = {
+      className: 'class',
+      beginKeywords: 'class enum',
+      end: /\s*[{]/,
+      excludeEnd: true,
+      relevance: 0,
+      contains: [ hljs.TITLE_MODE ]
+    };
+
+    const PS_FUNCTION = {
+      className: 'function',
+      begin: /function\s+/,
+      end: /\s*\{|$/,
+      excludeEnd: true,
+      returnBegin: true,
+      relevance: 0,
+      contains: [
+        {
+          begin: "function",
+          relevance: 0,
+          className: "keyword"
+        },
+        {
+          className: "title",
+          begin: TITLE_NAME_RE,
+          relevance: 0
+        },
+        {
+          begin: /\(/,
+          end: /\)/,
+          className: "params",
+          relevance: 0,
+          contains: [ VAR ]
+        }
+        // CMDLETS
+      ]
+    };
+
+    // Using statment, plus type, plus assembly name.
+    const PS_USING = {
+      begin: /using\s/,
+      end: /$/,
+      returnBegin: true,
+      contains: [
+        QUOTE_STRING,
+        APOS_STRING,
+        {
+          className: 'keyword',
+          begin: /(using|assembly|command|module|namespace|type)/
+        }
+      ]
+    };
+
+    // Comperison operators & function named parameters.
+    const PS_ARGUMENTS = {
+      variants: [
+        // PS literals are pretty verbose so it's a good idea to accent them a bit.
+        {
+          className: 'operator',
+          begin: '('.concat(COMPARISON_OPERATORS, ')\\b')
+        },
+        {
+          className: 'literal',
+          begin: /(-)[\w\d]+/,
+          relevance: 0
+        }
+      ]
+    };
+
+    const HASH_SIGNS = {
+      className: 'selector-tag',
+      begin: /@\B/,
+      relevance: 0
+    };
+
+    // It's a very general rule so I'll narrow it a bit with some strict boundaries
+    // to avoid any possible false-positive collisions!
+    const PS_METHODS = {
+      className: 'function',
+      begin: /\[.*\]\s*[\w]+[ ]??\(/,
+      end: /$/,
+      returnBegin: true,
+      relevance: 0,
+      contains: [
+        {
+          className: 'keyword',
+          begin: '('.concat(
+            KEYWORDS.keyword.toString().replace(/\s/g, '|'
+            ), ')\\b'),
+          endsParent: true,
+          relevance: 0
+        },
+        hljs.inherit(hljs.TITLE_MODE, {
+          endsParent: true
+        })
+      ]
+    };
+
+    const GENTLEMANS_SET = [
+      // STATIC_MEMBER,
+      PS_METHODS,
+      PS_COMMENT,
+      BACKTICK_ESCAPE,
+      hljs.NUMBER_MODE,
+      QUOTE_STRING,
+      APOS_STRING,
+      // PS_NEW_OBJECT_TYPE,
+      CMDLETS,
+      VAR,
+      LITERAL,
+      HASH_SIGNS
+    ];
+
+    const PS_TYPE = {
+      begin: /\[/,
+      end: /\]/,
+      excludeBegin: true,
+      excludeEnd: true,
+      relevance: 0,
+      contains: [].concat(
+        'self',
+        GENTLEMANS_SET,
+        {
+          begin: "(" + TYPES.join("|") + ")",
+          className: "built_in",
+          relevance: 0
+        },
+        {
+          className: 'type',
+          begin: /[\.\w\d]+/,
+          relevance: 0
+        }
+      )
+    };
+
+    PS_METHODS.contains.unshift(PS_TYPE);
+
+    return {
+      name: 'PowerShell',
+      aliases: [
+        "ps",
+        "ps1"
+      ],
+      case_insensitive: true,
+      keywords: KEYWORDS,
+      contains: GENTLEMANS_SET.concat(
+        PS_CLASS,
+        PS_FUNCTION,
+        PS_USING,
+        PS_ARGUMENTS,
+        PS_TYPE
+      )
+    };
+  }
+
+  var powershell_1 = powershell;
+
   // this does not work....
   // ['javascript', 'python', 'bash'].forEach(async (langName) => {
   //     const langModule = await import(`highlight.js/lib/languages/${langName}`);
@@ -5016,8 +6303,14 @@
   core.registerLanguage('python', python_1);
   core.registerLanguage('typescript', typescript_1);
   core.registerLanguage('html', xml_1);
+  core.registerLanguage('go', go_1);
+  core.registerLanguage('c', c_1);
+  core.registerLanguage('csharp', csharp_1);
+  core.registerLanguage('dockerfile', dockerfile_1);
+  core.registerLanguage('makefile', makefile_1);
+  core.registerLanguage('powershell', powershell_1);
   function highlighter(code, language) {
-      const validLanguage = core.getLanguage(language) ? language : 'plaintext';
+      const validLanguage = core.getLanguage(language) ? language : 'bash';
       return core.highlight(code, { language: validLanguage }).value;
   }
   let quiztestHighlight = {

@@ -35,7 +35,7 @@
 </script>
 {#if elapsedTime}
      <span title="Quiz test's elapsed time">
-         {elapsedTime}
+         ⏰ {elapsedTime}
     </span>
 {/if}
 

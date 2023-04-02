@@ -31,6 +31,7 @@
             style: 'percent'
         });
     }
+
     function stringInterpolation(text,vars)
     {
         Object.keys(vars).map((k) => {
@@ -58,6 +59,7 @@
         <ol>
             {#each quiz.questions as question, i}
                 <li class="top-list-item" on:click="{() => quiz.jump(i)}">
+                    {$_('questionLetter')} {i+1} :
                         <span class="list-question">
                             {emojis[+question.solved]}
                             {@html question.text}
@@ -134,10 +136,7 @@
     .result
     {
         padding:1rem;
-        background: #FFDCE2;
-        background: -webkit-linear-gradient(top left, #F5FBD7, #FFDCE2);
-        background: -moz-linear-gradient(top left, #F5FBD7, #FFDCE2);
-        background: linear-gradient(to bottom right, #F5FBD7, #FFDCE2);
+        background: linear-gradient(180deg, rgba(255,255,255,0) -8.81%, #fff 34.08%),linear-gradient(270deg, rgba(42,240,228,0.4) 0%, rgba(140,51,255,0.4) 37.5%, rgba(255,39,118,0.4) 68.75%, rgba(255,188,15,0.4) 100%),#fff;
     }
 
 
