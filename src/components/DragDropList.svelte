@@ -7,7 +7,7 @@
     let ghost: HTMLElement;
     let grabbed: HTMLElement;
 
-    let lastTarget;
+    let lastTarget : any;
 
     let mouseY = 0; // pointer y coordinate within client
     let offsetY = 0; // y distance from top of grabbed element to pointer

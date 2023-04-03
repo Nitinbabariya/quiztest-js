@@ -5,7 +5,6 @@
     import registerLanguages from './languages/i18n';
     import Card from './components/Card.svelte';
     import QuestionView from './components/QuestionView.svelte';
-    import Button from './components/Button.svelte';
     import { _ } from 'svelte-i18n';
     import ResultsView from './components/ResultsView.svelte';
     import registerIcons from './registerIcons.js';
@@ -20,11 +19,7 @@
     $: question = quiz.active;
     $: showHint = $question.showHint;
     $: index = quiz.index;
-    $: onLast = quiz.onLast;
-    $: onFirst = quiz.onFirst;
     $: onResults = quiz.onResults;
-    $: isEvaluated = quiz.isEvaluated;
-    $: allVisited = quiz.allVisited;
     $: shouldPresentIntroductionScreen = quiz.shouldPresentIntroductionScreen;
 
 
@@ -34,8 +29,6 @@
     let node: HTMLElement;
     let minHeight = 150;
     let reloaded = false;
-
-    let props;
 
     onMount(async () => {
         let primaryColor: string = quiz.config.primaryColor;
@@ -63,10 +56,9 @@
                     </p>
             </div>
         {:else}
-                <Timer bind:this={timer}></Timer>
             <Loading update="{reloaded}" ms="{800}" minHeight="{minHeight}">
             <Container>
-
+                <Timer bind:this={timer}></Timer>
                 <div class="pagination" style=";width:100%">
                         {#each quiz.questions as q, i}
                             <button  on:click="{() => quiz.jump(i)}" class="{$index === i ? 'active' : ''}">{i+1} </button>
@@ -78,7 +70,7 @@
 
                             <div class="pagination" style="margin-top:10px">
                                 <button
-                                        on:click="{() => {quiz.jump(0)}}"><Icon name="redo" /> Review your answers </button>
+                                        on:click="{() => {quiz.jump(0)}}">👀 Review your answers </button>
 
                                 <button style="margin-right: 1rem" title="{$_('reset')}"
                                         on:click="{() => {
@@ -147,9 +139,8 @@
     code {
         font-size: 85%;
         color: #333;
-        white-space: pre-wrap;
         border-radius: 4px;
-        padding: 0.2em 0.4em;
+        padding: 0 5px 0 5px;
         background-color: #f8f8f8;
         font-family: Consolas, Monaco, monospace;
     }

@@ -7,6 +7,12 @@ import plaintext from 'highlight.js/lib/languages/plaintext';
 import python from 'highlight.js/lib/languages/python';
 import typescript from 'highlight.js/lib/languages/typescript';
 import xml from 'highlight.js/lib/languages/xml';
+import go from 'highlight.js/lib/languages/go';
+import c from 'highlight.js/lib/languages/c';
+import csharp from 'highlight.js/lib/languages/csharp';
+import dockerfile from 'highlight.js/lib/languages/dockerfile';
+import makefile from 'highlight.js/lib/languages/makefile';
+import powershell from 'highlight.js/lib/languages/powershell';
 import type { QuiztestExtension } from '../quiztest.js';
 
 // this does not work....
@@ -23,9 +29,15 @@ hljs.registerLanguage('plaintext', plaintext);
 hljs.registerLanguage('python', python);
 hljs.registerLanguage('typescript', typescript);
 hljs.registerLanguage('html', xml);
+hljs.registerLanguage('go', go);
+hljs.registerLanguage('c', c);
+hljs.registerLanguage('csharp', csharp);
+hljs.registerLanguage('dockerfile',dockerfile);
+hljs.registerLanguage('makefile', makefile);
+hljs.registerLanguage('powershell', powershell );
 
 function highlighter(code, language) {
-    const validLanguage = hljs.getLanguage(language) ? language : 'plaintext';
+    const validLanguage = hljs.getLanguage(language) ? language : 'bash';
     return hljs.highlight(code, { language: validLanguage }).value;
 }
 

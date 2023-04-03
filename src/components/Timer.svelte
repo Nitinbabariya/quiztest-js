@@ -1,7 +1,7 @@
 <script lang="ts">
     import { onMount } from 'svelte';
     let startDate =  undefined
-    let elapsedTime;
+    let elapsedTime : string;
 
     let isActive= true;
     export const start = () => {
@@ -25,7 +25,7 @@
         }, 1000);
     });
 
-    function convertMsToHM(milliseconds) {
+    function convertMsToHM(milliseconds: number) {
         let seconds = Math.floor(milliseconds / 1000);
         let minutes = Math.floor(seconds / 60);
         seconds = seconds % 60;
@@ -35,7 +35,7 @@
 </script>
 {#if elapsedTime}
      <span title="Quiz test's elapsed time">
-         {elapsedTime}
+         ⏰ {elapsedTime}
     </span>
 {/if}
 

@@ -12,7 +12,7 @@ I'm working on this project in my free time to learn more about https://svelte.d
 ## Usage
 
 quiztest is easy to setup and best used in combination with existing static site generators like *Jekyll*, *Hugo* or *Sphinx*. Check out the extensions
-[hugo-quiz](https://github.com/bonartm/hugo-quiz) and [sphinxcontrib-quizdown](https://github.com/bonartm/sphinxcontrib-quizdown).
+[hugo-quiz](https://github.com/Nitinbabariya/hugo-quiz) 
 
 ### 📚 [Documentation](./docs/)
 
@@ -74,7 +74,132 @@ Write questions within a `quiztest` class (edit in the [🚀quizdown editor](htt
 </div>
 ...
 ```
+## Markdown support
 
+### Currently quiztest supports following markdown elements
+
+#### Bold
+~~~
+**bold text**
+~~~ 
+**bold text**
+
+#### Italic
+~~~
+*italicized text*
+~~~
+*italicized text*
+
+#### strikethrough
+~~~
+~~The world is flat.~~
+~~~
+~~The world is flat.~~
+
+#### Blockquote (Used to provide hint of explanation that is useful for examiner in given context of question)
+~~~ 
+> blockquote
+~~~
+> this is an example quotation
+
+#### Code
+~~~ 
+`hello world!
+~~~
+`hello world!`
+
+#### Fenced code block
+~~~
+{
+    "firstName": "John",
+    "lastName": "Smith",
+}
+~~~
+
+```
+{
+  "firstName": "John",
+  "lastName": "Smith",
+}
+```
+
+#### Ordered List (single choice answers)
+~~~
+1. First item
+2. Second item
+3. Third item
+~~~
+1. First item
+2. Second item
+3. Third item
+
+#### Unordered List (multi choice answers)
+~~~
+- First item
+- Second item
+- Third item
+~~~
+- First item
+- Second item
+- Third item
+
+#### Link
+~~~
+[title](https://www.example.com)
+~~~
+[title](https://www.example.com)
+
+#### images
+~~~
+![alt text](image.jpg)
+~~~
+![alt text](image.jpg)
+
+#### Heading
+~~~
+Currently heading is supported but only used as a question separator
+# H1
+## H2
+### H3
+~~~
+
+### Not supported markdown elements
+
+#### Horizontal Rule
+~~~
+---
+~~~
+
+#### Highlight
+```
+I need to highlight these ==very important words==.
+```
+I need to highlight these ==very important words==.
+
+#### Subscript
+~~~
+H~2~O
+~~~
+
+#### Superscript
+~~~
+X^2^
+~~~
+
+#### Footnotes
+~~~
+Here's a sentence with a footnote. [^1]
+[^1]: This is the footnote.
+~~~
+
+#### Table
+~~~
+| Syntax | Description |
+| ----------- | ----------- |
+| Header | Title |
+| Paragraph | Text |
+
+~~~
 
 
 ## Contributing
@@ -82,13 +207,11 @@ Write questions within a `quiztest` class (edit in the [🚀quizdown editor](htt
 Pull requests and feature requests are welcome. For major changes, please open an issue first to discuss what you would like to change. I'm happy for any feedback on how to improve the code base. 
 
 ### Wish List
-- Add timer that could be turned on or off
-- Show question index so its easier for people to jump around the questions, add a flag so its easy to review 
 - customizable reward page at the end of the quiz. Nice to show encouraging messages if the user is not performing well or otherway if the user is really good then play some animation and music
 - fill in the blanks quiz
 - link quizzes on different pages together via a results summary page (https://github.com/bonartm/quizdown-js/issues/18)
 
-### How To
+### How To 
 
 After cloning, install the packages with 
 
@@ -108,20 +231,30 @@ You can also preview a live version with
 npm run dev
 ```
 
-# Example of text highlighting css 
+### Release process
 ```
-<ul>
-    <li><span class="highlight-simple">.highlight-simple</span> or just use <mark>&lt;mark&gt;</mark> </li>
-    <li><span class="highlight-ribbon">.highlight-ribbon</span></li>
-    <li><span class="highlight-arrow">.highlight-arrow</span></li>
-    <li><span class="highlight-sketch">.highlight-sketch</span></li>
-    <li><span class="highlight-realistic-marker">.highlight-realistic-marker</span></li>
-    <li><span class="highlight-border">.highlight-border</span></li>
-    <li><span class="highlight-circle-sketch">.highlight-circle-sketch</span></li>
-</ul>
+#specify the version
+# https://docs.npmjs.com/updating-your-published-package-version-number
+npm version {major|minor|patch}
+
+#Build bundle in release mode
+npm run build
+
+# push the changes 
+git push
+git push origin --tags
+
+# create PR
+
+# Merge the PR
+# Create a release in github
+ This will triggers the release process to publish the new npm package at https://www.npmjs.com/package/quiztest?activeTab=versions
+
 ```
+
+### Published npm packages
+[List of published packages](https://www.npmjs.com/package/quiztest?activeTab=versions)
 
 ## Credits
-
-Its a forked project, I am Inspired by the [mermaid library](https://github.com/bonartm/quizdown-js) https://bonartm.github.io/quizdown-live-editor/
-to lean on top of what https://github.com/bonartm/ has built.
+Its a forked project, I am Inspired by the [mermaid library](https://github.com/bonartm/quizdown-js)
+to lean on top of what [bonartm](https://github.com/bonartm) has built.
