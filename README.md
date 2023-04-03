@@ -240,13 +240,9 @@ npm version {major|minor|patch}
 #Build bundle in release mode
 npm run build
 
-#tag the release
-git tag
-git push tag
-
 # push the changes 
 git push
-git push tag
+git push origin --tags
 
 # create PR
 
