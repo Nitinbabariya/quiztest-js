@@ -40,8 +40,4 @@
         color:#566573;
         font-size: 0.7em;
     }
-
-    code{
-        word-wrap: break-word;
-    }
 </style>

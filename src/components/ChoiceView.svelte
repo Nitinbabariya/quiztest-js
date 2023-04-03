@@ -140,17 +140,6 @@
         margin:1px 0 1px 0;
         cursor: pointer;
     }
-
-    [type='checkbox']:hover + span,
-    [type='checkbox']:focus + span,
-    [type='radio']:hover + span,
-    [type='radio']:focus + span {
-    }
-
-    [type='checkbox']:checked + span,
-    [type='radio']:checked + span {
-    }
-
     label [type='checkbox']+span:before {
         display: grid;
         flex-shrink: 0;
@@ -226,13 +215,5 @@
 
     blockquote::after{
         content: '';
-    }
-
-    blockquote span{
-        display:inline;
-        color:#333333;
-        font-style: normal;
-        font-weight: bold;
-        margin-top:1em;
     }
 </style>

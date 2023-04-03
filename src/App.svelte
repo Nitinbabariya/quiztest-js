@@ -5,7 +5,6 @@
     import registerLanguages from './languages/i18n';
     import Card from './components/Card.svelte';
     import QuestionView from './components/QuestionView.svelte';
-    import Button from './components/Button.svelte';
     import { _ } from 'svelte-i18n';
     import ResultsView from './components/ResultsView.svelte';
     import registerIcons from './registerIcons.js';
@@ -20,11 +19,7 @@
     $: question = quiz.active;
     $: showHint = $question.showHint;
     $: index = quiz.index;
-    $: onLast = quiz.onLast;
-    $: onFirst = quiz.onFirst;
     $: onResults = quiz.onResults;
-    $: isEvaluated = quiz.isEvaluated;
-    $: allVisited = quiz.allVisited;
     $: shouldPresentIntroductionScreen = quiz.shouldPresentIntroductionScreen;
 
 
@@ -34,8 +29,6 @@
     let node: HTMLElement;
     let minHeight = 150;
     let reloaded = false;
-
-    let props;
 
     onMount(async () => {
         let primaryColor: string = quiz.config.primaryColor;

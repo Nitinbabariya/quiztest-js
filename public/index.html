@@ -26,224 +26,184 @@
 </style>
 
 <body>
-<div class="container" id="quiztest">
-	<div class="quiztest" >
+<div class="container">
+	<div class="quiztest">
 		---
 		shuffleAnswers: true
 		shuffleQuestions: false
 		nQuestions: 3
+		introduction: >
+			<h1>Discover the real you</h1>
+
+			You're more awesome than you think! Take free quizzes to reveal your talents and skills.
+
+			The test contains a set of questions and there is no time limit.
+
+			The test is not official, it's just one of the most efficient ways to see how much you know, or don't know, about the subject.
+
+			<h1> Count your score </h1>
+			You will get <span class="highlight highlight-ribbon">1 point</span> for each correct answer. At the end of the Quiz, your total score will be displayed.
+
+			<h1> Reflect on you answers</h1>
+			Please conduct a self review of your answers once you complete the quiz test.
+		    Being an active participant in your own evaluation, honestly assess your strengths and also areas you need to improve.
+			Good luck!
+			<hr/>
 		---
 
-		# sensitive parameters
-		Your team is asked to handle the issue that terraform code outputs the password of the database after you issue
-		the `terraform apply`. How would you achieve the safety of the passwords?
+		# What's the value of $x$?**
 
-		1. [ ] Encrypt the plain text values to show output as random values
-		1. [ ] Password is encrypted in the database
-		1. [x] Use sensitive Parameter
-		> Make use of a delicate parameter. By running the terraform apply
-		and plan command on the console, the value is not displayed. The
-		password for the state files can be seen in plain-text format if you
-		have access.
-		1. [ ] Use terraform plan -var-file= “password=no” to hide output values
+		This is what i mean:
+		$$
+		x=\sqrt{\frac{9}{16}}
+		$$
 
+		> Also check out $\sqrt{x+2}$!
 
-		> https://www.terraform.io/docs/state/sensitive-data.html
+		1. [x] Try out: $x=0.75$
+		> World Wide Web Consortium
+		1. [ ] $x=0.5$ could also *be correct*!
+		1. [ ] perhaps  $x=1$?
+		1. [ ] $x=1.5$
 
-		# Update existing AWS resources
-		You need to change the instance type of an EC2 instance to `t3.large` while
-		keeping the default set values.
-		What adjustments do you make in order to meet his goal?
+		#### What's the value of `x[3]`?
 
-		1. [ ] Issue Terraform plan instance.type ` .t2.large ` and it deploys the
-		instance
-		> Correct since the syntax is incorrect. To alter the
-		instance type, use the cli command `terraform plan -
-		var="instancetype=t2.large"` which is referred to as `Instance.type`
-		in the above option. The instance is not deployed using t2.large or
-		terraform plan.
+		```python
+		# a python list
+		x = [1, 2, 3, 4]
+		```
 
-		1. [ ] Modify the `tf.variables` with the instance type and issue terraform
-		apply
-		> Incorrect because it is recommended that instead of
-		modifying the default values, you modify the `terraform.tfvars`
-		variables, as there are no `tf.variables` in terraform. Terraform plan to
-		check the instance type and then terraform apply for changes
-		because it is always a good practise to check before applying.
+		1. [ ] 1
+		1. [ ] 2
+		1. [ ] 3
+		1. [x] 4
 
-		1. [ ] Create a new file `my.tfvars` and add the type of the instance and
-		issue `terraform plan` and `terraform apply`
-		> Incorrect because the suggested file type for Terraform is
-		`terraform.tfvars`. To use cli terraform plan -var-file="my.tfvars" for any
-		other tf.vars file types, use cli terraform plan -var-file="my.tfvars"
+		#### Who is the person in the picture?
 
-		1. [x] Modify the `terraform.tfvars` with the instance type and issue
-		`terraform plan` and then terraform apply to deploy the instances
-		> Correct, since it checks the values after altering the
-		terraform.tfvars and then issues terraform apply.
+		![](https://upload.wikimedia.org/wikipedia/commons/thumb/9/9d/Sir_Tim_Berners-Lee.jpg/330px-Sir_Tim_Berners-Lee.jpg)
 
-		> https://www.terraform.io/docs/commands/environment-variables.html
-		https://www.terraform.io/docs/commands/plan.html
+		> In 1990, he published the [worlds first website](http://info.cern.ch/hypertext/WWW/TheProject.html).
+
+		1. [x] Tim Berners-Lee
+		1. [ ] Alan Turing
+		1. [ ] Barbara Liskov
+		1. [ ] Larry Page
 
 
-		# basics, workspace
-		One of your colleagues is new to Terraform and wants to add a new
-		workspace named new-hire. What command he should execute from
-		the following?
+		#### Which console appeared first, which last?
 
-		1. [ ] terraform workspace –new –new-hire
-		1. [x] terraform workspace new new-hire
-		> The syntax to use anytime you wish to create a new
-		workspace is terraform workspace new new-hire.
-		New-hire terraform workspace, for example
-		New workspace "new-hire" has been created and switched to!
-		1. [ ] terraform workspace init new-hire
-		1. [ ] terraform workspace new-hire
+		1. Atari 2600
+		2. NES
+		3. Sega Genesis
+		4. Play Station
+		5. Nintendo 64
+		6. Xbox
+		7. Wii
 
-		# basics, supported operation system
-		You're preparing to install Terraform on client workstations and want
-		to see which of the  following operating systems is supported?
-		Please select the
-		appropriate option.
+		#### Who is the person in the picture?
 
-		1. [ ] Windows
-		1. [ ] Amazon Linux
-		1. [ ] FreeBSD
-		1. [ ] Solaris
-		1. [ ] MacOS
-		1. [x] All of the above
+		![](https://upload.wikimedia.org/wikipedia/commons/thumb/e/e5/Ted_Nelson_cropped.jpg/330px-Ted_Nelson_cropped.jpg)
 
-		> All of the above are correct. Amazon Linux is just another flavor of Linux. Terraform works
-		perfectly well on it.
-		Please find the URL for your reference https://www.terraform.io/downloads.html
+		> He coined the terms *hypertext* and *hypermedia* in 1963!
 
-		#
-		John is a newbie to Terraform and wants to enable detailed logging
-		to find all the details
-		Which environment variable does he need to set?
-
-		1. [ ] TF_help
-		1. [x] TF_LOG
-		1. [ ] TF_Debug
-		1. [ ] TF_var_log
-
-		> Terraform does not give detailed logging by default. The environment
-		variable TF LOG must be enabled to allow thorough logging.
-		You can set the TRACE, INFO, WARN, or ERROR, DEBUG levels
-		by enabling TF LOG.
-		https://www.terraform.io/docs/cli/config/environment-variables.html
+		1. [x] Ted Nelson
+		1. [ ] Donald Knuth
+		1. [ ] Grace Hopper
+		1. [ ] John von Neumann
 
 
-		You have made changes to your tfvar files and would like to know
-		the contents of the state file. What command can be used for the
-		given requirement?
+		#### What is the HTML element for the largest heading in a document?
 
-		1. [ ] terraform state
-		1. [ ] terraform current
-		1. [x] terraform show
-		1. [ ] terraform inspect
+		1. [x] `<h1></h1>`
+		1. [ ] `<header></header>`
+		1. [ ] `<title></title>`
+		1. [ ] `<heading1></heading1>`
 
-		> The terraform show command displays comprehensible output from
-		state or plain files.
-		This is used to double-check the current state contents and inspect
-		the plan to ensure that everything is in working order (right).
-		Terraform show – json can be used to display outputs in json format.
-		https://www.terraform.io/docs/cli/commands/show.htmL
 
-		# Your firm employs a version control system (for example, git) and
-		has requested that you commit all terraform code to it. During the
-		commit, you must be cautious with sensitive information. Which of
-		the following files should be left out of the commit?
 
-		1. [ ] main.tf
-		1. [ ] variables.tf
-		1. [ ] provisioner.tf
-		1. [x] terraform.tfstate (right)
+		#### What is the `<a></a>` tag used for?
 
-		>  Usually, terraform.tfvars and terraform.tfstate files contain sensitive
-		data like passwords, access keys, and DB passwords. It is best to
-		avoid these files from committing
+		1. [x] for defining hyperlinks
+		1. [ ] for defining a paragraph
+		1. [ ] for defining code snippet
+		1. [ ] for defining an image
 
-		#  Your company's infrastructure is now hosted on Azure, and you
-		intend to use Terraform for further development and migration of
-		existing resources to Terraform. You've been tasked with planning
-		and implementing it, as well as ensuring that the old infrastructure is
-		correctly moved.
-		You attempted to utilise the terraform import command but were
-		unable to do so. What are the things that must be considered when
-		importing?
 
-		1. [ ] Ensure the existing resources are in a shutdown state so that
-		during import there are no issues.
-		1. [x] Ensure the resources of the existing infrastructure are updated in
-		the configuration file.
-		1. [ ] Add all the resource details to state files.
-		1. [ ] Run terraform show and refresh to see updated state files and
-		then terraform import.
 
-		> Terraform can import a resource into a state file, but not into a
-		configuration file. Before terraform import, it's a good idea to
-		manually add resource configuration.
-		https://www.terraform.io/docs/cli/import/index.html
+		### What is the difference between a tag and an attribute?
 
-		# Choose the best option from below to make Terraform code more
-		user configuration-centric.
+		```html
+		<a href="url">link text</a>
+		```
 
-		1. [ ] Variables
-		1. [ ] Local values
-		1. [x] Input Variable
-		1. [ ] Modules
+		Select all correct answers:
 
-		> Input variables are used as parameters in Terraform modules,
-		allowing them to be customised without modifying the module's
-		source code and allowing modules to be shared across
-		configurations.
-		You can set the values of variables declared in the root module of
-		your configuration using CLI options and environment variables. The
-		calling module should pass values to the module block when
-		declaring them in child modules.
-		Comparing Terraform modules to function definitions can be useful if
-		you're familiar with traditional programming languages:
-		Function arguments are analogous to input variables.
-		Function return values are analogous to output values.
-		Local values are similar to the temporary local variables in a
-		function.
+		- [x] A tag represents an html element.
+		- [x] An attribute defines a property of an html element.
+		- [ ] An attribute is everything between the opening and closing tag.
+		- [ ] `"url"` is an attribute in the example above.
 
-		Reference:
-		https://www.terraform.io/docs/language/values/variables.html
 
-		# Which of the following is a meta-argument defined in the
-		configuration files of Terraform?
+		#### How many valid HTML element tags are currently defined?
 
-		1. [ ] tfvar
-		1. [x] depends_on
-		1. [ ] instance_aws
-		1. [ ] var1
+		> Check out https://developer.mozilla.org/en-US/docs/Web/HTML/Element
 
-		>   depends_on is the meta-argument defined in the configuration files
-		of Terraform.
-		https://www.terraform.io/docs/language/metaarguments/
-		depends_on.html
-		Option A is incorrect: tfvars refers to the file extension rather than a
-		meta-argument for configurations within the files.
-		Option C is incorrect: instance aws is the resource type that
-		Terraform uses to create VMs in AWS. It's an AWS predefined
-		resource type, not a file-based configuration.
-		Option D is incorrect: var1 is a word used to define a variable, not a
-		meta-argument, so it is incorrect.
+		1. [x] 100 - 120
+		1. [ ] 80 - 100
+		1. [ ] 120 - 140
+		1. [ ] 140 - 160
 
-		#  Your configuration file has been locked accidentally. What of the
-		following command would you use to unlock?
 
-		1. [ ] terraform filename-unlock
-		1. [ ] delete the file and create a new state file
-		1. [x] terraform force-unlock
-		1. [ ] state.tf -unlock
+		### How many `buttons` are defined on the [homepage of Spiced Academy](https://www.spiced-academy.com/en)?
 
-		>   The terraform force-unlock command can be used to unlock the
-		state configuration manually. It has no effect on the infrastructure.
-		Refer to the following link for Syntax
-		https://www.terraform.io/docs/cli/commands/force-unlock.html
+		```html
+		<button>
+			my button
+		</button>
+		```
+
+		1. [x] 7
+		1. [ ] 14
+		1. [ ] 5
+		1. [ ] 23
+
+
+		#### What is the IP address of [google.com](https://google.com)?
+
+		> This question has two valid answers!
+
+		- [x] 142.250.186.110
+		> This is the ipv4 address
+		- [x] 2a00:1450:4001:829::200e
+		> This is the ipv6 address
+		- [ ] https
+		- [ ] com
+
+
+		#### What is a tag soup?
+
+		> `<p>This is a tag <em>soup.</p></em>`
+
+		- [ ] nicely written html code
+		- [x] malformed html code
+
+
+
+		#### Two organizations hide in the chunk of text. Do you find them?
+
+		```
+		CW3THAGWW
+		```
+
+		- [x] W3C
+		> World Wide Web Consortium
+		- [x] WHATWG
+		>  ```bash
+		   Web Hypertext Application Technology Working Group
+		   ```
+		- [ ] WWW
+		- [ ] C3PO
+
 	</div>
 </div>
 </body>

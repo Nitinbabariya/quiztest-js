@@ -32,7 +32,7 @@
         });
     }
 
-    function stringInterpolation(text,vars)
+    function stringInterpolation(text:string,vars: object)
     {
         Object.keys(vars).map((k) => {
             const regex = new RegExp(`{{${k}}}`, "g");
