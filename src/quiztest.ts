@@ -3,6 +3,7 @@ import parseQuiztest from './parser.js';
 import { Config } from './config.js';
 import marked from './customizedMarked.js';
 import type { Quiz } from './quiz';
+import CryptoJS from 'crypto-js';
 
 export interface Quiztest {
     register(extension: QuiztestExtension): Quiztest
@@ -56,7 +57,11 @@ function init(config: object = {}): void {
                 function () {
                     let nodes = document.querySelectorAll('.quiztest');
                     for (let node of nodes) {
-                        createApp(node.innerHTML, node, globalConfig);
+                        var data = [{id: 1}, {id: 2}]
+                        // Decrypt
+                        var data  = CryptoJS.AES.decrypt(node.innerHTML, 'secret');
+                        var decryptedData = data.toString(CryptoJS.enc.Utf8);
+                        createApp(decryptedData, node, globalConfig);
                     }
                 },
                 false
