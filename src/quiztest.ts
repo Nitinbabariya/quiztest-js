@@ -58,7 +58,7 @@ function init(config: object = {}): void {
                 let nodes = document.querySelectorAll('.quiztest');
                 for (let node of nodes) {
 
-                    let data = node.innerHTML.trim();
+                    let data = node.innerHTML;
                     if (data.indexOf('---') < 0) {
                         data = CryptoJS.AES.decrypt(data, key);
                         // @ts-ignore
