@@ -166,7 +166,8 @@ Currently heading is supported but only used as a question separator
 #### Math and equation
 ~~~
 $$
-x = \frac{2+2}{\sqrt{a^2+b^2}}
+x = \f
+{\sqrt{a^2+b^2}}
 $$
 ~~~
 $$

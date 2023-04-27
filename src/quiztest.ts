@@ -3,6 +3,7 @@ import parseQuiztest from './parser.js';
 import { Config } from './config.js';
 import marked from './customizedMarked.js';
 import type { Quiz } from './quiz';
+import CryptoJS from 'crypto-js';
 
 export interface Quiztest {
     register(extension: QuiztestExtension): Quiztest
@@ -25,7 +26,7 @@ function createApp(rawQuiztest: string, node: Element, config: Config): App {
     node.innerHTML = '';
     let root: ShadowRoot;
     if (!!node.shadowRoot) {
-        //clear root if it allready exists
+        //clear root if it already exists
         root = node.shadowRoot;
         root.innerHTML = '';
     } else {
@@ -49,19 +50,25 @@ function createApp(rawQuiztest: string, node: Element, config: Config): App {
 
 function init(config: object = {}): void {
     let globalConfig = new Config(config);
-    if (globalConfig.startOnLoad) {
-        if (typeof document !== 'undefined') {
-            window.addEventListener(
-                'load',
-                function () {
-                    let nodes = document.querySelectorAll('.quiztest');
-                    for (let node of nodes) {
-                        createApp(node.innerHTML, node, globalConfig);
+
+    if (globalConfig.startOnLoad && typeof document !== 'undefined') {
+        window.addEventListener(
+            'load',
+            function () {
+                let nodes = document.querySelectorAll('.quiztest');
+                for (let node of nodes) {
+
+                    let data = node.innerHTML;
+                    if (data.indexOf('---') < 0) {
+                        data = CryptoJS.AES.decrypt(data, key);
+                        // @ts-ignore
+                        data = data.toString(CryptoJS.enc.Utf8);
                     }
-                },
-                false
-            );
-        }
+                    createApp(data, node, globalConfig);
+                }
+            },
+            false
+        );
     }
 }
 
