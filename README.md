@@ -163,6 +163,16 @@ Currently heading is supported but only used as a question separator
 ### H3
 ~~~
 
+#### Math and equation
+~~~
+$$
+x = \f
+{\sqrt{a^2+b^2}}
+$$
+~~~
+$$
+x = \frac{2+2}{\sqrt{a^2+b^2}}
+$$
 ### Not supported markdown elements
 
 #### Horizontal Rule
