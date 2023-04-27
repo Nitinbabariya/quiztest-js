@@ -26,7 +26,7 @@ function createApp(rawQuiztest: string, node: Element, config: Config): App {
     node.innerHTML = '';
     let root: ShadowRoot;
     if (!!node.shadowRoot) {
-        //clear root if it allready exists
+        //clear root if it already exists
         root = node.shadowRoot;
         root.innerHTML = '';
     } else {
@@ -50,23 +50,25 @@ function createApp(rawQuiztest: string, node: Element, config: Config): App {
 
 function init(config: object = {}): void {
     let globalConfig = new Config(config);
-    if (globalConfig.startOnLoad) {
-        if (typeof document !== 'undefined') {
-            window.addEventListener(
-                'load',
-                function () {
-                    let nodes = document.querySelectorAll('.quiztest');
-                    for (let node of nodes) {
-                        var data = [{id: 1}, {id: 2}]
-                        // Decrypt
-                        var data  = CryptoJS.AES.decrypt(node.innerHTML, 'secret');
-                        var decryptedData = data.toString(CryptoJS.enc.Utf8);
-                        createApp(decryptedData, node, globalConfig);
+
+    if (globalConfig.startOnLoad && typeof document !== 'undefined') {
+        window.addEventListener(
+            'load',
+            function () {
+                let nodes = document.querySelectorAll('.quiztest');
+                for (let node of nodes) {
+
+                    let data = node.innerHTML.trim();
+                    if (data.indexOf('---') < 0) {
+                        data = CryptoJS.AES.decrypt(data, key);
+                        // @ts-ignore
+                        data = data.toString(CryptoJS.enc.Utf8);
                     }
-                },
-                false
-            );
-        }
+                    createApp(data, node, globalConfig);
+                }
+            },
+            false
+        );
     }
 }
 
